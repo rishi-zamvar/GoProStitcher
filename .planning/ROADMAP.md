@@ -92,6 +92,13 @@ Plans:
 - STITCH-02: Progress bar with text showing current phase and which file is being processed (e.g., "Stitching 3/7: GH030001.MP4")
 - STITCH-03: After stitching completes, each original chunk is individually zipped into an `archive/` subfolder at the source location
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — ChunkStitcher + ChunkArchiver TDD: binary append and zip-per-chunk engines (GoProStitcherKit)
+- [ ] 04-02-PLAN.md — StitchProgressFeature TCA reducer + AppFeature navigation wiring + ChunkReview startStitching action
+- [ ] 04-03-PLAN.md — StitchProgressView SwiftUI + end-to-end integration test + human-verify
+
 **Success Criteria:**
 
 1. User sees "Start Stitching" button and can initiate the process; progress screen appears
