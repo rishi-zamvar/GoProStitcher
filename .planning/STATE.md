@@ -1,6 +1,6 @@
 # STATE: GoProStitcher
 
-**Last Updated:** 2026-03-17 (Plan 01-02 complete)
+**Last Updated:** 2026-03-17 (Plan 02-01 complete)
 
 ---
 
@@ -22,13 +22,14 @@
 
 ## Current Position
 
-**Phase:** 1 - Testing Infrastructure & Project Foundation (✓ Complete)
-**Status:** Phase verified — 9/9 must-haves pass. TEST-01 through TEST-04 complete.
+**Phase:** 2 - File Detection (In Progress)
+**Plan:** 02-01 complete — GoProNameParser + GoProChunk implemented and tested
+**Status:** Plan 02-01 complete. 2 tasks / 2 done. 25/25 tests passing.
 
-**Progress:** ███░░░░░░░ 25% (Phase 1/4 complete)
+**Progress:** ████░░░░░░ 37% (Phase 1 complete + Plan 02-01 complete)
 
 **Current Focus:**
-Phase 1 complete and verified. Next: Phase 2 — File Detection (with Tests).
+Phase 2 underway. GoProNameParser (pure parsing) done. Next: 02-02 file scanner / directory enumeration.
 
 ---
 
@@ -66,6 +67,9 @@ Phase 1 complete and verified. Next: Phase 2 — File Detection (with Tests).
 | setUp() does not throw on macOS XCTest | Use try? + XCTAssertNotNil pattern; override cannot add throws | From 01-02 |
 | test-data/ gitignored, tiny fixtures in Resources/ | Large real GoPro clips excluded from git; CI-safe tiny clips committed | From 01-02 |
 | xcpretty optional in run-tests.sh | Uses || true to avoid CI failure when xcpretty not installed | From 01-02 |
+| NSRegularExpression instead of Swift regex literal | Swift regex literals (/.../) fail as stored properties under swift-tools-version 5.9 on the installed toolchain; NSRegularExpression is universally safe | From 02-01 |
+| GoProNameParser as caseless enum | Prevents instantiation; pure static function namespace is the right model | From 02-01 |
+| Sort key: fileNumber asc then chapter asc | fileNumber = recording session, chapter = split within session; this order is the correct stitch sequence | From 02-01 |
 
 ### Known Constraints
 
@@ -80,7 +84,7 @@ Phase 1 complete and verified. Next: Phase 2 — File Detection (with Tests).
 - [x] Design test helper APIs for file system operations — DONE in 01-02
 - [ ] Add real tiny MP4 fixtures to GoProStitcherIntegrationTests/Resources/ (GH010001.MP4, GH020001.MP4, GH030001.MP4) before Phase 2 integration tests
 - [ ] Research AVFoundation quick preview performance (3-second clip extraction timing)
-- [ ] Identify GoPro chapter numbering variations (GH010001 vs GX010001 vs other patterns)
+- [x] Identify GoPro chapter numbering variations (GH010001 vs GX010001 vs other patterns) — DONE in 02-01
 - [ ] Confirm FileManager disk space API for checking available space before append
 
 ### Blockers
@@ -91,20 +95,16 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-17 17:45 UTC - Executed plan 01-02
-**Stopped at:** Completed 01-02-PLAN.md (2/2 tasks)
+**Last Session:** 2026-03-17 18:35 UTC - Executed plan 02-01
+**Stopped at:** Completed 02-01-PLAN.md (2/2 tasks)
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcherKit/Sources/GoProStitcherKit/TestHelpers/TempDirectoryHelper.swift
-- GoProStitcherKit/Sources/GoProStitcherKit/TestHelpers/GoProFileFactory.swift
-- GoProStitcherKit/Tests/GoProStitcherKitTests/TestHelpersTests.swift
-- scripts/run-tests.sh
-- .gitignore
-- GoProStitcherIntegrationTests/Resources/README.md
-- .planning/phases/01-testing-infrastructure/01-02-SUMMARY.md
+- GoProStitcherKit/Sources/GoProStitcherKit/GoProNameParser.swift
+- GoProStitcherKit/Tests/GoProStitcherKitTests/GoProNameParserTests.swift
+- .planning/phases/02-file-detection/02-01-SUMMARY.md
 
-**Next Session:** Execute Phase 2 plans (file ingestion, GoPro parsing)
+**Next Session:** Execute Phase 2 Plan 02 (file scanner / directory enumeration wrapping GoProNameParser)
 
 ---
 
