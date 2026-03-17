@@ -1,6 +1,6 @@
 # STATE: GoProStitcher
 
-**Last Updated:** 2026-03-18 (Plan 03-02 complete)
+**Last Updated:** 2026-03-18 (Plan 03-03 auto tasks complete; checkpoint pending)
 
 ---
 
@@ -22,13 +22,13 @@
 
 ## Current Position
 
-**Phase:** 3 - Review, Preview & Reorder (In Progress)
-**Status:** Plans 03-01 and 03-02 complete. Plan 03-03 (ChunkReviewView) remaining.
+**Phase:** 3 - Review, Preview & Reorder (In Progress — awaiting human verify)
+**Status:** Plans 03-01, 03-02, and 03-03 auto tasks complete. 03-03 checkpoint awaiting human verification.
 
-**Progress:** ███████░░░ 65% (Phase 2 complete + 03-01 + 03-02 done)
+**Progress:** ████████░░ 75% (Phase 2 complete + 03-01 + 03-02 + 03-03 auto tasks done)
 
 **Current Focus:**
-Phase 3 in progress. 03-02 ChunkReviewFeature reducer complete. Next: 03-03 ChunkReviewView (SwiftUI).
+Phase 3 auto work complete. ChunkReviewView, ChunkPreviewModal, AppFeature, and ContentView navigation all compiled clean. Waiting for human to run app and verify ORDER-01 through ORDER-04 visually.
 
 ---
 
@@ -80,6 +80,9 @@ Phase 3 in progress. 03-02 ChunkReviewFeature reducer complete. Next: 03-03 Chun
 | TCA TestStore mutation pattern (not XCTAssertEqual inside closure) | TestStore send closure receives inout state; mutate to expected value — TCA compares before/after; XCTAssert calls inside don't drive state matching | From 03-02 |
 | GoProStitcherIntegrationTests as hosted test bundle (TEST_HOST = app) | Standalone bundle cannot @testable import app internals; hosted bundle injects into app process giving access to internal types like ChunkReviewFeature | From 03-02 |
 | ChunkMetadata.== excludes NSImage thumbnail | NSImage does not conform to Equatable; duration + resolution equality is sufficient for TCA state diffing | From 03-02 |
+| @Perception.Bindable instead of @SwiftUI.Bindable | Deployment target is macOS 13; SwiftUI.Bindable requires macOS 14; TCA's bundled swift-perception provides backport | From 03-03 |
+| sheet(isPresented:) with manual Binding<Bool> for preview modal | sheet(item:) with .sending() would fire wrong TCA action; manual binding fires previewDismissed correctly | From 03-03 |
+| AppFeature optional chunkReview state for navigation | nil = picker screen; non-nil = review screen; clean navigation without router library at this scale | From 03-03 |
 
 ### Known Constraints
 
@@ -105,18 +108,20 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-18 - Executed plan 03-02 (ChunkReviewFeature TDD)
-**Stopped at:** Completed 03-02-PLAN.md (2 TDD tasks: RED + GREEN, all 4 reducer tests pass)
+**Last Session:** 2026-03-18 - Executed plan 03-03 auto tasks (ChunkReviewView + ContentView wiring)
+**Stopped at:** 03-03 checkpoint:human-verify (Task 3) — auto tasks e2c8cb1 and 678d6d4 complete
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcher/Features/ChunkReview/ChunkReviewFeature.swift
-- GoProStitcherIntegrationTests/ChunkReviewReducerTests.swift
-- project.yml (TEST_HOST/BUNDLE_LOADER for integration test target)
+- GoProStitcher/Features/ChunkReview/ChunkReviewView.swift (created)
+- GoProStitcher/Features/ChunkReview/ChunkPreviewModal.swift (created)
+- GoProStitcher/AppFeature.swift (created)
+- GoProStitcher/ContentView.swift (updated)
+- GoProStitcher/GoProStitcherApp.swift (updated)
 - GoProStitcher.xcodeproj/project.pbxproj (regenerated)
-- .planning/phases/03-review-preview-reorder/03-02-SUMMARY.md
+- .planning/phases/03-review-preview-reorder/03-03-SUMMARY.md
 
-**Next Session:** Execute 03-03 (ChunkReviewView — SwiftUI view connecting to ChunkReviewFeature reducer)
+**Next Session:** Human verification of ORDER-01 through ORDER-04 in running app, then Phase 3 is fully complete
 
 ---
 
