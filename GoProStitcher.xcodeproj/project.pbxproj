@@ -17,6 +17,7 @@
 		7B43CB04931E94A33629BC4E /* GoProStitcherKit in Frameworks */ = {isa = PBXBuildFile; productRef = 695116589AA273DD1066239B /* GoProStitcherKit */; };
 		A6A7023D81045BED013EE5DC /* ChunkReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F95D73C7A4C5EF8523D182A /* ChunkReviewView.swift */; };
 		BDEC659D5DA111EAF9670400 /* StitchProgressFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B95B6E049389DF9514CB8A /* StitchProgressFeature.swift */; };
+		BE5896D43149EACB8D6EC94A /* StitchProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4A3B77C4E112FF7043FDB /* StitchProgressView.swift */; };
 		CBC7E402317EBB4F5E0CE3C5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 24B635690ED3D414624D6B5B /* ComposableArchitecture */; };
 		CF15D34784197DC932842443 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF2BF210DA8636051C1E6498 /* README.md */; };
 		D2ED45493B36C77476A1F451 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D8CDAA05EC41DB67A7E129 /* AppFeature.swift */; };
@@ -55,6 +56,7 @@
 		8457ADA97DBFDCD768B16EAB /* FolderPickerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPickerFeature.swift; sourceTree = "<group>"; };
 		91B9DC253C56135A28E1D45C /* ChunkPreviewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkPreviewModal.swift; sourceTree = "<group>"; };
 		9AAAEDA1B43A9542FEB90AEA /* ChunkReviewReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkReviewReducerTests.swift; sourceTree = "<group>"; };
+		B4A4A3B77C4E112FF7043FDB /* StitchProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchProgressView.swift; sourceTree = "<group>"; };
 		BB4F3415CEFA0426B0167A07 /* GoProStitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoProStitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherIntegrationTests.swift; sourceTree = "<group>"; };
 		CE38420A22BA26DB39CA2763 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				57B95B6E049389DF9514CB8A /* StitchProgressFeature.swift */,
+				B4A4A3B77C4E112FF7043FDB /* StitchProgressView.swift */,
 			);
 			path = StitchProgress;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				70AAD24636B83E694666640C /* FolderPickerView.swift in Sources */,
 				60B76DE9D654C5E828C4C016 /* GoProStitcherApp.swift in Sources */,
 				BDEC659D5DA111EAF9670400 /* StitchProgressFeature.swift in Sources */,
+				BE5896D43149EACB8D6EC94A /* StitchProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

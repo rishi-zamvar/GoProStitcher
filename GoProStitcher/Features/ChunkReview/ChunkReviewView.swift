@@ -105,10 +105,10 @@ struct ChunkReviewView: View {
                 }
                 Spacer()
                 Button("Start Stitching") {
-                    // Phase 4 — not yet implemented
+                    store.send(.startStitching)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(true)
+                .disabled(store.chunks.isEmpty)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
