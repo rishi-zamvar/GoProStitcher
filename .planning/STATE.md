@@ -1,6 +1,6 @@
 # STATE: GoProStitcher
 
-**Last Updated:** 2026-03-17 (Plan 02-03 complete)
+**Last Updated:** 2026-03-18 (Plan 03-01 complete)
 
 ---
 
@@ -22,13 +22,13 @@
 
 ## Current Position
 
-**Phase:** 2 - File Detection (✓ Complete, Verified)
-**Status:** Phase verified — 9/9 must-haves pass. DETECT-01 through DETECT-04 complete.
+**Phase:** 3 - Review, Preview & Reorder (In Progress)
+**Status:** Plan 03-01 complete. AVMetadataReader built and tested. Plans 03-02 and 03-03 remaining.
 
-**Progress:** █████░░░░░ 50% (Phase 2/4 complete)
+**Progress:** ██████░░░░ 55% (Phase 2 complete + 03-01 done)
 
 **Current Focus:**
-Phase 2 complete and verified. Next: Phase 3 — Review, Preview & Reorder (with Tests).
+Phase 3 in progress. 03-01 AVMetadataReader complete. Next: 03-02 ChunkReviewFeature reducer.
 
 ---
 
@@ -74,6 +74,9 @@ Phase 2 complete and verified. Next: Phase 3 — Review, Preview & Reorder (with
 | userCancelledPicker is a distinct TCA action (not scanCompleted(.empty)) | Cancel must not overwrite a prior valid scan result; dedicated action only resets isLoading | From 02-03 |
 | NSOpenPanel via MainActor.run inside TCA .run effect | AppKit requires runModal() on main thread; this satisfies both AppKit and TCA concurrency rules | From 02-03 |
 | TCA Feature pattern: Features/FeatureName/FeatureNameFeature.swift + FeatureNameView.swift | One file per reducer, one file per view, under Features/ directory hierarchy | From 02-03 |
+| AVMetadataReader as caseless enum | Matches GoProNameParser/FolderScanner pure-static-namespace pattern, prevents instantiation | From 03-01 |
+| Real MP4 fixture required for AVFoundation tests | GoProFileFactory.makeChunk writes zero-filled bytes; AVFoundation cannot parse them; real fixture generated with ffmpeg | From 03-01 |
+| SPM test resources via Bundle.module | .copy("Resources") in Package.swift testTarget; Bundle.module.url(forResource:withExtension:) for lookup | From 03-01 |
 
 ### Known Constraints
 
@@ -86,7 +89,7 @@ Phase 2 complete and verified. Next: Phase 3 — Review, Preview & Reorder (with
 ### TODO (Backlog)
 
 - [x] Design test helper APIs for file system operations — DONE in 01-02
-- [ ] Add real tiny MP4 fixtures to GoProStitcherIntegrationTests/Resources/ (GH010001.MP4, GH020001.MP4, GH030001.MP4) before Phase 2 integration tests
+- [x] Add real tiny MP4 fixtures — DONE in 03-01 (GH010001.MP4 in GoProStitcherKitTests/Resources/)
 - [ ] Research AVFoundation quick preview performance (3-second clip extraction timing)
 - [x] Identify GoPro chapter numbering variations (GH010001 vs GX010001 vs other patterns) — DONE in 02-01
 - [ ] Confirm FileManager disk space API for checking available space before append
@@ -99,18 +102,18 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-17 - Executed plan 02-03 (FolderPickerFeature)
-**Stopped at:** Completed 02-03-PLAN.md (1 auto task + checkpoint human-verify, all verified)
+**Last Session:** 2026-03-18 - Executed plan 03-01 (AVMetadataReader TDD)
+**Stopped at:** Completed 03-01-PLAN.md (2 TDD tasks: RED + GREEN, all 40 tests pass)
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcher/Features/FolderPicker/FolderPickerFeature.swift
-- GoProStitcher/Features/FolderPicker/FolderPickerView.swift
-- GoProStitcher/ContentView.swift
-- GoProStitcher.xcodeproj/project.pbxproj
-- .planning/phases/02-file-detection/02-03-SUMMARY.md
+- GoProStitcherKit/Sources/GoProStitcherKit/AVMetadataReader.swift
+- GoProStitcherKit/Tests/GoProStitcherKitTests/AVMetadataReaderTests.swift
+- GoProStitcherKit/Tests/GoProStitcherKitTests/Resources/GH010001.MP4
+- GoProStitcherKit/Package.swift
+- .planning/phases/03-review-preview-reorder/03-01-SUMMARY.md
 
-**Next Session:** Execute Phase 3 (review screen — chunk reorder, preview, proceed to stitch)
+**Next Session:** Execute 03-02 (ChunkReviewFeature reducer — loads AVMetadataReader, manages chunk order)
 
 ---
 
