@@ -1,6 +1,6 @@
 # STATE: GoProStitcher
 
-**Last Updated:** 2026-03-18 (Plan 03-03 complete — checkpoint approved)
+**Last Updated:** 2026-03-18 (Plan 04-01 complete — ChunkStitcher and ChunkArchiver implemented)
 
 ---
 
@@ -22,13 +22,13 @@
 
 ## Current Position
 
-**Phase:** 3 - Review, Preview & Reorder (Complete)
-**Status:** Plans 03-01, 03-02, and 03-03 all complete. Phase 3 done. Ready for Phase 4.
+**Phase:** 4 - Stitching Archive (In progress)
+**Status:** Plan 04-01 complete. ChunkStitcher and ChunkArchiver implemented. Plans 04-02, 04-03 remaining.
 
-**Progress:** ███████░░░ 75% (Phase 3/4 complete)
+**Progress:** ████████░░ 80% (Phase 3 complete + 04-01 done)
 
 **Current Focus:**
-Phase 3 fully complete. All ORDER-01 through ORDER-04 requirements visually confirmed by human. Next: Phase 4 — stitching engine and progress screen.
+Plan 04-01 complete. ChunkStitcher (FileHandle binary append) and ChunkArchiver (/usr/bin/zip) both implemented with full TDD coverage. Next: 04-02 — stitching progress UI.
 
 ---
 
@@ -83,6 +83,9 @@ Phase 3 fully complete. All ORDER-01 through ORDER-04 requirements visually conf
 | @Perception.Bindable instead of @SwiftUI.Bindable | Deployment target is macOS 13; SwiftUI.Bindable requires macOS 14; TCA's bundled swift-perception provides backport | From 03-03 |
 | sheet(isPresented:) with manual Binding<Bool> for preview modal | sheet(item:) with .sending() would fire wrong TCA action; manual binding fires previewDismissed correctly | From 03-03 |
 | AppFeature optional chunkReview state for navigation | nil = picker screen; non-nil = review screen; clean navigation without router library at this scale | From 03-03 |
+| caseless enum for ChunkStitcher and ChunkArchiver | Matches established pure-static-namespace pattern (GoProNameParser, FolderScanner, AVMetadataReader), prevents instantiation | From 04-01 |
+| Pre-validate all sources before mutation in ChunkStitcher | Fail-fast before any FileHandle side-effects — if chunk 3 is missing, abort before modifying chunk 1 | From 04-01 |
+| /usr/bin/zip -j for ChunkArchiver instead of ZIPFoundation | No new SPM dependencies; system zip universally available on macOS 13+ | From 04-01 |
 
 ### Known Constraints
 
@@ -108,20 +111,18 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-18 - Completed plan 03-03 (checkpoint approved; Phase 3 fully done)
-**Stopped at:** End of Phase 3 — all plans complete
+**Last Session:** 2026-03-18 - Completed plan 04-01 (ChunkStitcher + ChunkArchiver TDD)
+**Stopped at:** End of 04-01 — ChunkStitcher and ChunkArchiver implemented and tested
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcher/Features/ChunkReview/ChunkReviewView.swift (created)
-- GoProStitcher/Features/ChunkReview/ChunkPreviewModal.swift (created)
-- GoProStitcher/AppFeature.swift (created)
-- GoProStitcher/ContentView.swift (updated)
-- GoProStitcher/GoProStitcherApp.swift (updated)
-- GoProStitcher.xcodeproj/project.pbxproj (regenerated)
-- .planning/phases/03-review-preview-reorder/03-03-SUMMARY.md (finalized)
+- GoProStitcherKit/Sources/GoProStitcherKit/ChunkStitcher.swift (created)
+- GoProStitcherKit/Sources/GoProStitcherKit/ChunkArchiver.swift (created)
+- GoProStitcherKit/Tests/GoProStitcherKitTests/ChunkStitcherTests.swift (created)
+- GoProStitcherKit/Tests/GoProStitcherKitTests/ChunkArchiveTests.swift (created)
+- .planning/phases/04-stitching-archive/04-01-SUMMARY.md (created)
 
-**Next Session:** Begin Phase 4 — stitching engine and progress screen
+**Next Session:** 04-02 — stitching progress UI; invoke ChunkStitcher and ChunkArchiver on background Task
 
 ---
 
