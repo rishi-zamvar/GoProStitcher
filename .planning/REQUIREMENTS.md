@@ -5,6 +5,13 @@
 
 ## v1 Requirements
 
+### Testing Infrastructure
+
+- [ ] **TEST-01**: Unit test framework configured with test targets for logic, file I/O, and UI
+- [ ] **TEST-02**: Mock MP4 generator utility creates small test fixtures with valid MP4 headers and GoPro naming patterns
+- [ ] **TEST-03**: Test helpers for file system operations (temp directories, cleanup, validation)
+- [ ] **TEST-04**: CI-ready test runner (xcodebuild commands, test output parsing, failure reporting)
+
 ### File Detection
 
 - [ ] **DETECT-01**: User can select a folder via native macOS file picker dialog
@@ -24,13 +31,6 @@
 - [ ] **STITCH-01**: App stitches files by sequentially appending each chunk to file 1 in-place — no intermediate copies or file duplication
 - [ ] **STITCH-02**: Progress bar with text showing current phase and which file is being processed (e.g., "Stitching 3/7: GH030001.MP4")
 - [ ] **STITCH-03**: After stitching completes, each original chunk is individually zipped into an `archive/` subfolder at the source location
-
-### Testing
-
-- [ ] **TEST-01**: Unit tests for name parsing, ordering logic, file validation, and metadata extraction
-- [ ] **TEST-02**: Integration tests covering full pipeline: detect → order → stitch → archive
-- [ ] **TEST-03**: Error handling tests: bad files, missing permissions, insufficient disk space, interrupted operations, corrupted MP4s
-- [ ] **TEST-04**: UI tests for navigation flow, button states, progress display, and drag-to-reorder
 
 ## v2 Requirements
 
@@ -54,27 +54,29 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DETECT-01 | TBD | Pending |
-| DETECT-02 | TBD | Pending |
-| DETECT-03 | TBD | Pending |
-| DETECT-04 | TBD | Pending |
-| ORDER-01 | TBD | Pending |
-| ORDER-02 | TBD | Pending |
-| ORDER-03 | TBD | Pending |
-| ORDER-04 | TBD | Pending |
-| STITCH-01 | TBD | Pending |
-| STITCH-02 | TBD | Pending |
-| STITCH-03 | TBD | Pending |
-| TEST-01 | TBD | Pending |
-| TEST-02 | TBD | Pending |
-| TEST-03 | TBD | Pending |
-| TEST-04 | TBD | Pending |
+| TEST-01 | 1 | Pending |
+| TEST-02 | 1 | Pending |
+| TEST-03 | 1 | Pending |
+| TEST-04 | 1 | Pending |
+| DETECT-01 | 2 | Pending |
+| DETECT-02 | 2 | Pending |
+| DETECT-03 | 2 | Pending |
+| DETECT-04 | 2 | Pending |
+| ORDER-01 | 3 | Pending |
+| ORDER-02 | 3 | Pending |
+| ORDER-03 | 3 | Pending |
+| ORDER-04 | 3 | Pending |
+| STITCH-01 | 4 | Pending |
+| STITCH-02 | 4 | Pending |
+| STITCH-03 | 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 15 total
-- Mapped to phases: 0
-- Unmapped: 15
+- Mapped to phases: 15
+- Unmapped: 0
+- **Coverage: 100% ✓**
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after initial definition*
+*Traceability updated: 2026-03-17 after roadmap creation*
+*Traceability revised (test-first): 2026-03-17 after roadmap revision*
