@@ -1,6 +1,6 @@
 # STATE: GoProStitcher
 
-**Last Updated:** 2026-03-17 (Plan 02-01 complete)
+**Last Updated:** 2026-03-17 (Plan 02-03 complete)
 
 ---
 
@@ -22,14 +22,14 @@
 
 ## Current Position
 
-**Phase:** 2 - File Detection (In Progress)
-**Plan:** 02-02 complete — FolderScanner + FolderScanResult + ScannedChunk implemented and tested
-**Status:** Plan 02-02 complete. 2 tasks / 2 done. 34/34 tests passing.
+**Phase:** 2 - File Detection (Complete)
+**Plan:** 02-03 complete — FolderPickerFeature TCA reducer + FolderPickerView implemented and user-verified
+**Status:** Plan 02-03 complete. Phase 2 all 3 plans done. DETECT-01 through DETECT-04 user-verified.
 
-**Progress:** █████░░░░░ 50% (Phase 1 complete + Plans 02-01 and 02-02 complete)
+**Progress:** ███████░░░ 70% (Phase 1 complete + Phase 2 complete — all 3 plans)
 
 **Current Focus:**
-Phase 2 underway. GoProNameParser (pure parsing) done. FolderScanner (directory scan) done. Next: 02-03.
+Phase 2 complete. GoProNameParser, FolderScanner, and FolderPickerFeature/View all done. Ready for Phase 3 (review screen with reorder/preview).
 
 ---
 
@@ -72,6 +72,9 @@ Phase 2 underway. GoProNameParser (pure parsing) done. FolderScanner (directory 
 | Sort key: fileNumber asc then chapter asc | fileNumber = recording session, chapter = split within session; this order is the correct stitch sequence | From 02-01 |
 | FolderScanResult.empty covers both empty dirs and non-MP4-only dirs | Neither case has scannable content; callers don't need the distinction | From 02-02 |
 | ScannedChunk is a value type (struct) with chunk + url + sizeBytes | Immutable, Equatable, aggregates parsed metadata and filesystem facts in one type | From 02-02 |
+| userCancelledPicker is a distinct TCA action (not scanCompleted(.empty)) | Cancel must not overwrite a prior valid scan result; dedicated action only resets isLoading | From 02-03 |
+| NSOpenPanel via MainActor.run inside TCA .run effect | AppKit requires runModal() on main thread; this satisfies both AppKit and TCA concurrency rules | From 02-03 |
+| TCA Feature pattern: Features/FeatureName/FeatureNameFeature.swift + FeatureNameView.swift | One file per reducer, one file per view, under Features/ directory hierarchy | From 02-03 |
 
 ### Known Constraints
 
@@ -97,16 +100,18 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-17 18:39 UTC - Executed plan 02-02
-**Stopped at:** Completed 02-02-PLAN.md (2/2 tasks)
+**Last Session:** 2026-03-17 - Executed plan 02-03 (FolderPickerFeature)
+**Stopped at:** Completed 02-03-PLAN.md (1 auto task + checkpoint human-verify, all verified)
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcherKit/Sources/GoProStitcherKit/FolderScanner.swift
-- GoProStitcherKit/Tests/GoProStitcherKitTests/FolderScannerTests.swift
-- .planning/phases/02-file-detection/02-02-SUMMARY.md
+- GoProStitcher/Features/FolderPicker/FolderPickerFeature.swift
+- GoProStitcher/Features/FolderPicker/FolderPickerView.swift
+- GoProStitcher/ContentView.swift
+- GoProStitcher.xcodeproj/project.pbxproj
+- .planning/phases/02-file-detection/02-03-SUMMARY.md
 
-**Next Session:** Execute Phase 2 Plan 03 (next file-detection plan)
+**Next Session:** Execute Phase 3 (review screen — chunk reorder, preview, proceed to stitch)
 
 ---
 
