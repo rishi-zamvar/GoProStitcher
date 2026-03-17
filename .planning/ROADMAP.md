@@ -64,6 +64,13 @@
 - ORDER-03: User can drag to reorder files if auto-detected order is wrong
 - ORDER-04: Each file shows duration, file size, and resolution metadata
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — AVMetadataReader TDD: duration, resolution, thumbnail extraction from MP4 (GoProStitcherKit)
+- [ ] 03-02-PLAN.md — ChunkReviewFeature TCA reducer: reorder, preview selection, metadata load with unit tests
+- [ ] 03-03-PLAN.md — ChunkReviewView + ChunkPreviewModal SwiftUI + ContentView navigation wiring + human-verify
+
 **Success Criteria:**
 
 1. User sees list of detected files with thumbnails extracted from first frame of each mock MP4
@@ -101,7 +108,7 @@
 |-------|--------|-------|-----|-------|
 | 1 - Testing Infrastructure & Project Foundation | ✓ Complete | 2026-03-17 | 2026-03-17 | 2 plans, 9/9 must-haves verified |
 | 2 - File Detection (with Tests) | ✓ Complete | 2026-03-17 | 2026-03-17 | 3 plans, 9/9 must-haves verified |
-| 3 - Review, Preview & Reorder (with Tests) | Pending | — | — | Thumbnails, quick preview, drag-to-reorder with UI tests |
+| 3 - Review, Preview & Reorder (with Tests) | Planned | — | — | 3 plans, 3 waves — AVMetadataReader, ChunkReviewFeature, SwiftUI views |
 | 4 - Stitching & Archive with Full Integration Testing | Pending | — | — | In-place append, progress tracking, zip creation, end-to-end tests |
 
 ---
