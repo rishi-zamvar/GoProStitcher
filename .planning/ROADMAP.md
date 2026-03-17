@@ -67,9 +67,9 @@
 **Plans:** 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — AVMetadataReader TDD: duration, resolution, thumbnail extraction from MP4 (GoProStitcherKit)
-- [ ] 03-02-PLAN.md — ChunkReviewFeature TCA reducer: reorder, preview selection, metadata load with unit tests
-- [ ] 03-03-PLAN.md — ChunkReviewView + ChunkPreviewModal SwiftUI + ContentView navigation wiring + human-verify
+- [x] 03-01-PLAN.md — AVMetadataReader TDD: duration, resolution, thumbnail extraction from MP4 (GoProStitcherKit)
+- [x] 03-02-PLAN.md — ChunkReviewFeature TCA reducer: reorder, preview selection, metadata load with unit tests
+- [x] 03-03-PLAN.md — ChunkReviewView + ChunkPreviewModal SwiftUI + ContentView navigation wiring + human-verify
 
 **Success Criteria:**
 
@@ -108,7 +108,7 @@ Plans:
 |-------|--------|-------|-----|-------|
 | 1 - Testing Infrastructure & Project Foundation | ✓ Complete | 2026-03-17 | 2026-03-17 | 2 plans, 9/9 must-haves verified |
 | 2 - File Detection (with Tests) | ✓ Complete | 2026-03-17 | 2026-03-17 | 3 plans, 9/9 must-haves verified |
-| 3 - Review, Preview & Reorder (with Tests) | Planned | — | — | 3 plans, 3 waves — AVMetadataReader, ChunkReviewFeature, SwiftUI views |
+| 3 - Review, Preview & Reorder (with Tests) | ✓ Complete | 2026-03-18 | 2026-03-18 | 3 plans, 15/15 must-haves verified |
 | 4 - Stitching & Archive with Full Integration Testing | Pending | — | — | In-place append, progress tracking, zip creation, end-to-end tests |
 
 ---
@@ -127,10 +127,10 @@ Plans:
 | DETECT-02 | 2 | File Detection | Complete |
 | DETECT-03 | 2 | File Detection | Complete |
 | DETECT-04 | 2 | File Detection | Complete |
-| ORDER-01 | 3 | Review & Order | Pending |
-| ORDER-02 | 3 | Review & Order | Pending |
-| ORDER-03 | 3 | Review & Order | Pending |
-| ORDER-04 | 3 | Review & Order | Pending |
+| ORDER-01 | 3 | Review & Order | Complete |
+| ORDER-02 | 3 | Review & Order | Complete |
+| ORDER-03 | 3 | Review & Order | Complete |
+| ORDER-04 | 3 | Review & Order | Complete |
 | STITCH-01 | 4 | Stitching | Pending |
 | STITCH-02 | 4 | Stitching | Pending |
 | STITCH-03 | 4 | Stitching | Pending |

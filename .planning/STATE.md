@@ -25,7 +25,7 @@
 **Phase:** 3 - Review, Preview & Reorder (Complete)
 **Status:** Plans 03-01, 03-02, and 03-03 all complete. Phase 3 done. Ready for Phase 4.
 
-**Progress:** █████████░ 90% (Phases 1-3 complete; Phase 4 next)
+**Progress:** ███████░░░ 75% (Phase 3/4 complete)
 
 **Current Focus:**
 Phase 3 fully complete. All ORDER-01 through ORDER-04 requirements visually confirmed by human. Next: Phase 4 — stitching engine and progress screen.

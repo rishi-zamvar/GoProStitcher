@@ -62,10 +62,10 @@
 | DETECT-02 | 2 | Complete |
 | DETECT-03 | 2 | Complete |
 | DETECT-04 | 2 | Complete |
-| ORDER-01 | 3 | Pending |
-| ORDER-02 | 3 | Pending |
-| ORDER-03 | 3 | Pending |
-| ORDER-04 | 3 | Pending |
+| ORDER-01 | 3 | Complete |
+| ORDER-02 | 3 | Complete |
+| ORDER-03 | 3 | Complete |
+| ORDER-04 | 3 | Complete |
 | STITCH-01 | 4 | Pending |
 | STITCH-02 | 4 | Pending |
 | STITCH-03 | 4 | Pending |
