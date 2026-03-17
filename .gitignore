@@ -1,0 +1,18 @@
+# Xcode
+.DS_Store
+*.xcuserstate
+xcuserdata/
+DerivedData/
+.build/
+*.xcscmblueprint
+
+# Large test fixtures (real GoPro clips — gitignored, copy manually)
+test-data/
+
+# Swift Package Manager
+.swiftpm/
+GoProStitcherKit/.build/
+
+# OS
+.DS_Store
+Thumbs.db
