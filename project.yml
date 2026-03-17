@@ -50,6 +50,8 @@ targets:
       - GoProStitcherIntegrationTests
     dependencies:
       - package: GoProStitcherKit
+      - package: ComposableArchitecture
+        product: ComposableArchitecture
     settings:
       base:
         SWIFT_VERSION: "5.9"
