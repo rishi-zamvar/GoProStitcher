@@ -2,15 +2,25 @@ import ComposableArchitecture
 import SwiftUI
 
 struct ContentView: View {
+    let store: StoreOf<AppFeature>
+
     var body: some View {
-        FolderPickerView(
-            store: Store(initialState: FolderPickerFeature.State()) {
-                FolderPickerFeature()
-            }
-        )
+        if store.chunkReview != nil {
+            ChunkReviewView(
+                store: store.scope(state: \.chunkReview!, action: \.chunkReview)
+            )
+        } else {
+            FolderPickerView(
+                store: store.scope(state: \.folderPicker, action: \.folderPicker)
+            )
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(
+        store: Store(initialState: AppFeature.State()) {
+            AppFeature()
+        }
+    )
 }
