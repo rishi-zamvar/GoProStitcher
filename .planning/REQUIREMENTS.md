@@ -54,10 +54,10 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TEST-01 | 1 | Pending |
-| TEST-02 | 1 | Pending |
-| TEST-03 | 1 | Pending |
-| TEST-04 | 1 | Pending |
+| TEST-01 | 1 | Complete |
+| TEST-02 | 1 | Complete |
+| TEST-03 | 1 | Complete |
+| TEST-04 | 1 | Complete |
 | DETECT-01 | 2 | Pending |
 | DETECT-02 | 2 | Pending |
 | DETECT-03 | 2 | Pending |
