@@ -49,17 +49,19 @@ struct StitchProgressFeature {
 
                     do {
                         // Step 1 — Archive: zip every original chunk before stitching removes them.
-                        try ChunkArchiver.archive(chunks: chunkURLs, into: archiveDir) { idx, _ in
-                            Task {
-                                let name = chunkURLs[idx - 1].lastPathComponent
-                                await send(.phaseUpdated(.archiving(fileIndex: idx - 1, fileName: name)))
-                            }
+                        for (index, url) in chunkURLs.enumerated() {
+                            await send(.phaseUpdated(.archiving(fileIndex: index, fileName: url.lastPathComponent)))
                         }
+                        try ChunkArchiver.archive(chunks: chunkURLs, into: archiveDir)
 
                         // Step 2 — Stitch: append chunks[1..N-1] onto chunks[0] in-place.
+                        guard chunkURLs.count >= 2 else {
+                            // Single file — nothing to stitch, just archive was enough
+                            await send(.stitchCompleted)
+                            return
+                        }
                         for (index, sourceURL) in chunkURLs.dropFirst().enumerated() {
-                            let name = sourceURL.lastPathComponent
-                            await send(.phaseUpdated(.stitching(fileIndex: index + 1, fileName: name)))
+                            await send(.phaseUpdated(.stitching(fileIndex: index + 1, fileName: sourceURL.lastPathComponent)))
                         }
                         try ChunkStitcher.stitch(chunks: chunkURLs)
 
