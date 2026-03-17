@@ -1,6 +1,6 @@
 # STATE: GoProStitcher
 
-**Last Updated:** 2026-03-18 (Plan 03-01 complete)
+**Last Updated:** 2026-03-18 (Plan 03-02 complete)
 
 ---
 
@@ -23,12 +23,12 @@
 ## Current Position
 
 **Phase:** 3 - Review, Preview & Reorder (In Progress)
-**Status:** Plan 03-01 complete. AVMetadataReader built and tested. Plans 03-02 and 03-03 remaining.
+**Status:** Plans 03-01 and 03-02 complete. Plan 03-03 (ChunkReviewView) remaining.
 
-**Progress:** ██████░░░░ 55% (Phase 2 complete + 03-01 done)
+**Progress:** ███████░░░ 65% (Phase 2 complete + 03-01 + 03-02 done)
 
 **Current Focus:**
-Phase 3 in progress. 03-01 AVMetadataReader complete. Next: 03-02 ChunkReviewFeature reducer.
+Phase 3 in progress. 03-02 ChunkReviewFeature reducer complete. Next: 03-03 ChunkReviewView (SwiftUI).
 
 ---
 
@@ -77,6 +77,9 @@ Phase 3 in progress. 03-01 AVMetadataReader complete. Next: 03-02 ChunkReviewFea
 | AVMetadataReader as caseless enum | Matches GoProNameParser/FolderScanner pure-static-namespace pattern, prevents instantiation | From 03-01 |
 | Real MP4 fixture required for AVFoundation tests | GoProFileFactory.makeChunk writes zero-filled bytes; AVFoundation cannot parse them; real fixture generated with ffmpeg | From 03-01 |
 | SPM test resources via Bundle.module | .copy("Resources") in Package.swift testTarget; Bundle.module.url(forResource:withExtension:) for lookup | From 03-01 |
+| TCA TestStore mutation pattern (not XCTAssertEqual inside closure) | TestStore send closure receives inout state; mutate to expected value — TCA compares before/after; XCTAssert calls inside don't drive state matching | From 03-02 |
+| GoProStitcherIntegrationTests as hosted test bundle (TEST_HOST = app) | Standalone bundle cannot @testable import app internals; hosted bundle injects into app process giving access to internal types like ChunkReviewFeature | From 03-02 |
+| ChunkMetadata.== excludes NSImage thumbnail | NSImage does not conform to Equatable; duration + resolution equality is sufficient for TCA state diffing | From 03-02 |
 
 ### Known Constraints
 
@@ -102,18 +105,18 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-18 - Executed plan 03-01 (AVMetadataReader TDD)
-**Stopped at:** Completed 03-01-PLAN.md (2 TDD tasks: RED + GREEN, all 40 tests pass)
+**Last Session:** 2026-03-18 - Executed plan 03-02 (ChunkReviewFeature TDD)
+**Stopped at:** Completed 03-02-PLAN.md (2 TDD tasks: RED + GREEN, all 4 reducer tests pass)
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcherKit/Sources/GoProStitcherKit/AVMetadataReader.swift
-- GoProStitcherKit/Tests/GoProStitcherKitTests/AVMetadataReaderTests.swift
-- GoProStitcherKit/Tests/GoProStitcherKitTests/Resources/GH010001.MP4
-- GoProStitcherKit/Package.swift
-- .planning/phases/03-review-preview-reorder/03-01-SUMMARY.md
+- GoProStitcher/Features/ChunkReview/ChunkReviewFeature.swift
+- GoProStitcherIntegrationTests/ChunkReviewReducerTests.swift
+- project.yml (TEST_HOST/BUNDLE_LOADER for integration test target)
+- GoProStitcher.xcodeproj/project.pbxproj (regenerated)
+- .planning/phases/03-review-preview-reorder/03-02-SUMMARY.md
 
-**Next Session:** Execute 03-02 (ChunkReviewFeature reducer — loads AVMetadataReader, manages chunk order)
+**Next Session:** Execute 03-03 (ChunkReviewView — SwiftUI view connecting to ChunkReviewFeature reducer)
 
 ---
 
