@@ -19,7 +19,10 @@ let package = Package(
         ),
         .testTarget(
             name: "GoProStitcherKitTests",
-            dependencies: ["GoProStitcherKit"]
+            dependencies: ["GoProStitcherKit"],
+            resources: [
+                .copy("Resources")
+            ]
         ),
     ]
 )
