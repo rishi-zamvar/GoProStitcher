@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C0442925B0CB252EEA9A010 /* FolderPickerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457ADA97DBFDCD768B16EAB /* FolderPickerFeature.swift */; };
 		24563AC542B41FB2A662BDDF /* GoProStitcherKit in Frameworks */ = {isa = PBXBuildFile; productRef = C1E5AB11BD6337465460E6BC /* GoProStitcherKit */; };
 		60B76DE9D654C5E828C4C016 /* GoProStitcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */; };
 		6E55C07CA3684D3C0C0EDFD3 /* GoProStitcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D2389E7F089828C182644B /* GoProStitcherUITests.swift */; };
+		70AAD24636B83E694666640C /* FolderPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544974CD40BB9A44DB1B5F9E /* FolderPickerView.swift */; };
 		7B43CB04931E94A33629BC4E /* GoProStitcherKit in Frameworks */ = {isa = PBXBuildFile; productRef = 695116589AA273DD1066239B /* GoProStitcherKit */; };
 		CBC7E402317EBB4F5E0CE3C5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 24B635690ED3D414624D6B5B /* ComposableArchitecture */; };
+		CF15D34784197DC932842443 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF2BF210DA8636051C1E6498 /* README.md */; };
 		D4F3CC0C5292E9DEB023F3DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38420A22BA26DB39CA2763 /* ContentView.swift */; };
 		FC0A3F4B782D7AA7DBE7C53C /* GoProStitcherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */; };
 /* End PBXBuildFile section */
@@ -29,13 +32,16 @@
 /* Begin PBXFileReference section */
 		1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherApp.swift; sourceTree = "<group>"; };
 		211481CB4D40257C6DFA2320 /* GoProStitcherKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GoProStitcherKit; path = GoProStitcherKit; sourceTree = SOURCE_ROOT; };
+		544974CD40BB9A44DB1B5F9E /* FolderPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPickerView.swift; sourceTree = "<group>"; };
 		57D2389E7F089828C182644B /* GoProStitcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherUITests.swift; sourceTree = "<group>"; };
 		770486A167C05B829BC5DADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7C380692FB12220D81AAB214 /* GoProStitcherIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoProStitcherIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8457ADA97DBFDCD768B16EAB /* FolderPickerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPickerFeature.swift; sourceTree = "<group>"; };
 		BB4F3415CEFA0426B0167A07 /* GoProStitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoProStitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherIntegrationTests.swift; sourceTree = "<group>"; };
 		CE38420A22BA26DB39CA2763 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D014B5E3B7D3FADBB1C8658F /* GoProStitcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoProStitcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF2BF210DA8636051C1E6498 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,14 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		209A436B10B0EAEF08EA8A60 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				94601ACDC0284C8CF56D5580 /* FolderPicker */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		247AD8D3F5A724D8F4385AC6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,8 +106,26 @@
 			isa = PBXGroup;
 			children = (
 				BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */,
+				8A4D2FB4EED21E6556EDB1B5 /* Resources */,
 			);
 			path = GoProStitcherIntegrationTests;
+			sourceTree = "<group>";
+		};
+		8A4D2FB4EED21E6556EDB1B5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FF2BF210DA8636051C1E6498 /* README.md */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		94601ACDC0284C8CF56D5580 /* FolderPicker */ = {
+			isa = PBXGroup;
+			children = (
+				8457ADA97DBFDCD768B16EAB /* FolderPickerFeature.swift */,
+				544974CD40BB9A44DB1B5F9E /* FolderPickerView.swift */,
+			);
+			path = FolderPicker;
 			sourceTree = "<group>";
 		};
 		AE0463747E0D5580B991DE9A /* GoProStitcher */ = {
@@ -102,6 +134,7 @@
 				CE38420A22BA26DB39CA2763 /* ContentView.swift */,
 				1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */,
 				770486A167C05B829BC5DADF /* Info.plist */,
+				209A436B10B0EAEF08EA8A60 /* Features */,
 			);
 			path = GoProStitcher;
 			sourceTree = "<group>";
@@ -160,6 +193,7 @@
 			buildConfigurationList = 6DA94C39F59F35BCE2B13EDA /* Build configuration list for PBXNativeTarget "GoProStitcherIntegrationTests" */;
 			buildPhases = (
 				E47F581C066711915F636C4F /* Sources */,
+				B144F6CF9BE0FF3057B740DF /* Resources */,
 				FD29016E368A3E1254059C46 /* Frameworks */,
 			);
 			buildRules = (
@@ -223,12 +257,25 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		B144F6CF9BE0FF3057B740DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF15D34784197DC932842443 /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		24D8FB5F5B4BB581EF577809 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D4F3CC0C5292E9DEB023F3DE /* ContentView.swift in Sources */,
+				1C0442925B0CB252EEA9A010 /* FolderPickerFeature.swift in Sources */,
+				70AAD24636B83E694666640C /* FolderPickerView.swift in Sources */,
 				60B76DE9D654C5E828C4C016 /* GoProStitcherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,9 +1,13 @@
+import ComposableArchitecture
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("GoProStitcher")
-            .padding()
+        FolderPickerView(
+            store: Store(initialState: FolderPickerFeature.State()) {
+                FolderPickerFeature()
+            }
+        )
     }
 }
 
