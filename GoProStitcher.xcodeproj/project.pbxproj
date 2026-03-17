@@ -1,0 +1,586 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		24563AC542B41FB2A662BDDF /* GoProStitcherKit in Frameworks */ = {isa = PBXBuildFile; productRef = C1E5AB11BD6337465460E6BC /* GoProStitcherKit */; };
+		60B76DE9D654C5E828C4C016 /* GoProStitcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */; };
+		6E55C07CA3684D3C0C0EDFD3 /* GoProStitcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D2389E7F089828C182644B /* GoProStitcherUITests.swift */; };
+		7B43CB04931E94A33629BC4E /* GoProStitcherKit in Frameworks */ = {isa = PBXBuildFile; productRef = 695116589AA273DD1066239B /* GoProStitcherKit */; };
+		CBC7E402317EBB4F5E0CE3C5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 24B635690ED3D414624D6B5B /* ComposableArchitecture */; };
+		D4F3CC0C5292E9DEB023F3DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38420A22BA26DB39CA2763 /* ContentView.swift */; };
+		FC0A3F4B782D7AA7DBE7C53C /* GoProStitcherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F82DF20A321DD5905BD4D5C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB40CE1C8DDC5F5BEF349FE8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 976868DE01B96EF0A0067352;
+			remoteInfo = GoProStitcher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherApp.swift; sourceTree = "<group>"; };
+		211481CB4D40257C6DFA2320 /* GoProStitcherKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GoProStitcherKit; path = GoProStitcherKit; sourceTree = SOURCE_ROOT; };
+		57D2389E7F089828C182644B /* GoProStitcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherUITests.swift; sourceTree = "<group>"; };
+		770486A167C05B829BC5DADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7C380692FB12220D81AAB214 /* GoProStitcherIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoProStitcherIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB4F3415CEFA0426B0167A07 /* GoProStitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoProStitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherIntegrationTests.swift; sourceTree = "<group>"; };
+		CE38420A22BA26DB39CA2763 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D014B5E3B7D3FADBB1C8658F /* GoProStitcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoProStitcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B0DD912CCE91BF7B0E9D8DD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B43CB04931E94A33629BC4E /* GoProStitcherKit in Frameworks */,
+				CBC7E402317EBB4F5E0CE3C5 /* ComposableArchitecture in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD29016E368A3E1254059C46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24563AC542B41FB2A662BDDF /* GoProStitcherKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E1E1D3C3D3C615200DB9E96 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				211481CB4D40257C6DFA2320 /* GoProStitcherKit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		247AD8D3F5A724D8F4385AC6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB4F3415CEFA0426B0167A07 /* GoProStitcher.app */,
+				7C380692FB12220D81AAB214 /* GoProStitcherIntegrationTests.xctest */,
+				D014B5E3B7D3FADBB1C8658F /* GoProStitcherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		497BABEFBA03A263DFFCBCA0 = {
+			isa = PBXGroup;
+			children = (
+				AE0463747E0D5580B991DE9A /* GoProStitcher */,
+				853E89496B6987432F765A1A /* GoProStitcherIntegrationTests */,
+				E38DBA9B424AC8AD048E1633 /* GoProStitcherUITests */,
+				0E1E1D3C3D3C615200DB9E96 /* Packages */,
+				247AD8D3F5A724D8F4385AC6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		853E89496B6987432F765A1A /* GoProStitcherIntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */,
+			);
+			path = GoProStitcherIntegrationTests;
+			sourceTree = "<group>";
+		};
+		AE0463747E0D5580B991DE9A /* GoProStitcher */ = {
+			isa = PBXGroup;
+			children = (
+				CE38420A22BA26DB39CA2763 /* ContentView.swift */,
+				1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */,
+				770486A167C05B829BC5DADF /* Info.plist */,
+			);
+			path = GoProStitcher;
+			sourceTree = "<group>";
+		};
+		E38DBA9B424AC8AD048E1633 /* GoProStitcherUITests */ = {
+			isa = PBXGroup;
+			children = (
+				57D2389E7F089828C182644B /* GoProStitcherUITests.swift */,
+			);
+			path = GoProStitcherUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5D5F7914048200777A3AA909 /* GoProStitcherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD247AA0511C75D16B50942E /* Build configuration list for PBXNativeTarget "GoProStitcherUITests" */;
+			buildPhases = (
+				D96FCD8B91E2F1A53B6715CD /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				452891BDB10F786D2E898490 /* PBXTargetDependency */,
+			);
+			name = GoProStitcherUITests;
+			packageProductDependencies = (
+			);
+			productName = GoProStitcherUITests;
+			productReference = D014B5E3B7D3FADBB1C8658F /* GoProStitcherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		976868DE01B96EF0A0067352 /* GoProStitcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA4A5F953DE00237CEC93680 /* Build configuration list for PBXNativeTarget "GoProStitcher" */;
+			buildPhases = (
+				24D8FB5F5B4BB581EF577809 /* Sources */,
+				B0DD912CCE91BF7B0E9D8DD3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoProStitcher;
+			packageProductDependencies = (
+				695116589AA273DD1066239B /* GoProStitcherKit */,
+				24B635690ED3D414624D6B5B /* ComposableArchitecture */,
+			);
+			productName = GoProStitcher;
+			productReference = BB4F3415CEFA0426B0167A07 /* GoProStitcher.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1A2C4F7891B1209B4346F4F /* GoProStitcherIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DA94C39F59F35BCE2B13EDA /* Build configuration list for PBXNativeTarget "GoProStitcherIntegrationTests" */;
+			buildPhases = (
+				E47F581C066711915F636C4F /* Sources */,
+				FD29016E368A3E1254059C46 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoProStitcherIntegrationTests;
+			packageProductDependencies = (
+				C1E5AB11BD6337465460E6BC /* GoProStitcherKit */,
+			);
+			productName = GoProStitcherIntegrationTests;
+			productReference = 7C380692FB12220D81AAB214 /* GoProStitcherIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB40CE1C8DDC5F5BEF349FE8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					5D5F7914048200777A3AA909 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+						TestTargetID = 976868DE01B96EF0A0067352;
+					};
+					976868DE01B96EF0A0067352 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+					F1A2C4F7891B1209B4346F4F = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 31848EE2230620ED42D0E371 /* Build configuration list for PBXProject "GoProStitcher" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 497BABEFBA03A263DFFCBCA0;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C038858FEBD18B4084B25045 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				7165063357A9526B3703381B /* XCLocalSwiftPackageReference "GoProStitcherKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				976868DE01B96EF0A0067352 /* GoProStitcher */,
+				F1A2C4F7891B1209B4346F4F /* GoProStitcherIntegrationTests */,
+				5D5F7914048200777A3AA909 /* GoProStitcherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		24D8FB5F5B4BB581EF577809 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4F3CC0C5292E9DEB023F3DE /* ContentView.swift in Sources */,
+				60B76DE9D654C5E828C4C016 /* GoProStitcherApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D96FCD8B91E2F1A53B6715CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E55C07CA3684D3C0C0EDFD3 /* GoProStitcherUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E47F581C066711915F636C4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC0A3F4B782D7AA7DBE7C53C /* GoProStitcherIntegrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		452891BDB10F786D2E898490 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 976868DE01B96EF0A0067352 /* GoProStitcher */;
+			targetProxy = F82DF20A321DD5905BD4D5C2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0A11391BF65ACB2DD4CFEFD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "";
+			};
+			name = Debug;
+		};
+		1CBAEF6FBB25D665AEE9CA97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2F148111CC60AE277FBD2267 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		436A71D1771B12486A46E2A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "";
+			};
+			name = Release;
+		};
+		95A8956C8D05EA9674539E3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GoProStitcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rishizamvar.GoProStitcher;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		A3B11D4A60F9657F1B6143F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_TARGET_NAME = GoProStitcher;
+			};
+			name = Debug;
+		};
+		DBCD64123CC3F3A5DA675ECD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_TARGET_NAME = GoProStitcher;
+			};
+			name = Release;
+		};
+		FE85BEB6716A41E53D65FA78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GoProStitcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rishizamvar.GoProStitcher;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		31848EE2230620ED42D0E371 /* Build configuration list for PBXProject "GoProStitcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CBAEF6FBB25D665AEE9CA97 /* Debug */,
+				2F148111CC60AE277FBD2267 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6DA94C39F59F35BCE2B13EDA /* Build configuration list for PBXNativeTarget "GoProStitcherIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A11391BF65ACB2DD4CFEFD7 /* Debug */,
+				436A71D1771B12486A46E2A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BA4A5F953DE00237CEC93680 /* Build configuration list for PBXNativeTarget "GoProStitcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE85BEB6716A41E53D65FA78 /* Debug */,
+				95A8956C8D05EA9674539E3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DD247AA0511C75D16B50942E /* Build configuration list for PBXNativeTarget "GoProStitcherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3B11D4A60F9657F1B6143F9 /* Debug */,
+				DBCD64123CC3F3A5DA675ECD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		7165063357A9526B3703381B /* XCLocalSwiftPackageReference "GoProStitcherKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = GoProStitcherKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C038858FEBD18B4084B25045 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		24B635690ED3D414624D6B5B /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C038858FEBD18B4084B25045 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		695116589AA273DD1066239B /* GoProStitcherKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GoProStitcherKit;
+		};
+		C1E5AB11BD6337465460E6BC /* GoProStitcherKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GoProStitcherKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = AB40CE1C8DDC5F5BEF349FE8 /* Project object */;
+}

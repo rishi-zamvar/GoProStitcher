@@ -1,0 +1,92 @@
+name: GoProStitcher
+options:
+  deploymentTarget:
+    macOS: "13.0"
+  defaultConfig: Debug
+  xcodeVersion: "14"
+
+packages:
+  GoProStitcherKit:
+    path: GoProStitcherKit
+  ComposableArchitecture:
+    url: https://github.com/pointfreeco/swift-composable-architecture
+    from: "1.15.0"
+
+targets:
+  GoProStitcher:
+    type: application
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - GoProStitcher
+    info:
+      path: GoProStitcher/Info.plist
+      properties:
+        CFBundleDisplayName: GoProStitcher
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        NSPrincipalClass: NSApplication
+        NSSupportsAutomaticTermination: true
+        NSSupportsSuddenTermination: true
+    dependencies:
+      - package: GoProStitcherKit
+      - package: ComposableArchitecture
+        product: ComposableArchitecture
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+        ENABLE_HARDENED_RUNTIME: NO
+        PRODUCT_BUNDLE_IDENTIFIER: com.rishizamvar.GoProStitcher
+        GENERATE_INFOPLIST_FILE: NO
+
+  GoProStitcherIntegrationTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - GoProStitcherIntegrationTests
+    dependencies:
+      - package: GoProStitcherKit
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+        TEST_HOST: ""
+        BUNDLE_LOADER: ""
+        GENERATE_INFOPLIST_FILE: YES
+
+  GoProStitcherUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - GoProStitcherUITests
+    dependencies:
+      - target: GoProStitcher
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+        TEST_TARGET_NAME: GoProStitcher
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  GoProStitcher:
+    build:
+      targets:
+        GoProStitcher: all
+        GoProStitcherIntegrationTests: [test]
+        GoProStitcherUITests: [test]
+    test:
+      targets:
+        - GoProStitcherIntegrationTests
+        - GoProStitcherUITests
+      commandLineArguments:
+        "-AppleLanguages (en)": true
