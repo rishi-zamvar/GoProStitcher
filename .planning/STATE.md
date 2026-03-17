@@ -23,13 +23,13 @@
 ## Current Position
 
 **Phase:** 2 - File Detection (In Progress)
-**Plan:** 02-01 complete — GoProNameParser + GoProChunk implemented and tested
-**Status:** Plan 02-01 complete. 2 tasks / 2 done. 25/25 tests passing.
+**Plan:** 02-02 complete — FolderScanner + FolderScanResult + ScannedChunk implemented and tested
+**Status:** Plan 02-02 complete. 2 tasks / 2 done. 34/34 tests passing.
 
-**Progress:** ████░░░░░░ 37% (Phase 1 complete + Plan 02-01 complete)
+**Progress:** █████░░░░░ 50% (Phase 1 complete + Plans 02-01 and 02-02 complete)
 
 **Current Focus:**
-Phase 2 underway. GoProNameParser (pure parsing) done. Next: 02-02 file scanner / directory enumeration.
+Phase 2 underway. GoProNameParser (pure parsing) done. FolderScanner (directory scan) done. Next: 02-03.
 
 ---
 
@@ -70,6 +70,8 @@ Phase 2 underway. GoProNameParser (pure parsing) done. Next: 02-02 file scanner 
 | NSRegularExpression instead of Swift regex literal | Swift regex literals (/.../) fail as stored properties under swift-tools-version 5.9 on the installed toolchain; NSRegularExpression is universally safe | From 02-01 |
 | GoProNameParser as caseless enum | Prevents instantiation; pure static function namespace is the right model | From 02-01 |
 | Sort key: fileNumber asc then chapter asc | fileNumber = recording session, chapter = split within session; this order is the correct stitch sequence | From 02-01 |
+| FolderScanResult.empty covers both empty dirs and non-MP4-only dirs | Neither case has scannable content; callers don't need the distinction | From 02-02 |
+| ScannedChunk is a value type (struct) with chunk + url + sizeBytes | Immutable, Equatable, aggregates parsed metadata and filesystem facts in one type | From 02-02 |
 
 ### Known Constraints
 
@@ -95,16 +97,16 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-17 18:35 UTC - Executed plan 02-01
-**Stopped at:** Completed 02-01-PLAN.md (2/2 tasks)
+**Last Session:** 2026-03-17 18:39 UTC - Executed plan 02-02
+**Stopped at:** Completed 02-02-PLAN.md (2/2 tasks)
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcherKit/Sources/GoProStitcherKit/GoProNameParser.swift
-- GoProStitcherKit/Tests/GoProStitcherKitTests/GoProNameParserTests.swift
-- .planning/phases/02-file-detection/02-01-SUMMARY.md
+- GoProStitcherKit/Sources/GoProStitcherKit/FolderScanner.swift
+- GoProStitcherKit/Tests/GoProStitcherKitTests/FolderScannerTests.swift
+- .planning/phases/02-file-detection/02-02-SUMMARY.md
 
-**Next Session:** Execute Phase 2 Plan 02 (file scanner / directory enumeration wrapping GoProNameParser)
+**Next Session:** Execute Phase 2 Plan 03 (next file-detection plan)
 
 ---
 
