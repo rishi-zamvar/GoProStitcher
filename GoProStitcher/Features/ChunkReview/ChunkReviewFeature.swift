@@ -51,6 +51,8 @@ struct ChunkReviewFeature {
         case metadataLoaded(URL, ChunkMetadata)
         /// Trigger loadMetadata for all chunks (called on view appear).
         case loadAllMetadata
+        /// User tapped "Start Stitching". AppFeature intercepts this to navigate to progress screen.
+        case startStitching
     }
 
     var body: some ReducerOf<Self> {
@@ -91,6 +93,10 @@ struct ChunkReviewFeature {
                     Effect<Action>.send(.loadMetadata(chunk.url))
                 }
                 return .merge(effects)
+
+            case .startStitching:
+                // AppFeature intercepts this action to navigate to the progress screen.
+                return .none
             }
         }
     }
