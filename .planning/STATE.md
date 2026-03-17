@@ -1,6 +1,6 @@
 # STATE: GoProStitcher
 
-**Last Updated:** 2026-03-18 (Plan 04-01 complete — ChunkStitcher and ChunkArchiver implemented)
+**Last Updated:** 2026-03-17 (Plan 04-02 complete — StitchProgressFeature and AppFeature navigation wired)
 
 ---
 
@@ -23,12 +23,12 @@
 ## Current Position
 
 **Phase:** 4 - Stitching Archive (In progress)
-**Status:** Plan 04-01 complete. ChunkStitcher and ChunkArchiver implemented. Plans 04-02, 04-03 remaining.
+**Status:** Plan 04-02 complete. StitchProgressFeature reducer and AppFeature navigation wired. Plan 04-03 remaining.
 
-**Progress:** ████████░░ 80% (Phase 3 complete + 04-01 done)
+**Progress:** █████████░ 90% (Phase 3 complete + 04-01 + 04-02 done)
 
 **Current Focus:**
-Plan 04-01 complete. ChunkStitcher (FileHandle binary append) and ChunkArchiver (/usr/bin/zip) both implemented with full TDD coverage. Next: 04-02 — stitching progress UI.
+Plan 04-02 complete. StitchProgressFeature (archive-then-stitch pipeline), StitchPhase enum, ChunkReviewFeature.startStitching, and AppFeature navigation all implemented. Next: 04-03 — StitchProgressView UI.
 
 ---
 
@@ -86,6 +86,9 @@ Plan 04-01 complete. ChunkStitcher (FileHandle binary append) and ChunkArchiver 
 | caseless enum for ChunkStitcher and ChunkArchiver | Matches established pure-static-namespace pattern (GoProNameParser, FolderScanner, AVMetadataReader), prevents instantiation | From 04-01 |
 | Pre-validate all sources before mutation in ChunkStitcher | Fail-fast before any FileHandle side-effects — if chunk 3 is missing, abort before modifying chunk 1 | From 04-01 |
 | /usr/bin/zip -j for ChunkArchiver instead of ZIPFoundation | No new SPM dependencies; system zip universally available on macOS 13+ | From 04-01 |
+| Archive-first then stitch operation order | ChunkArchiver runs on all chunk URLs before ChunkStitcher removes source files — preserves originals per STITCH-03 | From 04-02 |
+| startStitching returns .none in ChunkReviewFeature; AppFeature intercepts | ChunkReviewFeature stays ignorant of navigation; AppFeature owns the transition to stitchProgress state | From 04-02 |
+| StitchPhase enum lives in GoProStitcherKit (not app target) | Unit tests can import StitchPhase without depending on the full app target | From 04-02 |
 
 ### Known Constraints
 
@@ -111,18 +114,18 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-18 - Completed plan 04-01 (ChunkStitcher + ChunkArchiver TDD)
-**Stopped at:** End of 04-01 — ChunkStitcher and ChunkArchiver implemented and tested
+**Last Session:** 2026-03-17 - Completed plan 04-02 (StitchProgressFeature + AppFeature navigation)
+**Stopped at:** End of 04-02 — StitchProgressFeature reducer, StitchPhase enum, ChunkReviewFeature.startStitching, AppFeature nav all wired
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcherKit/Sources/GoProStitcherKit/ChunkStitcher.swift (created)
-- GoProStitcherKit/Sources/GoProStitcherKit/ChunkArchiver.swift (created)
-- GoProStitcherKit/Tests/GoProStitcherKitTests/ChunkStitcherTests.swift (created)
-- GoProStitcherKit/Tests/GoProStitcherKitTests/ChunkArchiveTests.swift (created)
-- .planning/phases/04-stitching-archive/04-01-SUMMARY.md (created)
+- GoProStitcherKit/Sources/GoProStitcherKit/StitchProgressState.swift (created)
+- GoProStitcher/Features/StitchProgress/StitchProgressFeature.swift (created)
+- GoProStitcher/Features/ChunkReview/ChunkReviewFeature.swift (modified — startStitching action)
+- GoProStitcher/AppFeature.swift (modified — stitchProgress state, action, intercept, .ifLet)
+- .planning/phases/04-stitching-archive/04-02-SUMMARY.md (created)
 
-**Next Session:** 04-02 — stitching progress UI; invoke ChunkStitcher and ChunkArchiver on background Task
+**Next Session:** 04-03 — StitchProgressView UI binds to StitchProgressFeature.State
 
 ---
 
