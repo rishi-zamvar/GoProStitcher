@@ -32,9 +32,8 @@ final class ChunkReviewReducerTests: XCTestCase {
         }
 
         await store.send(.chunksReordered(from: IndexSet(integer: 2), to: 0)) { state in
-            XCTAssertEqual(state.chunks[0], chunkC)
-            XCTAssertEqual(state.chunks[1], chunkA)
-            XCTAssertEqual(state.chunks[2], chunkB)
+            // TCA TestStore: mutate state to match expected result
+            state.chunks = [chunkC, chunkA, chunkB]
         }
     }
 
@@ -51,9 +50,7 @@ final class ChunkReviewReducerTests: XCTestCase {
         }
 
         await store.send(.chunksReordered(from: IndexSet(integer: 0), to: 3)) { state in
-            XCTAssertEqual(state.chunks[0], chunkB)
-            XCTAssertEqual(state.chunks[1], chunkC)
-            XCTAssertEqual(state.chunks[2], chunkA)
+            state.chunks = [chunkB, chunkC, chunkA]
         }
     }
 
@@ -69,7 +66,7 @@ final class ChunkReviewReducerTests: XCTestCase {
         }
 
         await store.send(.chunkTapped(targetURL)) { state in
-            XCTAssertEqual(state.selectedPreviewURL, targetURL)
+            state.selectedPreviewURL = targetURL
         }
     }
 
@@ -85,11 +82,11 @@ final class ChunkReviewReducerTests: XCTestCase {
         }
 
         await store.send(.chunkTapped(targetURL)) { state in
-            XCTAssertEqual(state.selectedPreviewURL, targetURL)
+            state.selectedPreviewURL = targetURL
         }
 
         await store.send(.previewDismissed) { state in
-            XCTAssertNil(state.selectedPreviewURL)
+            state.selectedPreviewURL = nil
         }
     }
 }

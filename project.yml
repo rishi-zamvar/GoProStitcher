@@ -49,17 +49,15 @@ targets:
     sources:
       - GoProStitcherIntegrationTests
     dependencies:
-      - package: GoProStitcherKit
-      - package: ComposableArchitecture
-        product: ComposableArchitecture
+      - target: GoProStitcher
     settings:
       base:
         SWIFT_VERSION: "5.9"
         DEVELOPMENT_TEAM: ""
         CODE_SIGN_IDENTITY: "-"
         CODE_SIGN_STYLE: Manual
-        TEST_HOST: ""
-        BUNDLE_LOADER: ""
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/GoProStitcher.app/Contents/MacOS/GoProStitcher"
+        BUNDLE_LOADER: "$(TEST_HOST)"
         GENERATE_INFOPLIST_FILE: YES
 
   GoProStitcherUITests:
