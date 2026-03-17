@@ -100,7 +100,7 @@
 | Phase | Status | Start | End | Notes |
 |-------|--------|-------|-----|-------|
 | 1 - Testing Infrastructure & Project Foundation | ✓ Complete | 2026-03-17 | 2026-03-17 | 2 plans, 9/9 must-haves verified |
-| 2 - File Detection (with Tests) | Pending | — | — | File picker, validation, GoPro parsing with unit/integration tests |
+| 2 - File Detection (with Tests) | ✓ Complete | 2026-03-17 | 2026-03-17 | 3 plans, 9/9 must-haves verified |
 | 3 - Review, Preview & Reorder (with Tests) | Pending | — | — | Thumbnails, quick preview, drag-to-reorder with UI tests |
 | 4 - Stitching & Archive with Full Integration Testing | Pending | — | — | In-place append, progress tracking, zip creation, end-to-end tests |
 
@@ -116,10 +116,10 @@
 | TEST-02 | 1 | Testing Infrastructure | Complete |
 | TEST-03 | 1 | Testing Infrastructure | Complete |
 | TEST-04 | 1 | Testing Infrastructure | Complete |
-| DETECT-01 | 2 | File Detection | Pending |
-| DETECT-02 | 2 | File Detection | Pending |
-| DETECT-03 | 2 | File Detection | Pending |
-| DETECT-04 | 2 | File Detection | Pending |
+| DETECT-01 | 2 | File Detection | Complete |
+| DETECT-02 | 2 | File Detection | Complete |
+| DETECT-03 | 2 | File Detection | Complete |
+| DETECT-04 | 2 | File Detection | Complete |
 | ORDER-01 | 3 | Review & Order | Pending |
 | ORDER-02 | 3 | Review & Order | Pending |
 | ORDER-03 | 3 | Review & Order | Pending |

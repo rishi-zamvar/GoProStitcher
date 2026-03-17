@@ -22,14 +22,13 @@
 
 ## Current Position
 
-**Phase:** 2 - File Detection (Complete)
-**Plan:** 02-03 complete — FolderPickerFeature TCA reducer + FolderPickerView implemented and user-verified
-**Status:** Plan 02-03 complete. Phase 2 all 3 plans done. DETECT-01 through DETECT-04 user-verified.
+**Phase:** 2 - File Detection (✓ Complete, Verified)
+**Status:** Phase verified — 9/9 must-haves pass. DETECT-01 through DETECT-04 complete.
 
-**Progress:** ███████░░░ 70% (Phase 1 complete + Phase 2 complete — all 3 plans)
+**Progress:** █████░░░░░ 50% (Phase 2/4 complete)
 
 **Current Focus:**
-Phase 2 complete. GoProNameParser, FolderScanner, and FolderPickerFeature/View all done. Ready for Phase 3 (review screen with reorder/preview).
+Phase 2 complete and verified. Next: Phase 3 — Review, Preview & Reorder (with Tests).
 
 ---
 

@@ -58,10 +58,10 @@
 | TEST-02 | 1 | Complete |
 | TEST-03 | 1 | Complete |
 | TEST-04 | 1 | Complete |
-| DETECT-01 | 2 | Pending |
-| DETECT-02 | 2 | Pending |
-| DETECT-03 | 2 | Pending |
-| DETECT-04 | 2 | Pending |
+| DETECT-01 | 2 | Complete |
+| DETECT-02 | 2 | Complete |
+| DETECT-03 | 2 | Complete |
+| DETECT-04 | 2 | Complete |
 | ORDER-01 | 3 | Pending |
 | ORDER-02 | 3 | Pending |
 | ORDER-03 | 3 | Pending |
