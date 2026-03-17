@@ -3,19 +3,19 @@ import XCTest
 
 final class ChunkArchiveTests: XCTestCase {
     private var tempDir: URL!
-    private var archiveDir: URL!
+    private var manifestURL: URL!
 
     override func setUp() {
         super.setUp()
         tempDir = try? TempDirectoryHelper.create()
         XCTAssertNotNil(tempDir, "Failed to create temp directory in setUp")
-        archiveDir = tempDir?.appendingPathComponent("archive", isDirectory: true)
+        manifestURL = tempDir?.appendingPathComponent("stitch_manifest.json")
     }
 
     override func tearDown() {
         TempDirectoryHelper.cleanup(url: tempDir)
         tempDir = nil
-        archiveDir = nil
+        manifestURL = nil
         super.tearDown()
     }
 
@@ -26,9 +26,9 @@ final class ChunkArchiveTests: XCTestCase {
         try data.write(to: url)
     }
 
-    // MARK: - Archive creation
+    // MARK: - Manifest creation
 
-    func testArchive_threeChunks_createsIndividualZips() throws {
+    func testArchive_threeChunks_createsManifest() throws {
         let chunk1 = tempDir.appendingPathComponent("GH010001.MP4")
         let chunk2 = tempDir.appendingPathComponent("GH020001.MP4")
         let chunk3 = tempDir.appendingPathComponent("GH030001.MP4")
@@ -37,34 +37,22 @@ final class ChunkArchiveTests: XCTestCase {
         try makeFile(at: chunk2, byte: 0xBB, count: 200)
         try makeFile(at: chunk3, byte: 0xCC, count: 300)
 
-        try ChunkArchiver.archive(chunks: [chunk1, chunk2, chunk3], into: archiveDir)
+        try ChunkArchiver.archive(chunks: [chunk1, chunk2, chunk3], into: manifestURL)
 
-        // archiveDir should exist and contain 3 zip files
-        XCTAssertTrue(FileManager.default.fileExists(atPath: archiveDir.path), "Archive directory should be created")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: manifestURL.path), "Manifest file should exist")
 
-        let zip1 = archiveDir.appendingPathComponent("GH010001.MP4.zip")
-        let zip2 = archiveDir.appendingPathComponent("GH020001.MP4.zip")
-        let zip3 = archiveDir.appendingPathComponent("GH030001.MP4.zip")
+        let data = try Data(contentsOf: manifestURL)
+        let manifest = try JSONDecoder().decode(StitchManifest.self, from: data)
 
-        XCTAssertTrue(FileManager.default.fileExists(atPath: zip1.path), "GH010001.MP4.zip should exist")
-        XCTAssertTrue(FileManager.default.fileExists(atPath: zip2.path), "GH020001.MP4.zip should exist")
-        XCTAssertTrue(FileManager.default.fileExists(atPath: zip3.path), "GH030001.MP4.zip should exist")
-    }
-
-    func testArchive_zipFilesHaveCorrectNames() throws {
-        let chunk1 = tempDir.appendingPathComponent("chunk_A.mp4")
-        let chunk2 = tempDir.appendingPathComponent("chunk_B.mp4")
-
-        try makeFile(at: chunk1, byte: 0xAA, count: 50)
-        try makeFile(at: chunk2, byte: 0xBB, count: 50)
-
-        try ChunkArchiver.archive(chunks: [chunk1, chunk2], into: archiveDir)
-
-        let zipA = archiveDir.appendingPathComponent("chunk_A.mp4.zip")
-        let zipB = archiveDir.appendingPathComponent("chunk_B.mp4.zip")
-
-        XCTAssertTrue(FileManager.default.fileExists(atPath: zipA.path), "chunk_A.mp4.zip should exist")
-        XCTAssertTrue(FileManager.default.fileExists(atPath: zipB.path), "chunk_B.mp4.zip should exist")
+        XCTAssertEqual(manifest.version, 1)
+        XCTAssertEqual(manifest.stitchedFilename, "GH010001.MP4")
+        XCTAssertEqual(manifest.chunks.count, 3)
+        XCTAssertEqual(manifest.chunks[0].filename, "GH010001.MP4")
+        XCTAssertEqual(manifest.chunks[0].sizeBytes, 100)
+        XCTAssertEqual(manifest.chunks[1].filename, "GH020001.MP4")
+        XCTAssertEqual(manifest.chunks[1].sizeBytes, 200)
+        XCTAssertEqual(manifest.chunks[2].filename, "GH030001.MP4")
+        XCTAssertEqual(manifest.chunks[2].sizeBytes, 300)
     }
 
     func testArchive_progressCallbackCalled() throws {
@@ -77,25 +65,22 @@ final class ChunkArchiveTests: XCTestCase {
         try makeFile(at: chunk3, byte: 0xCC, count: 50)
 
         var progressCalls: [(current: Int, total: Int)] = []
-        try ChunkArchiver.archive(chunks: [chunk1, chunk2, chunk3], into: archiveDir) { current, total in
+        try ChunkArchiver.archive(chunks: [chunk1, chunk2, chunk3], into: manifestURL) { current, total in
             progressCalls.append((current, total))
         }
 
         XCTAssertEqual(progressCalls.count, 3, "Progress callback should be called once per chunk")
-        XCTAssertEqual(progressCalls[0].total, 3, "Total should always be 3")
-        XCTAssertEqual(progressCalls[0].current, 1, "First callback: current=1")
-        XCTAssertEqual(progressCalls[1].current, 2, "Second callback: current=2")
-        XCTAssertEqual(progressCalls[2].current, 3, "Third callback: current=3")
+        XCTAssertEqual(progressCalls[0].total, 3)
+        XCTAssertEqual(progressCalls[0].current, 1)
+        XCTAssertEqual(progressCalls[1].current, 2)
+        XCTAssertEqual(progressCalls[2].current, 3)
     }
 
     func testArchive_progressCallbackIsNilByDefault() throws {
         let chunk1 = tempDir.appendingPathComponent("chunk1.mp4")
         try makeFile(at: chunk1, byte: 0xAA, count: 50)
-        let chunk2 = tempDir.appendingPathComponent("chunk2.mp4")
-        try makeFile(at: chunk2, byte: 0xBB, count: 50)
 
-        // Should not throw when progress is nil (the default)
-        XCTAssertNoThrow(try ChunkArchiver.archive(chunks: [chunk1, chunk2], into: archiveDir))
+        XCTAssertNoThrow(try ChunkArchiver.archive(chunks: [chunk1], into: manifestURL))
     }
 
     // MARK: - Error cases
@@ -103,16 +88,53 @@ final class ChunkArchiveTests: XCTestCase {
     func testArchive_missingSource_throwsSourceNotFound() throws {
         let missing = tempDir.appendingPathComponent("nonexistent.mp4")
 
-        XCTAssertThrowsError(try ChunkArchiver.archive(chunks: [missing], into: archiveDir)) { error in
+        XCTAssertThrowsError(try ChunkArchiver.archive(chunks: [missing], into: manifestURL)) { error in
             guard let archiveError = error as? ChunkArchiverError else {
                 XCTFail("Expected ChunkArchiverError, got \(error)")
                 return
             }
             if case .sourceNotFound(let url) = archiveError {
-                XCTAssertEqual(url, missing, "Error should reference the missing source URL")
+                XCTAssertEqual(url, missing)
             } else {
                 XCTFail("Expected .sourceNotFound, got \(archiveError)")
             }
         }
+    }
+
+    // MARK: - Revert
+
+    func testRevert_splitsStitchedFileBackIntoChunks() throws {
+        let chunk1 = tempDir.appendingPathComponent("GH010001.MP4")
+        let chunk2 = tempDir.appendingPathComponent("GH020001.MP4")
+        let chunk3 = tempDir.appendingPathComponent("GH030001.MP4")
+
+        try makeFile(at: chunk1, byte: 0xAA, count: 100)
+        try makeFile(at: chunk2, byte: 0xBB, count: 200)
+        try makeFile(at: chunk3, byte: 0xCC, count: 300)
+
+        // Save manifest
+        try ChunkArchiver.archive(chunks: [chunk1, chunk2, chunk3], into: manifestURL)
+
+        // Simulate stitching: concatenate all into chunk1
+        let stitchedData = Data(repeating: 0xAA, count: 100)
+            + Data(repeating: 0xBB, count: 200)
+            + Data(repeating: 0xCC, count: 300)
+        try stitchedData.write(to: chunk1)
+
+        // Revert into a separate output directory
+        let outputDir = tempDir.appendingPathComponent("restored")
+        try ChunkArchiver.revert(stitchedURL: chunk1, manifestURL: manifestURL, outputDir: outputDir)
+
+        // Verify restored chunks
+        let restored1 = try Data(contentsOf: outputDir.appendingPathComponent("GH010001.MP4"))
+        let restored2 = try Data(contentsOf: outputDir.appendingPathComponent("GH020001.MP4"))
+        let restored3 = try Data(contentsOf: outputDir.appendingPathComponent("GH030001.MP4"))
+
+        XCTAssertEqual(restored1.count, 100)
+        XCTAssertEqual(restored2.count, 200)
+        XCTAssertEqual(restored3.count, 300)
+        XCTAssertEqual(restored1[0], 0xAA)
+        XCTAssertEqual(restored2[0], 0xBB)
+        XCTAssertEqual(restored3[0], 0xCC)
     }
 }

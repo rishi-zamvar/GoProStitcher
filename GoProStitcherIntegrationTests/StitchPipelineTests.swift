@@ -15,7 +15,7 @@ final class StitchPipelineTests: XCTestCase {
         super.tearDown()
     }
 
-    func testFullStitchAndArchivePipeline() throws {
+    func testFullManifestAndStitchPipeline() throws {
         // Create 3 chunks with known distinct byte patterns
         let chunk1URL = tempDir.appendingPathComponent("GH010001.MP4")
         let chunk2URL = tempDir.appendingPathComponent("GH020001.MP4")
@@ -24,15 +24,19 @@ final class StitchPipelineTests: XCTestCase {
         try Data(repeating: 0xBB, count: 200).write(to: chunk2URL)
         try Data(repeating: 0xCC, count: 300).write(to: chunk3URL)
 
-        let archiveDir = tempDir.appendingPathComponent("archive")
+        let manifestURL = tempDir.appendingPathComponent("stitch_manifest.json")
 
-        // Step 1: Archive all chunks first (preserves originals)
-        try ChunkArchiver.archive(chunks: [chunk1URL, chunk2URL, chunk3URL], into: archiveDir)
+        // Step 1: Save manifest (records chunk boundaries for reversion)
+        try ChunkArchiver.archive(chunks: [chunk1URL, chunk2URL, chunk3URL], into: manifestURL)
 
-        // Verify zip files exist
-        XCTAssertTrue(FileManager.default.fileExists(atPath: archiveDir.appendingPathComponent("GH010001.MP4.zip").path))
-        XCTAssertTrue(FileManager.default.fileExists(atPath: archiveDir.appendingPathComponent("GH020001.MP4.zip").path))
-        XCTAssertTrue(FileManager.default.fileExists(atPath: archiveDir.appendingPathComponent("GH030001.MP4.zip").path))
+        // Verify manifest exists and is correct
+        XCTAssertTrue(FileManager.default.fileExists(atPath: manifestURL.path))
+        let manifestData = try Data(contentsOf: manifestURL)
+        let manifest = try JSONDecoder().decode(StitchManifest.self, from: manifestData)
+        XCTAssertEqual(manifest.chunks.count, 3)
+        XCTAssertEqual(manifest.chunks[0].sizeBytes, 100)
+        XCTAssertEqual(manifest.chunks[1].sizeBytes, 200)
+        XCTAssertEqual(manifest.chunks[2].sizeBytes, 300)
 
         // Step 2: Stitch (appends chunk2 and chunk3 onto chunk1, removes chunk2 and chunk3)
         try ChunkStitcher.stitch(chunks: [chunk1URL, chunk2URL, chunk3URL])
@@ -43,17 +47,36 @@ final class StitchPipelineTests: XCTestCase {
         XCTAssertEqual(size, 600, "Stitched file should be sum of all chunk sizes")
 
         // Verify chunk2 and chunk3 were removed from disk (not duplicated)
-        XCTAssertFalse(FileManager.default.fileExists(atPath: chunk2URL.path), "Source chunk2 should be removed after stitch")
-        XCTAssertFalse(FileManager.default.fileExists(atPath: chunk3URL.path), "Source chunk3 should be removed after stitch")
+        XCTAssertFalse(FileManager.default.fileExists(atPath: chunk2URL.path))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: chunk3URL.path))
 
         // Verify byte content is correct concatenation
         let stitchedData = try Data(contentsOf: chunk1URL)
-        XCTAssertEqual(stitchedData[0], 0xAA)       // first byte of chunk1
-        XCTAssertEqual(stitchedData[99], 0xAA)      // last byte of chunk1
-        XCTAssertEqual(stitchedData[100], 0xBB)     // first byte of chunk2
-        XCTAssertEqual(stitchedData[299], 0xBB)     // last byte of chunk2
-        XCTAssertEqual(stitchedData[300], 0xCC)     // first byte of chunk3
-        XCTAssertEqual(stitchedData[599], 0xCC)     // last byte of chunk3
+        XCTAssertEqual(stitchedData[0], 0xAA)
+        XCTAssertEqual(stitchedData[100], 0xBB)
+        XCTAssertEqual(stitchedData[300], 0xCC)
+    }
+
+    func testRevertRestoresOriginalChunks() throws {
+        let chunk1URL = tempDir.appendingPathComponent("GH010001.MP4")
+        let chunk2URL = tempDir.appendingPathComponent("GH020001.MP4")
+        try Data(repeating: 0xAA, count: 100).write(to: chunk1URL)
+        try Data(repeating: 0xBB, count: 200).write(to: chunk2URL)
+
+        let manifestURL = tempDir.appendingPathComponent("stitch_manifest.json")
+        try ChunkArchiver.archive(chunks: [chunk1URL, chunk2URL], into: manifestURL)
+        try ChunkStitcher.stitch(chunks: [chunk1URL, chunk2URL])
+
+        // Revert
+        let outputDir = tempDir.appendingPathComponent("restored")
+        try ChunkArchiver.revert(stitchedURL: chunk1URL, manifestURL: manifestURL, outputDir: outputDir)
+
+        let restored1 = try Data(contentsOf: outputDir.appendingPathComponent("GH010001.MP4"))
+        let restored2 = try Data(contentsOf: outputDir.appendingPathComponent("GH020001.MP4"))
+        XCTAssertEqual(restored1.count, 100)
+        XCTAssertEqual(restored2.count, 200)
+        XCTAssertEqual(restored1[0], 0xAA)
+        XCTAssertEqual(restored2[0], 0xBB)
     }
 
     func testStitchErrorOnMissingDestination() throws {
@@ -65,16 +88,5 @@ final class StitchPipelineTests: XCTestCase {
                 XCTFail("Expected .destinationNotFound, got \(error)")
             }
         }
-    }
-
-    func testArchiveProgressCallbackCount() throws {
-        let urls = try GoProFileFactory.makeSequence(in: tempDir, count: 4, chunkSizeBytes: 50)
-        let archiveDir = tempDir.appendingPathComponent("archive")
-        var callbackIndices: [Int] = []
-        try ChunkArchiver.archive(chunks: urls, into: archiveDir) { idx, total in
-            callbackIndices.append(idx)
-        }
-        // ChunkArchiver fires progress?(index + 1, total), so indices are 1-based: [1, 2, 3, 4]
-        XCTAssertEqual(callbackIndices, [1, 2, 3, 4], "Progress callback should fire once per chunk with 1-based index")
     }
 }

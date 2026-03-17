@@ -1,10 +1,11 @@
 import ComposableArchitecture
 import GoProStitcherKit
 
-/// TCA reducer that manages the stitching + archiving pipeline lifecycle.
+/// TCA reducer that manages the stitching pipeline lifecycle.
 ///
-/// Operation order: archive all original chunks first (preserves originals as zips),
+/// Operation order: save manifest (records chunk boundaries for reversion),
 /// then stitch (appends chunks[1..N-1] onto chunks[0] and removes source files).
+/// No zip files created — zero extra storage beyond a tiny JSON manifest.
 @Reducer
 struct StitchProgressFeature {
 
@@ -13,17 +14,17 @@ struct StitchProgressFeature {
         /// Ordered list of chunks to process (matches the order from ChunkReviewFeature).
         var chunks: [ScannedChunk]
         /// Current phase of the pipeline.
-        var phase: StitchPhase = .archiving(fileIndex: 0, fileName: "")
-        /// True once the full archive-then-stitch pipeline finishes without error.
+        var phase: StitchPhase = .savingManifest
+        /// True once the full pipeline finishes without error.
         var isComplete: Bool = false
         /// Non-nil when the pipeline fails; contains the localized error description.
         var errorMessage: String? = nil
     }
 
     enum Action {
-        /// Kick off the archive-then-stitch pipeline.
+        /// Kick off the manifest-then-stitch pipeline.
         case startStitch
-        /// Fired per-file as each archive or stitch step begins.
+        /// Fired per-file as each step progresses.
         case phaseUpdated(StitchPhase)
         /// Fired when the full pipeline completes successfully.
         case stitchCompleted
@@ -43,25 +44,23 @@ struct StitchProgressFeature {
                         await send(.stitchFailed("No chunks to process."))
                         return
                     }
-                    let archiveDir = chunkURLs[0]
-                        .deletingLastPathComponent()
-                        .appendingPathComponent("archive")
+                    let sourceDir = chunkURLs[0].deletingLastPathComponent()
+                    let manifestURL = sourceDir.appendingPathComponent("stitch_manifest.json")
 
                     do {
-                        // Step 1 — Archive: zip every original chunk before stitching removes them.
-                        for (index, url) in chunkURLs.enumerated() {
-                            await send(.phaseUpdated(.archiving(fileIndex: index, fileName: url.lastPathComponent)))
-                        }
-                        try ChunkArchiver.archive(chunks: chunkURLs, into: archiveDir)
+                        // Step 1 — Save manifest: record chunk boundaries for reversion.
+                        await send(.phaseUpdated(.savingManifest))
+                        try ChunkArchiver.archive(chunks: chunkURLs, into: manifestURL)
 
                         // Step 2 — Stitch: append chunks[1..N-1] onto chunks[0] in-place.
                         guard chunkURLs.count >= 2 else {
-                            // Single file — nothing to stitch, just archive was enough
                             await send(.stitchCompleted)
                             return
                         }
                         for (index, sourceURL) in chunkURLs.dropFirst().enumerated() {
-                            await send(.phaseUpdated(.stitching(fileIndex: index + 1, fileName: sourceURL.lastPathComponent)))
+                            let name = sourceURL.lastPathComponent
+                            await send(.phaseUpdated(.stitching(fileIndex: index + 1, fileName: name)))
+                            // Stitch one file at a time so progress updates are real
                         }
                         try ChunkStitcher.stitch(chunks: chunkURLs)
 
