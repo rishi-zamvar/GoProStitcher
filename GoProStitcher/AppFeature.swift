@@ -3,13 +3,17 @@ import GoProStitcherKit
 
 // MARK: - AppFeature
 
-/// Root TCA reducer that manages top-level navigation between FolderPicker, ChunkReview,
-/// StitchProgress screens, and the AudioExtraction flow.
+/// Root TCA reducer that manages top-level navigation between the Home screen,
+/// FolderPicker/ChunkReview/StitchProgress (stitch tool), and the AudioExtraction flow.
 @Reducer
 struct AppFeature {
 
+    enum ActiveTool: Equatable { case stitch, audio }
+
     @ObservableState
     struct State: Equatable {
+        /// Home screen state (always present).
+        var home = HomeFeature.State()
         var folderPicker = FolderPickerFeature.State()
         /// Non-nil when the user has selected a folder and is reviewing chunks.
         var chunkReview: ChunkReviewFeature.State? = nil
@@ -19,20 +23,24 @@ struct AppFeature {
         var audioPicker = AudioFilePickerFeature.State()
         /// Non-nil once the user selects an MP4 — drives the extraction screen.
         var audioExtraction: AudioExtractionFeature.State? = nil
-        /// True when the user explicitly wants to enter the audio tool flow.
-        var showAudioPicker: Bool = false
+        /// Which tool (if any) the user has navigated into.
+        var activeTool: ActiveTool? = nil
     }
 
     enum Action {
+        case home(HomeFeature.Action)
         case folderPicker(FolderPickerFeature.Action)
         case chunkReview(ChunkReviewFeature.Action)
         case stitchProgress(StitchProgressFeature.Action)
         case audioPicker(AudioFilePickerFeature.Action)
         case audioExtraction(AudioExtractionFeature.Action)
-        case showAudioPickerTapped
+        case backToHome
     }
 
     var body: some ReducerOf<Self> {
+        Scope(state: \.home, action: \.home) {
+            HomeFeature()
+        }
         Scope(state: \.folderPicker, action: \.folderPicker) {
             FolderPickerFeature()
         }
@@ -41,6 +49,26 @@ struct AppFeature {
         }
         Reduce { state, action in
             switch action {
+            case .home(.stitchVideoTapped):
+                state.activeTool = .stitch
+                return .none
+
+            case .home(.extractAudioTapped):
+                state.activeTool = .audio
+                return .none
+
+            case .home:
+                return .none
+
+            case .backToHome:
+                state.activeTool = nil
+                state.chunkReview = nil
+                state.stitchProgress = nil
+                state.audioPicker = AudioFilePickerFeature.State()
+                state.audioExtraction = nil
+                state.folderPicker = FolderPickerFeature.State()
+                return .none
+
             case let .folderPicker(.scanCompleted(.success(chunks))):
                 state.chunkReview = ChunkReviewFeature.State(chunks: chunks)
                 return .none
@@ -59,12 +87,7 @@ struct AppFeature {
             case .stitchProgress:
                 return .none
 
-            case .showAudioPickerTapped:
-                state.showAudioPicker = true
-                return .none
-
             case let .audioPicker(.fileSelected(url)):
-                state.showAudioPicker = false
                 let filename = url.lastPathComponent
                 state.audioExtraction = AudioExtractionFeature.State(
                     sourceURL: url,
@@ -73,7 +96,7 @@ struct AppFeature {
                 return .send(.audioExtraction(.startExtraction))
 
             case .audioPicker(.userCancelledPicker):
-                state.showAudioPicker = false
+                state.activeTool = nil
                 return .none
 
             case .audioPicker:
