@@ -23,4 +23,29 @@
 - swift-tools-version 5.9, macOS 13 deployment target
 
 ---
+
+## v1.1 — GoPro Toolkit (Complete)
+
+**Completed:** 2026-03-18
+**Phases:** 5-8
+
+**What shipped:**
+- Audio extraction: MP4 → 320kbps MP3 via ffmpeg libmp3lame with progress tracking
+- Home screen: two-tool launcher with extensible ToolDescriptor array
+- App renamed to "GoPro Toolkit" (display name, window title)
+- 8-bit design system: JetBrains Mono font, 6-color retro palette, block-fill progress bars, hard-edge cards, no gradients/shadows/blur
+- Pixel-art app icon
+- Back-to-home navigation from all tool screens
+- Design token compliance tests
+
+**Requirements delivered:** 14/14 (RENAME-01, HOME-01..04, AUDIO-01..07, TEST-05..06)
+
+**Key decisions:**
+- ffmpeg for audio extraction (zero new SPM deps)
+- ActiveTool enum for tool routing (not Bool flags)
+- JetBrains Mono bundled, ATSApplicationFontsPath = "."
+- RetroProgressBar block-fill (████░░░░) replacing system ProgressView
+- DesignTokenComplianceTests for regression guard
+
+---
 *Last updated: 2026-03-18*

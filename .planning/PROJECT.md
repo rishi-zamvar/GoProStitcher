@@ -2,81 +2,90 @@
 
 ## What This Is
 
-A lightweight macOS desktop app for working with GoPro footage. Started as a stitcher for split MP4 chunks, now evolving into a multi-tool platform. Home screen presents independent tools as big buttons — designed to grow with new capabilities over time. Works with any MP4 but provides extra context for GoPro-named files.
+A lightweight macOS desktop app for working with GoPro footage. Multi-tool platform with an 8-bit retro design system. Home screen presents independent tools as big buttons — designed to grow with new capabilities. Works with any MP4 but provides extra context for GoPro-named files.
 
 ## Core Value
 
-A DJ/creator has a single app for all their GoPro post-processing needs — stitch chunks, extract audio, and future tools — without leaving the app or learning complex software.
+A DJ/creator has a single app for all their GoPro post-processing needs — stitch chunks, extract audio, downscale video, and future tools — without leaving the app or learning complex software.
 
-## Current Milestone: v1.1 — Extract Audio + App Restructure
+## Current Milestone: v1.2 — Video Downscale
 
-**Goal:** Rename to GoPro Toolkit, restructure UI as a tool launcher, add MP3 extraction from any MP4.
+**Goal:** Add a "Downscale Video" tool that converts 4K MP4 to 1080p H.264 while copying audio untouched.
 
 **Target features:**
-- App renamed from GoProStitcher to GoPro Toolkit
-- Home screen with two big buttons: "Stitch Video" | "Extract Audio"
-- Extensible architecture for adding more tools later
-- Extract Audio: file picker → select any MP4 → progress + metadata → 320kbps MP3 → auto-reveal in Finder
+- "Downscale Video" button on home screen (third tool)
+- Pick MP4 → metadata summary → editable output name (default: source_1080p.mp4) → progress → auto-reveal in Finder
+- Video re-encoded to H.264 1080p (-vf scale=-2:1080 -c:v libx264)
+- Audio stream copied untouched (-c:a copy) for maximum fidelity
+- Full test suite built first ensuring integration is solid
+- Same 8-bit design language throughout
 
 ## Requirements
 
 ### Validated
 
-- User picks a folder; app scans for GoPro MP4 chunks and shows count + size — v1.0
-- App parses GoPro naming convention for correct stitch order — v1.0
-- User reviews files with thumbnails, metadata, drag-to-reorder, preview modal — v1.0
+- Folder picker with GoPro file detection, review/reorder, preview modal — v1.0
 - ffmpeg concat stitching with progress tracking and manifest archiving — v1.0
-- Three-screen stitch flow: folder picker → review → progress — v1.0
+- Audio extraction: MP4 → 320kbps MP3, progress tracking, Finder reveal — v1.1
+- Home screen with extensible tool launcher — v1.1
+- App renamed to "GoPro Toolkit" — v1.1
+- 8-bit design system: JetBrains Mono, retro palette, block-fill progress, hard-edge cards — v1.1
 
 ### Active
 
-- [ ] App renamed to GoPro Toolkit throughout (bundle ID, display name, window title)
-- [ ] Home screen with extensible tool launcher (two big buttons for now)
-- [ ] "Stitch Video" button launches existing stitch flow
-- [ ] "Extract Audio" button launches new audio extraction flow
-- [ ] User can pick any MP4 file via native file picker
-- [ ] App shows extraction progress with metadata (duration, bitrate, file size)
-- [ ] Audio extracted as 320kbps MP3 saved next to source file (same name, .mp3 extension)
-- [ ] After extraction, MP3 auto-revealed in Finder
-- [ ] Test suite built first — extraction engine tested before UI wiring
+- [ ] "Downscale Video" button on home screen as third tool entry
+- [ ] User picks any MP4 via file picker
+- [ ] Metadata summary shown before encoding (source resolution, size, duration, codec)
+- [ ] Editable output filename (default: source_1080p.mp4)
+- [ ] Video re-encoded to H.264 1080p with audio stream copied untouched
+- [ ] Progress bar with percentage and time tracking during encoding
+- [ ] Output auto-revealed in Finder on completion
+- [ ] Full test suite built first — engine + integration tests before UI
+- [ ] All UI in 8-bit design language (RetroCard, RetroButton, RetroProgressBar, RetroFont)
 
 ### Out of Scope
 
-- Video editing, trimming, or overlap detection — not a video editor
-- Multi-camera/multi-session grouping — one recording per folder for stitch
-- iOS/iPhone version — macOS desktop only
-- Cloud storage or sync — purely local operations
-- Batch/multi-file audio extraction — one file at a time for v1.1
-- Format selection (WAV, FLAC, AAC) — MP3 only for v1.1
+- Custom resolution input — always 1080p for v1.2
+- Multiple resolution presets (720p, 480p) — future milestone
+- Batch downscaling — one file at a time
+- Video trimming or editing
+- Re-encoding audio — copy only
+- iOS version, cloud storage
 
 ## Context
 
-- GoPro cameras use exFAT which limits files to ~4GB, splitting long recordings into sequential chunks
-- Files are typically 12GB+ when stitched (3-4 chunks per recording)
-- User is a DJ who records sets/events — needs this as a utility tool, not a production suite
-- ffmpeg already a dependency (used for stitch) — reuse for audio extraction
-- App uses TCA (Composable Architecture), xcodegen, swift-tools-version 5.9, macOS 13 deployment target
-- Each tool should be an independent TCA feature module with its own reducer and view
+- GoPro 4K footage is typically H.265/HEVC; output as H.264 for max compatibility
+- ffmpeg already a dependency — reuse for video downscaling
+- Encoding 4K → 1080p is CPU-intensive; progress tracking via ffmpeg -progress pipe:1 (proven in audio extraction)
+- Each tool is an independent TCA module — VideoDownscaler follows AudioExtractor pattern
+- Home screen ToolDescriptor array — adding third tool is one array entry
+- 8-bit design system tokens already established (DesignTokens.swift, RetroProgressBar, RetroButton, RetroCard)
 
 ## Constraints
 
 - **Platform**: macOS desktop app, Swift/SwiftUI
-- **Performance**: Must handle 12GB+ files without buffering entire file in memory
-- **Architecture**: Each tool is an independent TCA module — no shared pipeline between tools
-- **Dependencies**: ffmpeg required (already present from v1.0)
+- **Performance**: Must handle 12GB+ files; ffmpeg runs as subprocess
+- **Architecture**: Independent TCA module, no coupling with stitch or audio tools
+- **Audio**: -c:a copy (zero quality loss, non-negotiable)
+- **Video**: H.264 output for compatibility
 - **Testing**: Test-first — engine tests before UI wiring
+- **Design**: Must use existing 8-bit design system tokens
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| ffmpeg concat with -c copy for stitching | Fast, no re-encoding, preserves quality | ✓ Good |
-| Manifest JSON for reversion | Tiny file, enables undo without zip overhead | ✓ Good |
-| TCA for state management | Testable, predictable, scales to multi-tool app | ✓ Good |
-| xcodegen + project.yml | Regenerable, diff-friendly Xcode project | ✓ Good |
-| Two big buttons home screen | Simple, extensible, clear entry points | — Pending |
-| Independent tool modules | No coupling between stitch and extract | — Pending |
-| ffmpeg for audio extraction | Already a dependency, handles all codecs | — Pending |
+| ffmpeg concat with -c copy for stitching | Fast, no re-encoding | ✓ Good |
+| Manifest JSON for reversion | Tiny file, enables undo | ✓ Good |
+| TCA for state management | Testable, predictable, scales | ✓ Good |
+| xcodegen + project.yml | Regenerable, diff-friendly | ✓ Good |
+| Extensible ToolDescriptor home screen | Adding tool = one array entry | ✓ Good |
+| Independent tool modules | No coupling between tools | ✓ Good |
+| ffmpeg for all media ops | Single dependency, all codecs | ✓ Good |
+| 8-bit design system | Cohesive retro aesthetic | ✓ Good |
+| -c:a copy for downscale | Zero audio quality loss | — Pending |
+| H.264 output codec | Maximum playback compatibility | — Pending |
+| Auto-name with edit | source_1080p.mp4 default, user can change | — Pending |
 
 ---
-*Last updated: 2026-03-18 after v1.1 milestone start*
+*Last updated: 2026-03-18 after v1.2 milestone start*
