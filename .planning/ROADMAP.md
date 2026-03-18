@@ -212,9 +212,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 08-01-PLAN.md — Design system foundation: DesignTokens, JetBrains Mono font, RetroProgressBar/Button/Card components + tests
-- [ ] 08-02-PLAN.md — Restyle all screens (HomeView, FolderPickerView, ChunkReviewView, StitchProgressView, AudioExtractionView, ContentView) with 8-bit design tokens
-- [ ] 08-03-PLAN.md — Screenshot evaluation, polish fixes, design token compliance test + final user approval
+- [x] 08-01-PLAN.md — Design system foundation: DesignTokens, JetBrains Mono font, RetroProgressBar/Button/Card components + tests
+- [x] 08-02-PLAN.md — Restyle all screens (HomeView, FolderPickerView, ChunkReviewView, StitchProgressView, AudioExtractionView, ContentView) with 8-bit design tokens
+- [x] 08-03-PLAN.md — Screenshot evaluation, polish fixes, design token compliance test + final user approval
 
 ---
 
@@ -231,7 +231,7 @@ Plans:
 | 5. AudioExtractor Engine | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 6. Audio Extraction UI | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 7. Home Screen & App Rename | v1.1 | 1/1 | Complete | 2026-03-18 |
-| 8. UX Redesign — 8-Bit Design System | v1.1 | 0/3 | Not started | - |
+| 8. UX Redesign — 8-Bit Design System | v1.1 | 3/3 | Complete | 2026-03-18 |
 
 ---
 
