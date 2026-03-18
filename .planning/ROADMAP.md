@@ -3,7 +3,8 @@
 ## Milestones
 
 - ✅ **v1.0 Stitcher** - Phases 1-4 (shipped 2026-03-18)
-- 🚧 **v1.1 Audio + Restructure** - Phases 5-7 (in progress)
+- ✅ **v1.1 Audio + Restructure** - Phases 5-8 (shipped 2026-03-18)
+- 🚧 **v1.2 Video Downscale** - Phases 9-10 (in progress)
 
 ## Phases
 
@@ -107,9 +108,8 @@ Plans:
 
 </details>
 
----
-
-### 🚧 v1.1 Audio + Restructure (In Progress)
+<details>
+<summary>✅ v1.1 Audio + Restructure (Phases 5-8) - SHIPPED 2026-03-18</summary>
 
 **Milestone Goal:** App renamed to GoPro Toolkit, restructured as an extensible multi-tool launcher, with a fully tested audio extraction tool that converts any MP4 to 320kbps MP3.
 
@@ -216,11 +216,78 @@ Plans:
 - [x] 08-02-PLAN.md — Restyle all screens (HomeView, FolderPickerView, ChunkReviewView, StitchProgressView, AudioExtractionView, ContentView) with 8-bit design tokens
 - [x] 08-03-PLAN.md — Screenshot evaluation, polish fixes, design token compliance test + final user approval
 
+</details>
+
+---
+
+### 🚧 v1.2 Video Downscale (In Progress)
+
+**Milestone Goal:** A fully tested video downscaling tool added to GoPro Toolkit — user picks any MP4, sees a metadata summary, optionally edits the output filename, watches H.264 1080p re-encoding progress, and finds the output auto-revealed in Finder. Accessible from a third home button.
+
+---
+
+#### Phase 9: VideoDownscaler Engine
+
+**Goal:** VideoDownscaler engine is built and fully tested — H.264 1080p re-encoding, audio copy, collision handling, ffmpeg check, and progress parsing all verified before any UI is wired.
+
+**Depends on:** Phase 8
+
+**Requirements:**
+- DOWNSCALE-01: VideoDownscaler engine re-encodes video to H.264 1080p (`-vf scale=-2:1080 -c:v libx264`)
+- DOWNSCALE-02: Audio stream copied untouched (`-c:a copy`) — zero quality loss
+- DOWNSCALE-03: Output filename defaults to `source_1080p.mp4`, collision handled with `_1`, `_2` suffixes
+- DOWNSCALE-04: ffmpeg availability checked before encoding; clear error if not found
+- DOWNSCALE-05: Progress reported via ffmpeg `-progress pipe:1` with percentage and time tracking
+- TEST-07: VideoDownscaler engine unit tested (encoding, audio copy, collision, error paths)
+
+**Success Criteria:**
+1. `VideoDownscaler.downscale(url:outputName:)` runs ffmpeg with `-vf scale=-2:1080 -c:v libx264 -c:a copy` and produces a valid MP4 at the specified output path
+2. When an output file already exists at the target path, downscaler appends `_1`, `_2`, etc. until the path is clear — verified by unit test
+3. When ffmpeg is not found on the system, downscaler returns a typed error with a human-readable message before spawning any process
+4. Progress values parsed from ffmpeg `-progress pipe:1` output are surfaced as a stream of percentage + elapsed time values — verified by unit test with mock pipe data
+5. Test suite passes with `xcodebuild test` — all error paths covered, no file-system side effects in CI
+
+**Plans:** TBD
+
+Plans:
+- [ ] 09-01-PLAN.md — VideoDownscalerError + VideoDownscaler engine + VideoDownscalerTests (encoding, audio copy, collision, progress parsing, error paths)
+
+---
+
+#### Phase 10: Downscale UI + Home Integration
+
+**Goal:** User can pick any MP4 from the home screen, review metadata, optionally rename the output, watch H.264 re-encoding progress with the 8-bit design system, and find the output auto-revealed in Finder — the complete downscale tool flow is wired, home-integrated, and integration-tested.
+
+**Depends on:** Phase 9 (VideoDownscaler engine)
+
+**Requirements:**
+- DOWNSCALE-06: User can select any MP4 via native file picker
+- DOWNSCALE-07: Metadata summary shown before encoding (source resolution, file size, duration, codec)
+- DOWNSCALE-08: Editable output filename field with default `source_1080p.mp4`
+- DOWNSCALE-09: Progress screen shows RetroProgressBar with percentage + time elapsed
+- DOWNSCALE-10: On completion, output auto-revealed in Finder
+- HOME-05: "Downscale Video" button on home screen as third tool
+- HOME-06: Back-to-home navigation from downscale flow
+- TEST-08: Integration test covering full downscale pipeline (pick → encode → verify 1080p output)
+- DESIGN-01: All downscale UI screens use 8-bit design tokens (RetroCard, RetroButton, RetroProgressBar, RetroFont)
+
+**Success Criteria:**
+1. User taps "Downscale Video" on the home screen, native macOS picker opens filtered to MP4 files, and a valid selection advances to the metadata summary screen
+2. Metadata summary screen displays source resolution, file size, duration, and codec; output filename field is pre-filled with `source_1080p.mp4` and is editable before encoding starts
+3. Progress screen shows RetroProgressBar filling from 0 to 100% alongside percentage and elapsed time — all using 8-bit design tokens (no gradients, no shadows, JetBrains Mono font)
+4. When encoding completes, Finder opens and highlights the output MP4 — no manual navigation needed
+5. Integration test exercises pick → encode → verify output MP4 exists, is non-empty, and is flagged as 1080p by AVFoundation metadata
+
+**Plans:** TBD
+
+Plans:
+- [ ] 10-01-PLAN.md — VideoFilePickerFeature + VideoMetadataFeature + VideoDownscaleFeature + all views + AppFeature wiring + integration test + human-verify
+
 ---
 
 ## Progress
 
-**Execution Order:** 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
+**Execution Order:** 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -232,6 +299,8 @@ Plans:
 | 6. Audio Extraction UI | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 7. Home Screen & App Rename | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 8. UX Redesign — 8-Bit Design System | v1.1 | 3/3 | Complete | 2026-03-18 |
+| 9. VideoDownscaler Engine | v1.2 | 0/1 | Not started | - |
+| 10. Downscale UI + Home Integration | v1.2 | 0/1 | Not started | - |
 
 ---
 
@@ -257,28 +326,48 @@ Plans:
 | STITCH-02 | 4 | Complete |
 | STITCH-03 | 4 | Complete |
 
-**v1.1 Requirements (14 total):**
+**v1.1 Requirements (14 total — all complete):**
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUDIO-02 | 5 | Pending |
-| AUDIO-03 | 5 | Pending |
-| AUDIO-06 | 5 | Pending |
-| AUDIO-07 | 5 | Pending |
-| TEST-05 | 5 | Pending |
-| AUDIO-01 | 6 | Pending |
-| AUDIO-04 | 6 | Pending |
-| AUDIO-05 | 6 | Pending |
-| TEST-06 | 6 | Pending |
-| RENAME-01 | 7 | Pending |
-| HOME-01 | 7 | Pending |
-| HOME-02 | 7 | Pending |
-| HOME-03 | 7 | Pending |
-| HOME-04 | 7 | Pending |
+| AUDIO-02 | 5 | Complete |
+| AUDIO-03 | 5 | Complete |
+| AUDIO-06 | 5 | Complete |
+| AUDIO-07 | 5 | Complete |
+| TEST-05 | 5 | Complete |
+| AUDIO-01 | 6 | Complete |
+| AUDIO-04 | 6 | Complete |
+| AUDIO-05 | 6 | Complete |
+| TEST-06 | 6 | Complete |
+| RENAME-01 | 7 | Complete |
+| HOME-01 | 7 | Complete |
+| HOME-02 | 7 | Complete |
+| HOME-03 | 7 | Complete |
+| HOME-04 | 7 | Complete |
+
+**v1.2 Requirements (15 total):**
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| DOWNSCALE-01 | 9 | Pending |
+| DOWNSCALE-02 | 9 | Pending |
+| DOWNSCALE-03 | 9 | Pending |
+| DOWNSCALE-04 | 9 | Pending |
+| DOWNSCALE-05 | 9 | Pending |
+| TEST-07 | 9 | Pending |
+| DOWNSCALE-06 | 10 | Pending |
+| DOWNSCALE-07 | 10 | Pending |
+| DOWNSCALE-08 | 10 | Pending |
+| DOWNSCALE-09 | 10 | Pending |
+| DOWNSCALE-10 | 10 | Pending |
+| HOME-05 | 10 | Pending |
+| HOME-06 | 10 | Pending |
+| TEST-08 | 10 | Pending |
+| DESIGN-01 | 10 | Pending |
 
 **Coverage Summary:**
-- v1.1 requirements: 14 total
-- Mapped to phases: 14
+- v1.2 requirements: 15 total
+- Mapped to phases: 15
 - Unmapped: 0
 - Coverage: 100% ✓
 
@@ -287,5 +376,6 @@ Plans:
 *Roadmap created: 2026-03-17*
 *Roadmap revised (test-first): 2026-03-17*
 *Roadmap updated (v1.1 milestone): 2026-03-18*
-*Depth: quick (3-5 phases per milestone)*
-*Next: `/gsd:execute-phase 6`*
+*Roadmap updated (v1.2 milestone): 2026-03-18*
+*Depth: quick (2-3 phases per milestone)*
+*Next: `/gsd:plan-phase 9`*

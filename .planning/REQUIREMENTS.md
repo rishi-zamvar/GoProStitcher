@@ -147,28 +147,30 @@
 | HOME-02 | 7 | Complete |
 | HOME-03 | 7 | Complete |
 | HOME-04 | 7 | Complete |
-| DOWNSCALE-01 | TBD | Pending |
-| DOWNSCALE-02 | TBD | Pending |
-| DOWNSCALE-03 | TBD | Pending |
-| DOWNSCALE-04 | TBD | Pending |
-| DOWNSCALE-05 | TBD | Pending |
-| DOWNSCALE-06 | TBD | Pending |
-| DOWNSCALE-07 | TBD | Pending |
-| DOWNSCALE-08 | TBD | Pending |
-| DOWNSCALE-09 | TBD | Pending |
-| DOWNSCALE-10 | TBD | Pending |
-| HOME-05 | TBD | Pending |
-| HOME-06 | TBD | Pending |
-| TEST-07 | TBD | Pending |
-| TEST-08 | TBD | Pending |
-| DESIGN-01 | TBD | Pending |
+| DOWNSCALE-01 | 9 | Pending |
+| DOWNSCALE-02 | 9 | Pending |
+| DOWNSCALE-03 | 9 | Pending |
+| DOWNSCALE-04 | 9 | Pending |
+| DOWNSCALE-05 | 9 | Pending |
+| TEST-07 | 9 | Pending |
+| DOWNSCALE-06 | 10 | Pending |
+| DOWNSCALE-07 | 10 | Pending |
+| DOWNSCALE-08 | 10 | Pending |
+| DOWNSCALE-09 | 10 | Pending |
+| DOWNSCALE-10 | 10 | Pending |
+| HOME-05 | 10 | Pending |
+| HOME-06 | 10 | Pending |
+| TEST-08 | 10 | Pending |
+| DESIGN-01 | 10 | Pending |
 
 **Coverage:**
 - v1.0 requirements: 15 total (all complete)
 - v1.1 requirements: 14 total (all complete)
-- v1.2 requirements: 15 total (awaiting roadmap)
-- Unmapped: 15 (awaiting roadmap)
+- v1.2 requirements: 15 total (mapped to phases 9-10)
+- Unmapped: 0
+- Coverage: 100% ✓
 
 ---
 *Requirements defined: 2026-03-17*
 *Updated: 2026-03-18 — v1.2 requirements defined*
+*Updated: 2026-03-18 — v1.2 traceability mapped (phases 9-10)*
