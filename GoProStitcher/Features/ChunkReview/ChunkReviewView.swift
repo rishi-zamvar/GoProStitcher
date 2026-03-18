@@ -17,7 +17,7 @@ private struct ChunkRowView: View {
     let metadata: ChunkMetadata?
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: RetroSpacing.sm) {
             // Thumbnail or placeholder
             Group {
                 if let image = metadata?.thumbnail {
@@ -26,42 +26,44 @@ private struct ChunkRowView: View {
                         .aspectRatio(contentMode: .fill)
                 } else {
                     Rectangle()
-                        .foregroundStyle(Color.secondary.opacity(0.25))
+                        .foregroundColor(RetroColor.beigeSecondary)
                         .overlay {
-                            Image(systemName: "film")
-                                .foregroundStyle(.secondary)
-                                .font(.caption)
+                            Text("[?]")
+                                .font(RetroFont.caption)
+                                .foregroundColor(RetroColor.muted)
                         }
                 }
             }
             .frame(width: 40, height: 30)
-            .clipShape(RoundedRectangle(cornerRadius: 4))
+            .clipShape(Rectangle())
+            .overlay(Rectangle().stroke(RetroColor.black, lineWidth: 1))
 
             // Filename + metadata
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: RetroSpacing.xs) {
                 Text(chunk.chunk.filename)
-                    .font(.system(.body, design: .monospaced))
+                    .font(RetroFont.body)
+                    .foregroundColor(RetroColor.black)
                     .lineLimit(1)
                     .truncationMode(.middle)
 
                 Text(metadataString)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(RetroFont.caption)
+                    .foregroundColor(RetroColor.muted)
             }
 
             Spacer()
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, RetroSpacing.xs)
     }
 
     private var metadataString: String {
         guard let meta = metadata else {
-            return "Loading…"
+            return "Loading..."
         }
         let duration = formattedDuration(meta.duration)
         let size = formattedSize(chunk.sizeBytes)
         let resolution = formattedResolution(meta.resolution)
-        return "\(duration) — \(size) — \(resolution)"
+        return "\(duration) -- \(size) -- \(resolution)"
     }
 
     private func formattedDuration(_ seconds: TimeInterval) -> String {
@@ -95,25 +97,28 @@ struct ChunkReviewView: View {
         VStack(alignment: .leading, spacing: 0) {
             // Header
             HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Review Clips")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                VStack(alignment: .leading, spacing: RetroSpacing.xs) {
+                    Text("REVIEW CLIPS")
+                        .font(RetroFont.bold(18))
+                        .foregroundColor(RetroColor.black)
                     Text("\(store.chunks.count) clip\(store.chunks.count == 1 ? "" : "s") detected — drag to reorder")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(RetroFont.regular(12))
+                        .foregroundColor(RetroColor.muted)
                 }
                 Spacer()
-                Button("Start Stitching") {
-                    store.send(.startStitching)
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(store.chunks.isEmpty)
+                RetroButton(
+                    title: "START STITCHING",
+                    action: { store.send(.startStitching) },
+                    isDisabled: store.chunks.isEmpty
+                )
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, RetroSpacing.md)
+            .padding(.vertical, RetroSpacing.sm)
 
-            Divider()
+            // Divider replacement — 2px black line
+            Rectangle()
+                .fill(RetroColor.black)
+                .frame(height: 2)
 
             // Chunk list
             List {
@@ -126,13 +131,18 @@ struct ChunkReviewView: View {
                     .onTapGesture {
                         store.send(.chunkTapped(chunk.url))
                     }
+                    .listRowBackground(RetroColor.beigeBackground)
+                    .listRowSeparatorTint(RetroColor.beigeSecondary)
                 }
                 .onMove { from, to in
                     store.send(.chunksReordered(from: from, to: to))
                 }
             }
             .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(RetroColor.beigeBackground)
         }
+        .background(RetroColor.beigeBackground)
         .frame(minWidth: 520, minHeight: 360)
         .onAppear {
             store.send(.loadAllMetadata)

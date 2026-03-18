@@ -29,27 +29,40 @@ struct ChunkPreviewModal: View {
     let onDismiss: () -> Void
 
     var body: some View {
-        VStack(spacing: 16) {
-            // Video player — 16:9 at 480pt wide
+        VStack(spacing: RetroSpacing.md) {
+            // Inverted title bar
+            RetroInvertedCard {
+                HStack {
+                    Text("PREVIEW")
+                        .font(RetroFont.bold(14))
+                        .foregroundColor(RetroColor.beigeBackground)
+                    Spacer()
+                }
+                .padding(.horizontal, RetroSpacing.md)
+                .padding(.vertical, RetroSpacing.sm)
+            }
+
+            // Video player — 16:9 at 480pt wide, hard edge
             AVPlayerViewRepresentable(url: url)
                 .frame(width: 480, height: 270)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .clipShape(Rectangle())
+                .overlay(Rectangle().stroke(RetroColor.black, lineWidth: 2))
 
             // Filename label
             Text(url.lastPathComponent)
-                .font(.system(.subheadline, design: .monospaced))
-                .foregroundStyle(.secondary)
+                .font(RetroFont.regular(12))
+                .foregroundColor(RetroColor.muted)
                 .lineLimit(1)
                 .truncationMode(.middle)
 
             // Close button
-            Button("Close") {
+            RetroButton(title: "CLOSE") {
                 onDismiss()
             }
             .keyboardShortcut(.escape, modifiers: [])
-            .buttonStyle(.borderedProminent)
         }
-        .padding(24)
-        .frame(width: 528, height: 380)
+        .padding(RetroSpacing.lg)
+        .background(RetroColor.black)
+        .frame(width: 528, height: 420)
     }
 }

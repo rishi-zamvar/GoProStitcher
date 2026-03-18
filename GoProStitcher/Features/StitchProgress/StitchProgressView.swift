@@ -8,45 +8,56 @@ struct StitchProgressView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            VStack(spacing: 24) {
+            VStack(spacing: RetroSpacing.lg) {
                 Text("GoPro Toolkit")
-                    .font(.title2).bold()
+                    .font(RetroFont.bold(18))
+                    .foregroundColor(RetroColor.black)
 
                 if store.isComplete {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 48))
-                        .foregroundColor(.green)
-                    Text("Done! Your video is ready.")
-                        .font(.headline)
-                    Text("Stitched file: \(store.chunks.first?.url.lastPathComponent ?? "")")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Text("A manifest was saved so you can split it back into chunks later.")
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
+                    RetroCard {
+                        VStack(spacing: RetroSpacing.sm) {
+                            Text("[✓ COMPLETE]")
+                                .font(RetroFont.bold(16))
+                                .foregroundColor(RetroColor.black)
+                            Text("Stitched file: \(store.chunks.first?.url.lastPathComponent ?? "")")
+                                .font(RetroFont.regular(12))
+                                .foregroundColor(RetroColor.muted)
+                                .multilineTextAlignment(.center)
+                            Text("A manifest was saved so you can split it back into chunks later.")
+                                .font(RetroFont.regular(11))
+                                .foregroundColor(RetroColor.muted)
+                                .multilineTextAlignment(.center)
+                        }
+                        .padding(RetroSpacing.md)
+                    }
                 } else if let errMsg = store.errorMessage {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 48))
-                        .foregroundColor(.red)
-                    Text("Error")
-                        .font(.headline)
-                    Text(errMsg)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
+                    RetroCard {
+                        VStack(spacing: RetroSpacing.sm) {
+                            Text("[✗ ERROR]")
+                                .font(RetroFont.bold(16))
+                                .foregroundColor(RetroColor.accentRed)
+                            Text(errMsg)
+                                .font(RetroFont.regular(12))
+                                .foregroundColor(RetroColor.accentRed)
+                                .multilineTextAlignment(.center)
+                        }
+                        .padding(RetroSpacing.md)
+                    }
                 } else {
-                    ProgressView(value: progressValue)
-                        .progressViewStyle(.linear)
-                        .frame(maxWidth: 400)
-
-                    Text(phaseLabel)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .monospacedDigit()
+                    RetroCard {
+                        VStack(spacing: RetroSpacing.sm) {
+                            RetroProgressBar(fraction: progressValue, blockCount: 16)
+                            Text(phaseLabel)
+                                .font(RetroFont.regular(13))
+                                .foregroundColor(RetroColor.muted)
+                        }
+                        .padding(RetroSpacing.md)
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(40)
+            .padding(RetroSpacing.xxl)
+            .background(RetroColor.beigeBackground)
         }
     }
 
