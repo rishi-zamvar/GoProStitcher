@@ -109,11 +109,11 @@
 | AUDIO-04 | 6 | Complete |
 | AUDIO-05 | 6 | Complete |
 | TEST-06 | 6 | Complete |
-| RENAME-01 | 7 | Pending |
-| HOME-01 | 7 | Pending |
-| HOME-02 | 7 | Pending |
-| HOME-03 | 7 | Pending |
-| HOME-04 | 7 | Pending |
+| RENAME-01 | 7 | Complete |
+| HOME-01 | 7 | Complete |
+| HOME-02 | 7 | Complete |
+| HOME-03 | 7 | Complete |
+| HOME-04 | 7 | Complete |
 
 **Coverage:**
 - v1.0 requirements: 15 total (all complete)

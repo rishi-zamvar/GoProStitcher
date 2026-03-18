@@ -190,7 +190,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 07-01-PLAN.md — HomeFeature + HomeView + AppFeature enum routing + display name rename + human-verify
+- [x] 07-01-PLAN.md — HomeFeature + HomeView + AppFeature enum routing + display name rename + human-verify
 
 ---
 
@@ -206,7 +206,7 @@ Plans:
 | 4. Stitching & Archive | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 5. AudioExtractor Engine | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 6. Audio Extraction UI | v1.1 | 1/1 | Complete | 2026-03-18 |
-| 7. Home Screen & App Rename | v1.1 | 0/1 | Not started | - |
+| 7. Home Screen & App Rename | v1.1 | 1/1 | Complete | 2026-03-18 |
 
 ---
 
