@@ -160,10 +160,10 @@ Plans:
 3. When extraction completes, Finder opens and highlights the output MP3 — no manual navigation needed
 4. Integration test exercises pick → extract → verify MP3 exists at expected path and is non-empty
 
-**Plans:** TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 06-01: AudioFeature TCA reducer + AudioProgressView SwiftUI + integration test + human-verify
+- [ ] 06-01-PLAN.md — AudioFilePickerFeature + AudioExtractionFeature + AudioExtractionView + AppFeature wiring + integration test + human-verify
 
 ---
 
@@ -263,4 +263,4 @@ Plans:
 *Roadmap revised (test-first): 2026-03-17*
 *Roadmap updated (v1.1 milestone): 2026-03-18*
 *Depth: quick (3-5 phases per milestone)*
-*Next: `/gsd:execute-phase 5`*
+*Next: `/gsd:execute-phase 6`*
