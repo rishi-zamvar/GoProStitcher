@@ -1,7 +1,7 @@
 # Requirements: GoPro Toolkit
 
 **Defined:** 2026-03-17
-**Core Value:** A DJ/creator has a single app for all their GoPro post-processing needs — stitch chunks, extract audio, and future tools — without leaving the app or learning complex software.
+**Core Value:** A DJ/creator has a single app for all their GoPro post-processing needs — stitch chunks, extract audio, downscale video, and future tools — without leaving the app or learning complex software.
 
 ## v1.0 Requirements (Complete)
 
@@ -29,33 +29,65 @@
 ### Stitching
 
 - [x] **STITCH-01**: App stitches files by sequentially appending each chunk to file 1 in-place — no intermediate copies or file duplication
-- [x] **STITCH-02**: Progress bar with text showing current phase and which file is being processed (e.g., "Stitching 3/7: GH030001.MP4")
+- [x] **STITCH-02**: Progress bar with text showing current phase and which file is being processed
 - [x] **STITCH-03**: After stitching completes, each original chunk is individually zipped into an `archive/` subfolder at the source location
 
-## v1.1 Requirements
+## v1.1 Requirements (Complete)
 
 ### App Restructure
 
-- [ ] **RENAME-01**: App renamed to "GoPro Toolkit" (display name, window title, bundle display name)
-- [ ] **HOME-01**: Home screen with two big buttons: "Stitch Video" and "Extract Audio"
-- [ ] **HOME-02**: Home screen layout is extensible — adding a third tool button requires minimal code change
-- [ ] **HOME-03**: "Stitch Video" button launches existing stitch flow unchanged
-- [ ] **HOME-04**: User can navigate back to home screen from any tool
+- [x] **RENAME-01**: App renamed to "GoPro Toolkit" (display name, window title, bundle display name)
+- [x] **HOME-01**: Home screen with two big buttons: "Stitch Video" and "Extract Audio"
+- [x] **HOME-02**: Home screen layout is extensible — adding a third tool button requires minimal code change
+- [x] **HOME-03**: "Stitch Video" button launches existing stitch flow unchanged
+- [x] **HOME-04**: User can navigate back to home screen from any tool
 
 ### Audio Extraction
 
-- [ ] **AUDIO-01**: User can select any MP4 file via native macOS file picker
-- [ ] **AUDIO-02**: App extracts audio as 320kbps CBR MP3 using ffmpeg libmp3lame
-- [ ] **AUDIO-03**: MP3 saved next to source file with same name and .mp3 extension
-- [ ] **AUDIO-04**: Progress screen shows extraction status with metadata (source duration, file size, audio bitrate)
-- [ ] **AUDIO-05**: On completion, MP3 is auto-revealed in Finder
-- [ ] **AUDIO-06**: File collision handled — if .mp3 already exists, append suffix (e.g., `_1.mp3`)
-- [ ] **AUDIO-07**: ffmpeg availability checked before extraction; clear error if not found
+- [x] **AUDIO-01**: User can select any MP4 file via native macOS file picker
+- [x] **AUDIO-02**: App extracts audio as 320kbps CBR MP3 using ffmpeg libmp3lame
+- [x] **AUDIO-03**: MP3 saved next to source file with same name and .mp3 extension
+- [x] **AUDIO-04**: Progress screen shows extraction status with metadata (source duration, file size, audio bitrate)
+- [x] **AUDIO-05**: On completion, MP3 is auto-revealed in Finder
+- [x] **AUDIO-06**: File collision handled — if .mp3 already exists, append suffix
+- [x] **AUDIO-07**: ffmpeg availability checked before extraction; clear error if not found
 
 ### Testing
 
-- [ ] **TEST-05**: AudioExtractor engine unit tested (extraction, error cases, collision handling)
-- [ ] **TEST-06**: Integration test covering full extraction pipeline (pick → extract → verify MP3)
+- [x] **TEST-05**: AudioExtractor engine unit tested (extraction, error cases, collision handling)
+- [x] **TEST-06**: Integration test covering full extraction pipeline
+
+## v1.2 Requirements
+
+### Video Downscale Engine
+
+- [ ] **DOWNSCALE-01**: VideoDownscaler engine re-encodes video to H.264 1080p (`-vf scale=-2:1080 -c:v libx264`)
+- [ ] **DOWNSCALE-02**: Audio stream copied untouched (`-c:a copy`) — zero quality loss
+- [ ] **DOWNSCALE-03**: Output filename defaults to `source_1080p.mp4`, collision handled with `_1`, `_2` suffixes
+- [ ] **DOWNSCALE-04**: ffmpeg availability checked before encoding; clear error if not found
+- [ ] **DOWNSCALE-05**: Progress reported via ffmpeg `-progress pipe:1` with percentage and time tracking
+
+### Video Downscale UI
+
+- [ ] **DOWNSCALE-06**: User can select any MP4 via native file picker
+- [ ] **DOWNSCALE-07**: Metadata summary shown before encoding (source resolution, file size, duration, codec)
+- [ ] **DOWNSCALE-08**: Editable output filename field with default `source_1080p.mp4`
+- [ ] **DOWNSCALE-09**: Progress screen shows RetroProgressBar with percentage + time elapsed
+- [ ] **DOWNSCALE-10**: On completion, output auto-revealed in Finder
+
+### Integration
+
+- [ ] **HOME-05**: "Downscale Video" button on home screen as third tool
+- [ ] **HOME-06**: Back-to-home navigation from downscale flow
+
+### Testing
+
+- [ ] **TEST-07**: VideoDownscaler engine unit tested (encoding, audio copy, collision, error paths)
+- [ ] **TEST-08**: Integration test covering full downscale pipeline (pick → encode → verify 1080p output)
+
+### Design
+
+- [ ] **DESIGN-01**: All downscale UI screens use 8-bit design tokens (RetroCard, RetroButton, RetroProgressBar, RetroFont)
 
 ## v2 Requirements
 
@@ -66,20 +98,21 @@
 - **UX-V2-03**: Drag-and-drop folder onto app icon to start
 - **AUDIO-V2-01**: Batch multi-file audio extraction
 - **AUDIO-V2-02**: Format selection (WAV, FLAC, AAC)
-- **AUDIO-V2-03**: Source bitrate detection warning (don't upsample)
-- **AUDIO-V2-04**: Smooth progress bar via ffmpeg stderr parsing
+- **DOWNSCALE-V2-01**: Resolution presets (720p, 480p)
+- **DOWNSCALE-V2-02**: Batch video downscaling
+- **DOWNSCALE-V2-03**: Custom resolution input
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Video editing/trimming/overlap detection | GoPro splits are exact — binary concat only |
+| Video editing/trimming | Not a video editor |
 | Multi-camera/session grouping | One recording per folder |
-| Transcoding or re-encoding video | Preserves quality, saves time |
 | iOS version | Desktop utility only |
 | Cloud storage/sync | Purely local operations |
-| Audio enhancement/normalization | Not an audio editor — extract as-is |
-| Upsampling from lower bitrate | Misleading quality; anti-feature |
+| Audio enhancement/normalization | Not an audio editor |
+| Upsampling video resolution | Misleading quality; anti-feature |
+| Re-encoding audio during downscale | -c:a copy preserves fidelity |
 
 ## Traceability
 
@@ -114,13 +147,28 @@
 | HOME-02 | 7 | Complete |
 | HOME-03 | 7 | Complete |
 | HOME-04 | 7 | Complete |
+| DOWNSCALE-01 | TBD | Pending |
+| DOWNSCALE-02 | TBD | Pending |
+| DOWNSCALE-03 | TBD | Pending |
+| DOWNSCALE-04 | TBD | Pending |
+| DOWNSCALE-05 | TBD | Pending |
+| DOWNSCALE-06 | TBD | Pending |
+| DOWNSCALE-07 | TBD | Pending |
+| DOWNSCALE-08 | TBD | Pending |
+| DOWNSCALE-09 | TBD | Pending |
+| DOWNSCALE-10 | TBD | Pending |
+| HOME-05 | TBD | Pending |
+| HOME-06 | TBD | Pending |
+| TEST-07 | TBD | Pending |
+| TEST-08 | TBD | Pending |
+| DESIGN-01 | TBD | Pending |
 
 **Coverage:**
 - v1.0 requirements: 15 total (all complete)
-- v1.1 requirements: 14 total (14 mapped to phases 5-7)
-- Unmapped: 0
-- Coverage: 100% ✓
+- v1.1 requirements: 14 total (all complete)
+- v1.2 requirements: 15 total (awaiting roadmap)
+- Unmapped: 15 (awaiting roadmap)
 
 ---
 *Requirements defined: 2026-03-17*
-*Updated: 2026-03-18 — v1.1 requirements mapped to phases 5-7*
+*Updated: 2026-03-18 — v1.2 requirements defined*
