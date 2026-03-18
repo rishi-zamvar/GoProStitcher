@@ -71,6 +71,10 @@ public enum ChunkStitcher {
         let sourceHandle = try FileHandle(forReadingFrom: source)
         defer { try? sourceHandle.close() }
 
+        // Disable file system caching to avoid filling RAM with disk cache
+        _ = fcntl(sourceHandle.fileDescriptor, F_NOCACHE, 1)
+        _ = fcntl(destinationHandle.fileDescriptor, F_NOCACHE, 1)
+
         // Seek destination to end before appending
         try destinationHandle.seekToEnd()
 
