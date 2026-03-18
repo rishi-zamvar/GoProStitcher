@@ -12,16 +12,20 @@
 		382422428818ED1CD61CB68E /* ChunkPreviewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B9DC253C56135A28E1D45C /* ChunkPreviewModal.swift */; };
 		4CA9A99D4D18AD0BAF6B2B7B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A08EFE9BEA3622A3212DFA9 /* HomeView.swift */; };
 		4D9356C707D46C253B66C97E /* AudioExtractionFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA095F9B397DA437DCD3D82A /* AudioExtractionFeature.swift */; };
+		54B8FDDBE21BD46C46A11B22 /* JetBrainsMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F34E7CB5781A7F65B53F6C4 /* JetBrainsMono-Bold.ttf */; };
 		5B6E316E444F2B3241972A46 /* AudioExtractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51399FB2ABC643798A1D0D0C /* AudioExtractionView.swift */; };
 		60B76DE9D654C5E828C4C016 /* GoProStitcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */; };
 		6676487D5D6453B8BB2659CD /* ChunkReviewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB218D4FF685EB63297F05 /* ChunkReviewFeature.swift */; };
 		6E55C07CA3684D3C0C0EDFD3 /* GoProStitcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D2389E7F089828C182644B /* GoProStitcherUITests.swift */; };
 		70AAD24636B83E694666640C /* FolderPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544974CD40BB9A44DB1B5F9E /* FolderPickerView.swift */; };
+		71FAF765780D4ADAF68A863A /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 003FE9A3C3358C90DA7E99C9 /* JetBrainsMono-Regular.ttf */; };
 		7B43CB04931E94A33629BC4E /* GoProStitcherKit in Frameworks */ = {isa = PBXBuildFile; productRef = 695116589AA273DD1066239B /* GoProStitcherKit */; };
 		9053A73BCA76666BBCCDD304 /* AudioFilePickerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11499FA91A315D83BA67870D /* AudioFilePickerFeature.swift */; };
 		A6A7023D81045BED013EE5DC /* ChunkReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F95D73C7A4C5EF8523D182A /* ChunkReviewView.swift */; };
 		BDEC659D5DA111EAF9670400 /* StitchProgressFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B95B6E049389DF9514CB8A /* StitchProgressFeature.swift */; };
 		BE5896D43149EACB8D6EC94A /* StitchProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4A3B77C4E112FF7043FDB /* StitchProgressView.swift */; };
+		C0C2401F20D8842CA1E37072 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BF9AFD6A11889C968FD7AA0 /* Assets.xcassets */; };
+		C0E12D725F121FC9544729B9 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63C2445C2D1EC63006ADE02 /* DesignTokens.swift */; };
 		CAD9DAED637ABFD575A4E975 /* StitchPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B31C9A91A3C0CCC5A77A25 /* StitchPipelineTests.swift */; };
 		CBC7E402317EBB4F5E0CE3C5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 24B635690ED3D414624D6B5B /* ComposableArchitecture */; };
 		CF15D34784197DC932842443 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF2BF210DA8636051C1E6498 /* README.md */; };
@@ -50,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		003FE9A3C3358C90DA7E99C9 /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
 		11499FA91A315D83BA67870D /* AudioFilePickerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFilePickerFeature.swift; sourceTree = "<group>"; };
 		1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherApp.swift; sourceTree = "<group>"; };
 		211481CB4D40257C6DFA2320 /* GoProStitcherKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GoProStitcherKit; path = GoProStitcherKit; sourceTree = SOURCE_ROOT; };
@@ -60,6 +65,7 @@
 		544974CD40BB9A44DB1B5F9E /* FolderPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPickerView.swift; sourceTree = "<group>"; };
 		57B95B6E049389DF9514CB8A /* StitchProgressFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchProgressFeature.swift; sourceTree = "<group>"; };
 		57D2389E7F089828C182644B /* GoProStitcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherUITests.swift; sourceTree = "<group>"; };
+		5BF9AFD6A11889C968FD7AA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69D8CDAA05EC41DB67A7E129 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		770486A167C05B829BC5DADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7C380692FB12220D81AAB214 /* GoProStitcherIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoProStitcherIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +73,8 @@
 		91B9DC253C56135A28E1D45C /* ChunkPreviewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkPreviewModal.swift; sourceTree = "<group>"; };
 		96D0CC0AD44AA6BF33AA220C /* AudioExtractionPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExtractionPipelineTests.swift; sourceTree = "<group>"; };
 		9AAAEDA1B43A9542FEB90AEA /* ChunkReviewReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkReviewReducerTests.swift; sourceTree = "<group>"; };
+		9F34E7CB5781A7F65B53F6C4 /* JetBrainsMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Bold.ttf"; sourceTree = "<group>"; };
+		A63C2445C2D1EC63006ADE02 /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
 		B4A4A3B77C4E112FF7043FDB /* StitchProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchProgressView.swift; sourceTree = "<group>"; };
 		BA095F9B397DA437DCD3D82A /* AudioExtractionFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExtractionFeature.swift; sourceTree = "<group>"; };
 		BB4F3415CEFA0426B0167A07 /* GoProStitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoProStitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0105D1E07CDB2583CD1B926E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9F34E7CB5781A7F65B53F6C4 /* JetBrainsMono-Bold.ttf */,
+				003FE9A3C3358C90DA7E99C9 /* JetBrainsMono-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		0E1E1D3C3D3C615200DB9E96 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +157,14 @@
 			path = StitchProgress;
 			sourceTree = "<group>";
 		};
+		4487542ECBCD7732AEDC402C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0105D1E07CDB2583CD1B926E /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		497BABEFBA03A263DFFCBCA0 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +174,14 @@
 				0E1E1D3C3D3C615200DB9E96 /* Packages */,
 				247AD8D3F5A724D8F4385AC6 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		6CF5F84AFBBABE27427C9BB9 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				A63C2445C2D1EC63006ADE02 /* DesignTokens.swift */,
+			);
+			path = DesignSystem;
 			sourceTree = "<group>";
 		};
 		853E89496B6987432F765A1A /* GoProStitcherIntegrationTests */ = {
@@ -193,10 +226,13 @@
 			isa = PBXGroup;
 			children = (
 				69D8CDAA05EC41DB67A7E129 /* AppFeature.swift */,
+				5BF9AFD6A11889C968FD7AA0 /* Assets.xcassets */,
 				CE38420A22BA26DB39CA2763 /* ContentView.swift */,
 				1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */,
 				770486A167C05B829BC5DADF /* Info.plist */,
+				6CF5F84AFBBABE27427C9BB9 /* DesignSystem */,
 				209A436B10B0EAEF08EA8A60 /* Features */,
+				4487542ECBCD7732AEDC402C /* Resources */,
 			);
 			path = GoProStitcher;
 			sourceTree = "<group>";
@@ -245,6 +281,7 @@
 			buildConfigurationList = BA4A5F953DE00237CEC93680 /* Build configuration list for PBXNativeTarget "GoProStitcher" */;
 			buildPhases = (
 				24D8FB5F5B4BB581EF577809 /* Sources */,
+				7DF1EB5B3F8918340F47B7F7 /* Resources */,
 				B0DD912CCE91BF7B0E9D8DD3 /* Frameworks */,
 			);
 			buildRules = (
@@ -329,6 +366,16 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7DF1EB5B3F8918340F47B7F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0C2401F20D8842CA1E37072 /* Assets.xcassets in Resources */,
+				54B8FDDBE21BD46C46A11B22 /* JetBrainsMono-Bold.ttf in Resources */,
+				71FAF765780D4ADAF68A863A /* JetBrainsMono-Regular.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B144F6CF9BE0FF3057B740DF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -352,6 +399,7 @@
 				6676487D5D6453B8BB2659CD /* ChunkReviewFeature.swift in Sources */,
 				A6A7023D81045BED013EE5DC /* ChunkReviewView.swift in Sources */,
 				D4F3CC0C5292E9DEB023F3DE /* ContentView.swift in Sources */,
+				C0E12D725F121FC9544729B9 /* DesignTokens.swift in Sources */,
 				1C0442925B0CB252EEA9A010 /* FolderPickerFeature.swift in Sources */,
 				70AAD24636B83E694666640C /* FolderPickerView.swift in Sources */,
 				60B76DE9D654C5E828C4C016 /* GoProStitcherApp.swift in Sources */,

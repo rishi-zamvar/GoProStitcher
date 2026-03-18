@@ -19,6 +19,8 @@ targets:
     deploymentTarget: "13.0"
     sources:
       - GoProStitcher
+      - path: GoProStitcher/Resources/Fonts
+        buildPhase: resources
     info:
       path: GoProStitcher/Info.plist
       properties:
@@ -28,6 +30,7 @@ targets:
         NSPrincipalClass: NSApplication
         NSSupportsAutomaticTermination: true
         NSSupportsSuddenTermination: true
+        ATSApplicationFontsPath: Fonts
     dependencies:
       - package: GoProStitcherKit
       - package: ComposableArchitecture
