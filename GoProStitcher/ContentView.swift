@@ -38,14 +38,33 @@ struct ContentView: View {
 
             case .audio:
                 if store.audioExtraction != nil {
-                    AudioExtractionView(
-                        store: store.scope(state: \.audioExtraction!, action: \.audioExtraction)
-                    )
+                    VStack(spacing: 0) {
+                        HStack {
+                            RetroButton(title: "< BACK") { store.send(.backToHome) }
+                            Spacer()
+                        }
+                        .padding(RetroSpacing.md)
+                        .background(RetroColor.beigeBackground)
+
+                        AudioExtractionView(
+                            store: store.scope(state: \.audioExtraction!, action: \.audioExtraction)
+                        )
+                    }
+                    .background(RetroColor.beigeBackground)
                 } else {
-                    // Show file picker immediately; cancelling returns to home
-                    AudioFilePickerView(
-                        store: store.scope(state: \.audioPicker, action: \.audioPicker)
-                    )
+                    VStack(spacing: 0) {
+                        HStack {
+                            RetroButton(title: "< BACK") { store.send(.backToHome) }
+                            Spacer()
+                        }
+                        .padding(RetroSpacing.md)
+                        .background(RetroColor.beigeBackground)
+
+                        AudioFilePickerView(
+                            store: store.scope(state: \.audioPicker, action: \.audioPicker)
+                        )
+                    }
+                    .background(RetroColor.beigeBackground)
                 }
             }
         }
