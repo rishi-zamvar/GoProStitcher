@@ -247,7 +247,7 @@ Plans:
 4. Progress values parsed from ffmpeg `-progress pipe:1` output are surfaced as a stream of percentage + elapsed time values — verified by unit test with mock pipe data
 5. Test suite passes with `xcodebuild test` — all error paths covered, no file-system side effects in CI
 
-**Plans:** TBD
+**Plans:** 1 plan
 
 Plans:
 - [ ] 09-01-PLAN.md — VideoDownscalerError + VideoDownscaler engine + VideoDownscalerTests (encoding, audio copy, collision, progress parsing, error paths)
@@ -278,7 +278,7 @@ Plans:
 4. When encoding completes, Finder opens and highlights the output MP4 — no manual navigation needed
 5. Integration test exercises pick → encode → verify output MP4 exists, is non-empty, and is flagged as 1080p by AVFoundation metadata
 
-**Plans:** TBD
+**Plans:** 1 plan
 
 Plans:
 - [ ] 10-01-PLAN.md — VideoFilePickerFeature + VideoMetadataFeature + VideoDownscaleFeature + all views + AppFeature wiring + integration test + human-verify
