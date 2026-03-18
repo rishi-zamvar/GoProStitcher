@@ -1,6 +1,6 @@
 # STATE: GoPro Toolkit
 
-**Last Updated:** 2026-03-18 (v1.1 roadmap created — phases 5-7 defined)
+**Last Updated:** 2026-03-18 (Phase 5 Plan 01 complete — AudioExtractor engine)
 
 ---
 
@@ -17,11 +17,11 @@ See: .planning/PROJECT.md
 ## Current Position
 
 Phase: 5 of 7 (AudioExtractor Engine)
-Plan: 0 of 1 in current phase
-Status: Ready to plan
-Last activity: 2026-03-18 — v1.1 roadmap created (phases 5-7)
+Plan: 1 of 1 in current phase
+Status: Phase complete
+Last activity: 2026-03-18 — Completed 05-01-PLAN.md (AudioExtractor engine)
 
-Progress: ████████░░░░░░░ 57% (4/7 phases complete — v1.0 done)
+Progress: ██████████░░░░░ 71% (5/7 phases complete)
 
 ---
 
@@ -39,6 +39,7 @@ Progress: ████████░░░░░░░ 57% (4/7 phases complete
 | 2. File Detection | 3 | Complete |
 | 3. Review & Reorder | 3 | Complete |
 | 4. Stitching & Archive | 3 | Complete |
+| 5. AudioExtractor Engine | 1 | Complete |
 
 ---
 
@@ -50,6 +51,8 @@ Progress: ████████░░░░░░░ 57% (4/7 phases complete
 - TCA tree-based navigation — HomeFeature routes to independent tool flows
 - Test-first: engine tests (Phase 5) before UI wiring (Phase 6)
 - Home screen uses extensible button array — adding tool N requires one array entry
+- AudioExtractor output placed next to source file (same directory)
+- GH010001_audio.MP4 added as separate test fixture — video-only MP4 causes ffmpeg exit 234 with -vn; audio-bearing fixture required for extraction tests
 
 ### Pending Todos
 
@@ -63,8 +66,8 @@ None identified.
 
 ## Session Continuity
 
-Last session: 2026-03-18
-Stopped at: v1.1 roadmap written (ROADMAP.md, STATE.md, REQUIREMENTS.md updated)
+Last session: 2026-03-18T13:07:00Z
+Stopped at: Completed 05-01-PLAN.md (AudioExtractor engine — AudioExtractor + AudioExtractorError + tests)
 Resume file: None
 
-**Next session:** `/gsd:plan-phase 5` — AudioExtractor engine TDD plan
+**Next session:** `/gsd:plan-phase 6` — AudioExtractor UI wiring (TCA feature, file picker, progress state)
