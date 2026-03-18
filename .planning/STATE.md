@@ -1,6 +1,6 @@
 # STATE: GoPro Toolkit
 
-**Last Updated:** 2026-03-18 (Phase 8 Plan 01 — 8-bit design system foundation complete)
+**Last Updated:** 2026-03-18 (Phase 8 Plan 02 — all screens restyled, awaiting visual verify)
 
 ---
 
@@ -17,11 +17,11 @@ See: .planning/PROJECT.md
 ## Current Position
 
 Phase: 8 of 8 (UX Redesign — 8-Bit Design System)
-Plan: 1 of N in current phase
-Status: In progress (08-01 complete, next: screen restyling)
-Last activity: 2026-03-18 — Completed 08-01-PLAN.md (design tokens, fonts, components, tests)
+Plan: 2 of N in current phase
+Status: In progress (08-02 auto tasks complete, checkpoint awaiting human visual verify)
+Last activity: 2026-03-18 — Completed 08-02 auto tasks, all 8 screens restyled
 
-Progress: ████████████████ 100% foundation; Phase 8 plan 1 of N complete
+Progress: ████████████████ Phase 8 plan 2 of N complete (auto tasks); awaiting checkpoint approval
 
 ---
 
@@ -42,7 +42,7 @@ Progress: ████████████████ 100% foundation; Phas
 | 5. AudioExtractor Engine | 1 | Complete |
 | 6. Audio Extraction UI | 1 | Complete |
 | 7. Home Screen & App Rename | 1 | Complete |
-| 8. UX Redesign — 8-Bit Design System | 1+ | Plan 01 complete |
+| 8. UX Redesign — 8-Bit Design System | 2+ | Plans 01-02 complete (02 awaiting visual verify) |
 
 ---
 
@@ -64,6 +64,10 @@ Progress: ████████████████ 100% foundation; Phas
 - ATSApplicationFontsPath set to "." because xcodegen copies font files flat into Resources/ root (not into a Fonts/ subdir)
 - RetroProgressBar exposes displayString computed property for test access without ViewInspector
 - Design tokens as static-let enums — single source of truth, one-line palette changes
+- HomeView ToolRowView as a separate private struct with @State isHovered — cleaner hover-invert effect (full card flips black/beige)
+- ChunkPreviewModal black background creates cinema overlay feel against beige main screen
+- RetroProgressBar blockCount:16 for actual progress; blockCount:8 for indeterminate/loading placeholders
+- All SF Symbols replaced with ASCII/text: ▶ prefix, ✓, ✗, [?], [ SELECT ], [✓ COMPLETE], [✗ ERROR]
 
 ### Roadmap Evolution
 
@@ -81,8 +85,8 @@ None. Design system foundation ready; all tokens, fonts, and components availabl
 
 ## Session Continuity
 
-Last session: 2026-03-18T14:24:00Z
-Stopped at: Completed 08-01-PLAN.md — all tasks done, SUMMARY.md created
+Last session: 2026-03-18T14:29:34Z
+Stopped at: 08-02 checkpoint:human-verify — 2/2 auto tasks complete, awaiting visual approval
 Resume file: None
 
-**Next session:** Execute 08-02-PLAN.md (screen restyling using design system tokens).
+**Next session:** Resume 08-02 after user types "approved" — then 08-02 is fully done and 08-03 (polish) begins.
