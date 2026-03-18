@@ -1,14 +1,16 @@
-# ROADMAP: GoProStitcher
+# Roadmap: GoPro Toolkit
 
-**Project Value:** A DJ/creator can go from a folder of split GoPro chunks to a single continuous video file with minimal disk usage, no file duplication, and confidence that originals are safely archived.
+## Milestones
 
-**Depth:** Quick (3-5 phases, 1-3 plans each)
-**Total Requirements:** 15 v1
-**Phases:** 4
+- ✅ **v1.0 Stitcher** - Phases 1-4 (shipped 2026-03-18)
+- 🚧 **v1.1 Audio + Restructure** - Phases 5-7 (in progress)
 
----
+## Phases
 
-## Phase 1: Testing Infrastructure & Project Foundation
+<details>
+<summary>✅ v1.0 Stitcher (Phases 1-4) - SHIPPED 2026-03-18</summary>
+
+### Phase 1: Testing Infrastructure & Project Foundation
 
 **Goal:** Xcode project is scaffolded with test targets, test utilities, and mock MP4 generators ready to support feature development.
 
@@ -21,7 +23,6 @@
 - TEST-04: CI-ready test runner (xcodebuild commands, test output parsing, failure reporting)
 
 **Success Criteria:**
-
 1. Xcode project created with app target and separate test targets (unit, integration, UI)
 2. Mock MP4 generator creates valid MP4 files with customizable duration, resolution, and GoPro naming
 3. Test helpers provide temp directory management, file cleanup, and standard assertions
@@ -30,7 +31,7 @@
 
 ---
 
-## Phase 2: File Detection (with Tests)
+### Phase 2: File Detection (with Tests)
 
 **Goal:** User can select a folder and app reliably detects GoPro chunks with correct stitch order, verified by comprehensive tests.
 
@@ -43,7 +44,6 @@
 - DETECT-04: App displays total file count and combined size before proceeding
 
 **Success Criteria:**
-
 1. User can click "Select Folder" button and native macOS file picker opens
 2. Unit tests verify GoPro naming parser handles GH/GX prefix variations and orders files by chapter number correctly
 3. Integration tests confirm app validates empty folder, rejects non-MP4 files, and displays appropriate error messages
@@ -52,7 +52,7 @@
 
 ---
 
-## Phase 3: Review, Preview & Reorder (with Tests)
+### Phase 3: Review, Preview & Reorder (with Tests)
 
 **Goal:** User can verify detected files with quick preview and reorder them if needed, with full test coverage for preview and drag interactions.
 
@@ -72,7 +72,6 @@ Plans:
 - [x] 03-03-PLAN.md — ChunkReviewView + ChunkPreviewModal SwiftUI + ContentView navigation wiring + human-verify
 
 **Success Criteria:**
-
 1. User sees list of detected files with thumbnails extracted from first frame of each mock MP4
 2. User can click any file and quick-preview plays first 3 seconds of video
 3. Unit tests verify drag-to-reorder reorders files correctly in memory; UI tests confirm visual reordering works
@@ -81,7 +80,7 @@ Plans:
 
 ---
 
-## Phase 4: Stitching & Archive with Full Integration Testing
+### Phase 4: Stitching & Archive with Full Integration Testing
 
 **Goal:** App stitches verified files in-place with clear progress, archives originals, and entire pipeline is validated through end-to-end tests.
 
@@ -95,56 +94,166 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — ChunkStitcher + ChunkArchiver TDD: binary append and zip-per-chunk engines (GoProStitcherKit)
-- [ ] 04-02-PLAN.md — StitchProgressFeature TCA reducer + AppFeature navigation wiring + ChunkReview startStitching action
-- [ ] 04-03-PLAN.md — StitchProgressView SwiftUI + end-to-end integration test + human-verify
+- [x] 04-01-PLAN.md — ChunkStitcher + ChunkArchiver TDD: binary append and zip-per-chunk engines (GoProStitcherKit)
+- [x] 04-02-PLAN.md — StitchProgressFeature TCA reducer + AppFeature navigation wiring + ChunkReview startStitching action
+- [x] 04-03-PLAN.md — StitchProgressView SwiftUI + end-to-end integration test + human-verify
 
 **Success Criteria:**
-
 1. User sees "Start Stitching" button and can initiate the process; progress screen appears
 2. Full integration test runs detect → preview → order → stitch → archive on 3-4 mock MP4 chunks; file output is validated
 3. Unit tests verify append logic produces correct binary concatenation; disk space monitoring confirms no duplicate files created
 4. Archive creation starts after stitching completes; user sees "Archiving: chunk 1/7" updates; all chunks are individually zipped
-5. Complete end-to-end test suite passes (95%+ coverage); all STITCH-01 through STITCH-03 requirements verified, plus error scenarios (insufficient disk, interrupted operations, corrupted MP4s)
+5. Complete end-to-end test suite passes; all STITCH-01 through STITCH-03 requirements verified, plus error scenarios
+
+</details>
 
 ---
 
-## Progress & Execution
+### 🚧 v1.1 Audio + Restructure (In Progress)
 
-| Phase | Status | Start | End | Notes |
-|-------|--------|-------|-----|-------|
-| 1 - Testing Infrastructure & Project Foundation | ✓ Complete | 2026-03-17 | 2026-03-17 | 2 plans, 9/9 must-haves verified |
-| 2 - File Detection (with Tests) | ✓ Complete | 2026-03-17 | 2026-03-17 | 3 plans, 9/9 must-haves verified |
-| 3 - Review, Preview & Reorder (with Tests) | ✓ Complete | 2026-03-18 | 2026-03-18 | 3 plans, 15/15 must-haves verified |
-| 4 - Stitching & Archive with Full Integration Testing | Pending | — | — | In-place append, progress tracking, zip creation, end-to-end tests |
+**Milestone Goal:** App renamed to GoPro Toolkit, restructured as an extensible multi-tool launcher, with a fully tested audio extraction tool that converts any MP4 to 320kbps MP3.
+
+---
+
+#### Phase 5: AudioExtractor Engine
+
+**Goal:** AudioExtractor engine is built and fully tested — extraction logic, collision handling, ffmpeg availability check, and error paths all verified before any UI is wired.
+
+**Depends on:** Phase 4
+
+**Requirements:**
+- AUDIO-02: App extracts audio as 320kbps CBR MP3 using ffmpeg libmp3lame
+- AUDIO-03: MP3 saved next to source file with same name and .mp3 extension
+- AUDIO-06: File collision handled — if .mp3 already exists, append suffix (e.g., `_1.mp3`)
+- AUDIO-07: ffmpeg availability checked before extraction; clear error if not found
+- TEST-05: AudioExtractor engine unit tested (extraction, error cases, collision handling)
+
+**Success Criteria:**
+1. `AudioExtractor.extract(url:)` runs ffmpeg with `-vn -acodec libmp3lame -b:a 320k` and produces a valid MP3 next to the source file
+2. When an `.mp3` already exists at the output path, extractor appends `_1`, `_2`, etc. until the path is clear — verified by unit test
+3. When ffmpeg is not found on the system, extractor returns a typed error with a human-readable message before spawning any process
+4. All extraction error paths (missing input, bad codec, interrupted) return typed errors with distinct messages — verified by unit tests
+5. Test suite passes with `swift test` or `xcodebuild test` — no flaky file-system side effects in CI
+
+**Plans:** TBD
+
+Plans:
+- [ ] 05-01: AudioExtractor engine TDD (ffmpeg process, collision resolution, availability check, error types)
+
+---
+
+#### Phase 6: Audio Extraction UI
+
+**Goal:** User can pick an MP4, watch extraction progress, and find the resulting MP3 auto-revealed in Finder — the complete audio tool flow is wired and integration-tested.
+
+**Depends on:** Phase 5 (AudioExtractor engine)
+
+**Requirements:**
+- AUDIO-01: User can select any MP4 file via native macOS file picker
+- AUDIO-04: Progress screen shows extraction status with metadata (source duration, file size, audio bitrate)
+- AUDIO-05: On completion, MP3 is auto-revealed in Finder
+- TEST-06: Integration test covering full extraction pipeline (pick → extract → verify MP3)
+
+**Success Criteria:**
+1. User clicks "Select File", native macOS picker opens filtered to MP4 files, and a valid selection advances to the progress screen
+2. Progress screen displays source filename, duration, file size, and audio bitrate while extraction runs
+3. When extraction completes, Finder opens and highlights the output MP3 — no manual navigation needed
+4. Integration test exercises pick → extract → verify MP3 exists at expected path and is non-empty
+
+**Plans:** TBD
+
+Plans:
+- [ ] 06-01: AudioFeature TCA reducer + AudioProgressView SwiftUI + integration test + human-verify
+
+---
+
+#### Phase 7: Home Screen & App Rename
+
+**Goal:** App is named "GoPro Toolkit" throughout, presents a home screen with two tool buttons, and both tools are reachable and dismissible without breaking any existing functionality.
+
+**Depends on:** Phase 6 (both tools complete before home wires them)
+
+**Requirements:**
+- RENAME-01: App renamed to "GoPro Toolkit" (display name, window title, bundle display name)
+- HOME-01: Home screen with two big buttons: "Stitch Video" and "Extract Audio"
+- HOME-02: Home screen layout is extensible — adding a third tool button requires minimal code change
+- HOME-03: "Stitch Video" button launches existing stitch flow unchanged
+- HOME-04: User can navigate back to home screen from any tool
+
+**Success Criteria:**
+1. App window title, dock icon tooltip, and about panel all read "GoPro Toolkit" — no "GoProStitcher" string visible to the user
+2. App launches directly to a home screen showing "Stitch Video" and "Extract Audio" buttons — no other screen appears on cold launch
+3. Tapping "Stitch Video" opens the existing stitch flow; every v1.0 user action works identically
+4. Tapping "Extract Audio" opens the audio tool; user can complete an extraction end-to-end from the home entry point
+5. Both tool screens have a "Back" or close action that returns to the home screen without restarting the app
+
+**Plans:** TBD
+
+Plans:
+- [ ] 07-01: HomeFeature TCA reducer + HomeView + AppFeature root navigation wiring + rename + human-verify
+
+---
+
+## Progress
+
+**Execution Order:** 1 → 2 → 3 → 4 → 5 → 6 → 7
+
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 1. Testing Infrastructure | v1.0 | 2/2 | Complete | 2026-03-17 |
+| 2. File Detection | v1.0 | 3/3 | Complete | 2026-03-17 |
+| 3. Review, Preview & Reorder | v1.0 | 3/3 | Complete | 2026-03-18 |
+| 4. Stitching & Archive | v1.0 | 3/3 | Complete | 2026-03-18 |
+| 5. AudioExtractor Engine | v1.1 | 0/1 | Not started | - |
+| 6. Audio Extraction UI | v1.1 | 0/1 | Not started | - |
+| 7. Home Screen & App Rename | v1.1 | 0/1 | Not started | - |
 
 ---
 
 ## Coverage Validation
 
-**Requirement Mapping:**
+**v1.0 Requirements (15 total — all complete):**
 
-| Requirement | Phase | Category | Status |
-|-------------|-------|----------|--------|
-| TEST-01 | 1 | Testing Infrastructure | Complete |
-| TEST-02 | 1 | Testing Infrastructure | Complete |
-| TEST-03 | 1 | Testing Infrastructure | Complete |
-| TEST-04 | 1 | Testing Infrastructure | Complete |
-| DETECT-01 | 2 | File Detection | Complete |
-| DETECT-02 | 2 | File Detection | Complete |
-| DETECT-03 | 2 | File Detection | Complete |
-| DETECT-04 | 2 | File Detection | Complete |
-| ORDER-01 | 3 | Review & Order | Complete |
-| ORDER-02 | 3 | Review & Order | Complete |
-| ORDER-03 | 3 | Review & Order | Complete |
-| ORDER-04 | 3 | Review & Order | Complete |
-| STITCH-01 | 4 | Stitching | Pending |
-| STITCH-02 | 4 | Stitching | Pending |
-| STITCH-03 | 4 | Stitching | Pending |
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| TEST-01 | 1 | Complete |
+| TEST-02 | 1 | Complete |
+| TEST-03 | 1 | Complete |
+| TEST-04 | 1 | Complete |
+| DETECT-01 | 2 | Complete |
+| DETECT-02 | 2 | Complete |
+| DETECT-03 | 2 | Complete |
+| DETECT-04 | 2 | Complete |
+| ORDER-01 | 3 | Complete |
+| ORDER-02 | 3 | Complete |
+| ORDER-03 | 3 | Complete |
+| ORDER-04 | 3 | Complete |
+| STITCH-01 | 4 | Complete |
+| STITCH-02 | 4 | Complete |
+| STITCH-03 | 4 | Complete |
+
+**v1.1 Requirements (14 total):**
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| AUDIO-02 | 5 | Pending |
+| AUDIO-03 | 5 | Pending |
+| AUDIO-06 | 5 | Pending |
+| AUDIO-07 | 5 | Pending |
+| TEST-05 | 5 | Pending |
+| AUDIO-01 | 6 | Pending |
+| AUDIO-04 | 6 | Pending |
+| AUDIO-05 | 6 | Pending |
+| TEST-06 | 6 | Pending |
+| RENAME-01 | 7 | Pending |
+| HOME-01 | 7 | Pending |
+| HOME-02 | 7 | Pending |
+| HOME-03 | 7 | Pending |
+| HOME-04 | 7 | Pending |
 
 **Coverage Summary:**
-- Total v1 requirements: 15
-- Mapped to phases: 15
+- v1.1 requirements: 14 total
+- Mapped to phases: 14
 - Unmapped: 0
 - Coverage: 100% ✓
 
@@ -152,5 +261,6 @@ Plans:
 
 *Roadmap created: 2026-03-17*
 *Roadmap revised (test-first): 2026-03-17*
-*Depth: quick (3-5 phases)*
-*Next: `/gsd:plan-phase 1`*
+*Roadmap updated (v1.1 milestone): 2026-03-18*
+*Depth: quick (3-5 phases per milestone)*
+*Next: `/gsd:plan-phase 5`*

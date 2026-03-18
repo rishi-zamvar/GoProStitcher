@@ -100,27 +100,27 @@
 | STITCH-01 | 4 | Complete |
 | STITCH-02 | 4 | Complete |
 | STITCH-03 | 4 | Complete |
-| RENAME-01 | TBD | Pending |
-| HOME-01 | TBD | Pending |
-| HOME-02 | TBD | Pending |
-| HOME-03 | TBD | Pending |
-| HOME-04 | TBD | Pending |
-| AUDIO-01 | TBD | Pending |
-| AUDIO-02 | TBD | Pending |
-| AUDIO-03 | TBD | Pending |
-| AUDIO-04 | TBD | Pending |
-| AUDIO-05 | TBD | Pending |
-| AUDIO-06 | TBD | Pending |
-| AUDIO-07 | TBD | Pending |
-| TEST-05 | TBD | Pending |
-| TEST-06 | TBD | Pending |
+| AUDIO-02 | 5 | Pending |
+| AUDIO-03 | 5 | Pending |
+| AUDIO-06 | 5 | Pending |
+| AUDIO-07 | 5 | Pending |
+| TEST-05 | 5 | Pending |
+| AUDIO-01 | 6 | Pending |
+| AUDIO-04 | 6 | Pending |
+| AUDIO-05 | 6 | Pending |
+| TEST-06 | 6 | Pending |
+| RENAME-01 | 7 | Pending |
+| HOME-01 | 7 | Pending |
+| HOME-02 | 7 | Pending |
+| HOME-03 | 7 | Pending |
+| HOME-04 | 7 | Pending |
 
 **Coverage:**
 - v1.0 requirements: 15 total (all complete)
-- v1.1 requirements: 14 total
-- Mapped to phases: 15 complete + 14 pending
-- Unmapped: 14 (awaiting roadmap)
+- v1.1 requirements: 14 total (14 mapped to phases 5-7)
+- Unmapped: 0
+- Coverage: 100% ✓
 
 ---
 *Requirements defined: 2026-03-17*
-*Updated: 2026-03-18 after v1.1 milestone start*
+*Updated: 2026-03-18 — v1.1 requirements mapped to phases 5-7*
