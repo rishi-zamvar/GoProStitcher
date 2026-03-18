@@ -9,7 +9,7 @@ struct FolderPickerView: View {
         VStack(spacing: 24) {
             // Header
             VStack(spacing: 8) {
-                Text("GoProStitcher")
+                Text("GoPro Toolkit")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 Text("Select a folder containing GoPro video files")
