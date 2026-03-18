@@ -100,11 +100,11 @@
 | STITCH-01 | 4 | Complete |
 | STITCH-02 | 4 | Complete |
 | STITCH-03 | 4 | Complete |
-| AUDIO-02 | 5 | Pending |
-| AUDIO-03 | 5 | Pending |
-| AUDIO-06 | 5 | Pending |
-| AUDIO-07 | 5 | Pending |
-| TEST-05 | 5 | Pending |
+| AUDIO-02 | 5 | Complete |
+| AUDIO-03 | 5 | Complete |
+| AUDIO-06 | 5 | Complete |
+| AUDIO-07 | 5 | Complete |
+| TEST-05 | 5 | Complete |
 | AUDIO-01 | 6 | Pending |
 | AUDIO-04 | 6 | Pending |
 | AUDIO-05 | 6 | Pending |

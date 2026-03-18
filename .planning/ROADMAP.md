@@ -138,7 +138,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 05-01-PLAN.md — AudioExtractorError + AudioExtractor engine + AudioExtractorTests (collision, error paths, extraction)
+- [x] 05-01-PLAN.md — AudioExtractorError + AudioExtractor engine + AudioExtractorTests (collision, error paths, extraction)
 
 ---
 
@@ -204,7 +204,7 @@ Plans:
 | 2. File Detection | v1.0 | 3/3 | Complete | 2026-03-17 |
 | 3. Review, Preview & Reorder | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 4. Stitching & Archive | v1.0 | 3/3 | Complete | 2026-03-18 |
-| 5. AudioExtractor Engine | v1.1 | 0/1 | Not started | - |
+| 5. AudioExtractor Engine | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 6. Audio Extraction UI | v1.1 | 0/1 | Not started | - |
 | 7. Home Screen & App Rename | v1.1 | 0/1 | Not started | - |
 
