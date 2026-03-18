@@ -1,6 +1,6 @@
 # STATE: GoPro Toolkit
 
-**Last Updated:** 2026-03-18 (v1.2 roadmap created — Phase 9 ready to plan)
+**Last Updated:** 2026-03-18 (Phase 9 Plan 01 complete — VideoDownscaler engine shipped)
 
 ---
 
@@ -17,20 +17,21 @@ See: .planning/PROJECT.md
 ## Current Position
 
 Phase: 9 of 10 (VideoDownscaler Engine)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-03-18 — v1.1 complete (Phase 8 approved); v1.2 roadmap written
+Plan: 1 of TBD in current phase
+Status: In progress — Plan 01 complete
+Last activity: 2026-03-18 — Completed 09-01-PLAN.md (VideoDownscaler engine + tests)
 
-Progress: ████████░░ Phases 1-8 complete (v1.0 + v1.1 shipped); Phase 9-10 not started
+Progress: ████████░░ Phases 1-8 complete (v1.0 + v1.1 shipped); Phase 9 in progress (1 plan done)
 
 ---
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 17 (v1.0: 11, v1.1: 6)
+- Total plans completed: 18 (v1.0: 11, v1.1: 6, v1.2: 1)
 - v1.0 phases: 4 complete
 - v1.1 phases: 4 complete
+- v1.2 phases: 1 in progress
 
 **By Phase:**
 
@@ -44,7 +45,7 @@ Progress: ████████░░ Phases 1-8 complete (v1.0 + v1.1 shippe
 | 6. Audio Extraction UI | 1 | Complete |
 | 7. Home Screen & App Rename | 1 | Complete |
 | 8. UX Redesign — 8-Bit Design System | 3 | Complete |
-| 9. VideoDownscaler Engine | TBD | Not started |
+| 9. VideoDownscaler Engine | 1+ | In progress (plan 01 done) |
 | 10. Downscale UI + Home Integration | TBD | Not started |
 
 ---
@@ -62,6 +63,10 @@ Progress: ████████░░ Phases 1-8 complete (v1.0 + v1.1 shippe
 - RetroProgressBar blockCount:16 for actual progress; blockCount:8 for indeterminate/loading
 - backToHome resets sub-state to fresh State() to avoid stale state on re-entry
 - ffmpeg `-progress pipe:1` used for downscale progress (same pattern as audio, but richer — has out_time, progress=end signal)
+- DownscaleProgress is a typed struct (fraction, secondsProcessed, totalSeconds, bitrateKbps, fps) — richer than AudioExtractor's tuple callback
+- VideoDownscaler.downscale takes outputName (full filename stem.ext) not just stem — gives caller explicit control
+- probeResolution guard is advisory (nil on ffprobe failure) to avoid false rejections on unusual inputs
+- lavfi synthetic fixtures generated at test runtime (no bundled binary fixtures needed)
 
 ### Pending Todos
 
@@ -69,14 +74,14 @@ None.
 
 ### Blockers/Concerns
 
-None. 8-bit design system and extensible home pattern fully in place — Phase 9 can proceed immediately.
+None. VideoDownscaler engine complete and tested. Phase 10 UI wiring can proceed immediately.
 
 ---
 
 ## Session Continuity
 
 Last session: 2026-03-18
-Stopped at: v1.2 roadmap created; Phase 9 ready to plan
+Stopped at: Completed 09-01-PLAN.md — VideoDownscaler engine + 8 passing tests
 Resume file: None
 
-**Next session:** Run `/gsd:plan-phase 9` to plan VideoDownscaler engine.
+**Next session:** Run `/gsd:plan-phase 10` or continue Phase 9 with remaining plans if any.
