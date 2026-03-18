@@ -1,6 +1,6 @@
 # STATE: GoProStitcher
 
-**Last Updated:** 2026-03-17 (Plan 04-02 complete — StitchProgressFeature and AppFeature navigation wired)
+**Last Updated:** 2026-03-18 (Plan 04-03 complete — StitchProgressView UI + end-to-end pipeline tests; Phase 4 COMPLETE)
 
 ---
 
@@ -22,13 +22,13 @@
 
 ## Current Position
 
-**Phase:** 4 - Stitching Archive (In progress)
-**Status:** Plan 04-02 complete. StitchProgressFeature reducer and AppFeature navigation wired. Plan 04-03 remaining.
+**Phase:** 4 - Stitching Archive (COMPLETE)
+**Status:** Plan 04-03 complete. All phase 4 plans done. v1.0 feature set complete.
 
-**Progress:** █████████░ 90% (Phase 3 complete + 04-01 + 04-02 done)
+**Progress:** ██████████ 100% (All phases complete: 01, 02, 03, 04)
 
 **Current Focus:**
-Plan 04-02 complete. StitchProgressFeature (archive-then-stitch pipeline), StitchPhase enum, ChunkReviewFeature.startStitching, and AppFeature navigation all implemented. Next: 04-03 — StitchProgressView UI.
+Phase 4 complete. StitchProgressView, ChunkReviewView "Start Stitching" button, ContentView routing, and end-to-end StitchPipelineTests all implemented and passing. v1.0 is ready.
 
 ---
 
@@ -89,6 +89,9 @@ Plan 04-02 complete. StitchProgressFeature (archive-then-stitch pipeline), Stitc
 | Archive-first then stitch operation order | ChunkArchiver runs on all chunk URLs before ChunkStitcher removes source files — preserves originals per STITCH-03 | From 04-02 |
 | startStitching returns .none in ChunkReviewFeature; AppFeature intercepts | ChunkReviewFeature stays ignorant of navigation; AppFeature owns the transition to stitchProgress state | From 04-02 |
 | StitchPhase enum lives in GoProStitcherKit (not app target) | Unit tests can import StitchPhase without depending on the full app target | From 04-02 |
+| StitchProgressView progress weighting: savingManifest=0.05, stitching=0.1+0.9*(idx/total) | Keeps manifest step visually light relative to the concat work | From 04-03 |
+| Integration tests use ffmpeg lavfi color source for valid MP4 fixtures | GoProFileFactory raw-byte stubs are not decodable by ffmpeg concat demuxer | From 04-03 |
+| Revert test verifies non-zero file size not exact bytes | ffmpeg remuxing introduces container overhead that changes byte counts | From 04-03 |
 
 ### Known Constraints
 
@@ -114,18 +117,18 @@ None identified at this stage.
 
 ## Session Continuity
 
-**Last Session:** 2026-03-17 - Completed plan 04-02 (StitchProgressFeature + AppFeature navigation)
-**Stopped at:** End of 04-02 — StitchProgressFeature reducer, StitchPhase enum, ChunkReviewFeature.startStitching, AppFeature nav all wired
+**Last Session:** 2026-03-18 - Completed plan 04-03 (StitchProgressView UI + end-to-end pipeline tests); Phase 4 COMPLETE
+**Stopped at:** Checkpoint human-verify for 04-03 (all auto tasks done, awaiting user verification)
 **Resume file:** None
 
 **Artifacts Updated:**
-- GoProStitcherKit/Sources/GoProStitcherKit/StitchProgressState.swift (created)
-- GoProStitcher/Features/StitchProgress/StitchProgressFeature.swift (created)
-- GoProStitcher/Features/ChunkReview/ChunkReviewFeature.swift (modified — startStitching action)
-- GoProStitcher/AppFeature.swift (modified — stitchProgress state, action, intercept, .ifLet)
-- .planning/phases/04-stitching-archive/04-02-SUMMARY.md (created)
+- GoProStitcher/Features/StitchProgress/StitchProgressView.swift (created)
+- GoProStitcherIntegrationTests/StitchPipelineTests.swift (created)
+- GoProStitcher/Features/ChunkReview/ChunkReviewView.swift (verified — has Start Stitching button)
+- GoProStitcher/ContentView.swift (verified — routes to StitchProgressView)
+- .planning/phases/04-stitching-archive/04-03-SUMMARY.md (created)
 
-**Next Session:** 04-03 — StitchProgressView UI binds to StitchProgressFeature.State
+**Next Session:** v1.0 complete. Next milestone is v1.1 per STATE.md (Integration & macOS Polish).
 
 ---
 
