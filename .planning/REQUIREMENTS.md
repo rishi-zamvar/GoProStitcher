@@ -105,10 +105,10 @@
 | AUDIO-06 | 5 | Complete |
 | AUDIO-07 | 5 | Complete |
 | TEST-05 | 5 | Complete |
-| AUDIO-01 | 6 | Pending |
-| AUDIO-04 | 6 | Pending |
-| AUDIO-05 | 6 | Pending |
-| TEST-06 | 6 | Pending |
+| AUDIO-01 | 6 | Complete |
+| AUDIO-04 | 6 | Complete |
+| AUDIO-05 | 6 | Complete |
+| TEST-06 | 6 | Complete |
 | RENAME-01 | 7 | Pending |
 | HOME-01 | 7 | Pending |
 | HOME-02 | 7 | Pending |

@@ -163,7 +163,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 06-01-PLAN.md — AudioFilePickerFeature + AudioExtractionFeature + AudioExtractionView + AppFeature wiring + integration test + human-verify
+- [x] 06-01-PLAN.md — AudioFilePickerFeature + AudioExtractionFeature + AudioExtractionView + AppFeature wiring + integration test + human-verify
 
 ---
 
@@ -205,7 +205,7 @@ Plans:
 | 3. Review, Preview & Reorder | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 4. Stitching & Archive | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 5. AudioExtractor Engine | v1.1 | 1/1 | Complete | 2026-03-18 |
-| 6. Audio Extraction UI | v1.1 | 0/1 | Not started | - |
+| 6. Audio Extraction UI | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 7. Home Screen & App Rename | v1.1 | 0/1 | Not started | - |
 
 ---
