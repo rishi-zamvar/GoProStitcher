@@ -187,10 +187,10 @@ Plans:
 4. Tapping "Extract Audio" opens the audio tool; user can complete an extraction end-to-end from the home entry point
 5. Both tool screens have a "Back" or close action that returns to the home screen without restarting the app
 
-**Plans:** TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 07-01: HomeFeature TCA reducer + HomeView + AppFeature root navigation wiring + rename + human-verify
+- [ ] 07-01-PLAN.md — HomeFeature + HomeView + AppFeature enum routing + display name rename + human-verify
 
 ---
 
