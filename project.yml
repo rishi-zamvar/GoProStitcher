@@ -30,7 +30,7 @@ targets:
         NSPrincipalClass: NSApplication
         NSSupportsAutomaticTermination: true
         NSSupportsSuddenTermination: true
-        ATSApplicationFontsPath: Fonts
+        ATSApplicationFontsPath: "."
     dependencies:
       - package: GoProStitcherKit
       - package: ComposableArchitecture

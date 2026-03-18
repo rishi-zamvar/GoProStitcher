@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01E2504C3F60EEA306976BEC /* DesignSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60FBB7AF5CE14B46F41315 /* DesignSystemTests.swift */; };
 		1C0442925B0CB252EEA9A010 /* FolderPickerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457ADA97DBFDCD768B16EAB /* FolderPickerFeature.swift */; };
 		1FDAB6DCD13B8FEA47D775CA /* ChunkReviewReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAAEDA1B43A9542FEB90AEA /* ChunkReviewReducerTests.swift */; };
 		382422428818ED1CD61CB68E /* ChunkPreviewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B9DC253C56135A28E1D45C /* ChunkPreviewModal.swift */; };
@@ -26,6 +27,7 @@
 		BE5896D43149EACB8D6EC94A /* StitchProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4A3B77C4E112FF7043FDB /* StitchProgressView.swift */; };
 		C0C2401F20D8842CA1E37072 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BF9AFD6A11889C968FD7AA0 /* Assets.xcassets */; };
 		C0E12D725F121FC9544729B9 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63C2445C2D1EC63006ADE02 /* DesignTokens.swift */; };
+		C2F7CEC28E9648BF4FDD57F5 /* RetroProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BA5AEA89B11B29BC5A8A7F /* RetroProgressBar.swift */; };
 		CAD9DAED637ABFD575A4E975 /* StitchPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B31C9A91A3C0CCC5A77A25 /* StitchPipelineTests.swift */; };
 		CBC7E402317EBB4F5E0CE3C5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 24B635690ED3D414624D6B5B /* ComposableArchitecture */; };
 		CF15D34784197DC932842443 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF2BF210DA8636051C1E6498 /* README.md */; };
@@ -33,6 +35,8 @@
 		D4F3CC0C5292E9DEB023F3DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38420A22BA26DB39CA2763 /* ContentView.swift */; };
 		EFD06DEEBAF1374E8741B766 /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A1D9C2F5EAD0B68D4C6B3 /* HomeFeature.swift */; };
 		F03632B36E93EE2D596B69C9 /* AudioExtractionPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D0CC0AD44AA6BF33AA220C /* AudioExtractionPipelineTests.swift */; };
+		F4E70858CEC3E3E2311D8EFF /* RetroCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6CC95A37697E17D6BFB64 /* RetroCard.swift */; };
+		FB4D7E567DFBC96ADEB55A5D /* RetroButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F945083113C9FA7598DD29E0 /* RetroButton.swift */; };
 		FC0A3F4B782D7AA7DBE7C53C /* GoProStitcherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +63,7 @@
 		1892886E14B4DA72CA91C7FF /* GoProStitcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherApp.swift; sourceTree = "<group>"; };
 		211481CB4D40257C6DFA2320 /* GoProStitcherKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GoProStitcherKit; path = GoProStitcherKit; sourceTree = SOURCE_ROOT; };
 		2A08EFE9BEA3622A3212DFA9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		32BA5AEA89B11B29BC5A8A7F /* RetroProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroProgressBar.swift; sourceTree = "<group>"; };
 		3ACB218D4FF685EB63297F05 /* ChunkReviewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkReviewFeature.swift; sourceTree = "<group>"; };
 		3F95D73C7A4C5EF8523D182A /* ChunkReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkReviewView.swift; sourceTree = "<group>"; };
 		51399FB2ABC643798A1D0D0C /* AudioExtractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExtractionView.swift; sourceTree = "<group>"; };
@@ -75,14 +80,17 @@
 		9AAAEDA1B43A9542FEB90AEA /* ChunkReviewReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkReviewReducerTests.swift; sourceTree = "<group>"; };
 		9F34E7CB5781A7F65B53F6C4 /* JetBrainsMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Bold.ttf"; sourceTree = "<group>"; };
 		A63C2445C2D1EC63006ADE02 /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+		ABE6CC95A37697E17D6BFB64 /* RetroCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroCard.swift; sourceTree = "<group>"; };
 		B4A4A3B77C4E112FF7043FDB /* StitchProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchProgressView.swift; sourceTree = "<group>"; };
 		BA095F9B397DA437DCD3D82A /* AudioExtractionFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExtractionFeature.swift; sourceTree = "<group>"; };
 		BB4F3415CEFA0426B0167A07 /* GoProStitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoProStitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoProStitcherIntegrationTests.swift; sourceTree = "<group>"; };
 		BE7A1D9C2F5EAD0B68D4C6B3 /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
 		CE38420A22BA26DB39CA2763 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CE60FBB7AF5CE14B46F41315 /* DesignSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystemTests.swift; sourceTree = "<group>"; };
 		D014B5E3B7D3FADBB1C8658F /* GoProStitcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoProStitcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1B31C9A91A3C0CCC5A77A25 /* StitchPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchPipelineTests.swift; sourceTree = "<group>"; };
+		F945083113C9FA7598DD29E0 /* RetroButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroButton.swift; sourceTree = "<group>"; };
 		FF2BF210DA8636051C1E6498 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +188,9 @@
 			isa = PBXGroup;
 			children = (
 				A63C2445C2D1EC63006ADE02 /* DesignTokens.swift */,
+				F945083113C9FA7598DD29E0 /* RetroButton.swift */,
+				ABE6CC95A37697E17D6BFB64 /* RetroCard.swift */,
+				32BA5AEA89B11B29BC5A8A7F /* RetroProgressBar.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -189,6 +200,7 @@
 			children = (
 				96D0CC0AD44AA6BF33AA220C /* AudioExtractionPipelineTests.swift */,
 				9AAAEDA1B43A9542FEB90AEA /* ChunkReviewReducerTests.swift */,
+				CE60FBB7AF5CE14B46F41315 /* DesignSystemTests.swift */,
 				BC8E8D69A886E7F11FE0B67F /* GoProStitcherIntegrationTests.swift */,
 				D1B31C9A91A3C0CCC5A77A25 /* StitchPipelineTests.swift */,
 				8A4D2FB4EED21E6556EDB1B5 /* Resources */,
@@ -405,6 +417,9 @@
 				60B76DE9D654C5E828C4C016 /* GoProStitcherApp.swift in Sources */,
 				EFD06DEEBAF1374E8741B766 /* HomeFeature.swift in Sources */,
 				4CA9A99D4D18AD0BAF6B2B7B /* HomeView.swift in Sources */,
+				FB4D7E567DFBC96ADEB55A5D /* RetroButton.swift in Sources */,
+				F4E70858CEC3E3E2311D8EFF /* RetroCard.swift in Sources */,
+				C2F7CEC28E9648BF4FDD57F5 /* RetroProgressBar.swift in Sources */,
 				BDEC659D5DA111EAF9670400 /* StitchProgressFeature.swift in Sources */,
 				BE5896D43149EACB8D6EC94A /* StitchProgressView.swift in Sources */,
 			);
@@ -424,6 +439,7 @@
 			files = (
 				F03632B36E93EE2D596B69C9 /* AudioExtractionPipelineTests.swift in Sources */,
 				1FDAB6DCD13B8FEA47D775CA /* ChunkReviewReducerTests.swift in Sources */,
+				01E2504C3F60EEA306976BEC /* DesignSystemTests.swift in Sources */,
 				FC0A3F4B782D7AA7DBE7C53C /* GoProStitcherIntegrationTests.swift in Sources */,
 				CAD9DAED637ABFD575A4E975 /* StitchPipelineTests.swift in Sources */,
 			);
