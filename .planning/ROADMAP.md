@@ -250,7 +250,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 09-01-PLAN.md — VideoDownscalerError + VideoDownscaler engine + VideoDownscalerTests (encoding, audio copy, collision, progress parsing, error paths)
+- [x] 09-01-PLAN.md — VideoDownscalerError + VideoDownscaler engine + VideoDownscalerTests (encoding, audio copy, collision, progress parsing, error paths)
 
 ---
 
@@ -299,7 +299,7 @@ Plans:
 | 6. Audio Extraction UI | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 7. Home Screen & App Rename | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 8. UX Redesign — 8-Bit Design System | v1.1 | 3/3 | Complete | 2026-03-18 |
-| 9. VideoDownscaler Engine | v1.2 | 0/1 | Not started | - |
+| 9. VideoDownscaler Engine | v1.2 | 1/1 | Complete | 2026-03-18 |
 | 10. Downscale UI + Home Integration | v1.2 | 0/1 | Not started | - |
 
 ---
