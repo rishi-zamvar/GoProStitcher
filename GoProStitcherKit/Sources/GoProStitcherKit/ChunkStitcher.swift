@@ -28,12 +28,15 @@ public enum ChunkStitcher {
 
     /// Stitches an ordered array of chunk files into a single file.
     ///
-    /// - Parameter chunks: Ordered list of chunk URLs. `chunks[0]` is the destination
-    ///   (modified in-place). `chunks[1...]` are read and appended, then deleted.
+    /// - Parameters:
+    ///   - chunks: Ordered list of chunk URLs. `chunks[0]` is the destination
+    ///     (modified in-place). `chunks[1...]` are read and appended, then deleted.
+    ///   - progress: Optional callback fired after each source chunk is appended.
+    ///     Receives `(completedIndex, totalSources)` where completedIndex is 1-based.
     /// - Throws: `ChunkStitcherError.empty` if fewer than 2 chunks provided,
     ///   `ChunkStitcherError.destinationNotFound` if chunks[0] is missing,
     ///   `ChunkStitcherError.sourceNotFound` if any subsequent chunk is missing.
-    public static func stitch(chunks: [URL]) throws {
+    public static func stitch(chunks: [URL], progress: ((Int, Int) -> Void)? = nil) throws {
         guard chunks.count >= 2 else {
             throw ChunkStitcherError.empty
         }
@@ -54,9 +57,12 @@ public enum ChunkStitcher {
         let destinationHandle = try FileHandle(forWritingTo: destination)
         defer { try? destinationHandle.close() }
 
-        for source in chunks[1...] {
+        let sources = Array(chunks[1...])
+        let total = sources.count
+        for (index, source) in sources.enumerated() {
             try appendFile(from: source, to: destinationHandle)
             try FileManager.default.removeItem(at: source)
+            progress?(index + 1, total)
         }
     }
 

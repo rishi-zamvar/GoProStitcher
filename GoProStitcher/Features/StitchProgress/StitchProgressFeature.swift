@@ -57,12 +57,14 @@ struct StitchProgressFeature {
                             await send(.stitchCompleted)
                             return
                         }
-                        for (index, sourceURL) in chunkURLs.dropFirst().enumerated() {
-                            let name = sourceURL.lastPathComponent
-                            await send(.phaseUpdated(.stitching(fileIndex: index + 1, fileName: name)))
-                            // Stitch one file at a time so progress updates are real
+                        await send(.phaseUpdated(.stitching(fileIndex: 1, fileName: chunkURLs[1].lastPathComponent)))
+                        try ChunkStitcher.stitch(chunks: chunkURLs) { completed, _ in
+                            let nextIndex = completed + 1
+                            if nextIndex < chunkURLs.count {
+                                let name = chunkURLs[nextIndex].lastPathComponent
+                                Task { await send(.phaseUpdated(.stitching(fileIndex: nextIndex, fileName: name))) }
+                            }
                         }
-                        try ChunkStitcher.stitch(chunks: chunkURLs)
 
                         await send(.stitchCompleted)
                     } catch {
