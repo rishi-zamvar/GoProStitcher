@@ -16,11 +16,14 @@ struct AudioExtractionFeature {
         var isComplete: Bool = false
         var outputURL: URL? = nil
         var errorMessage: String? = nil
+        var progressFraction: Double = 0
+        var secondsProcessed: Double = 0
     }
 
     enum Action {
         case startExtraction
         case metadataLoaded(duration: Double?, fileSize: Int64?, audioBitrate: Int?)
+        case progressUpdated(fraction: Double, secondsProcessed: Double)
         case extractionCompleted(URL)
         case extractionFailed(String)
         case revealInFinder
@@ -49,9 +52,12 @@ struct AudioExtractionFeature {
                     let dur = await duration
                     await send(.metadataLoaded(duration: dur, fileSize: fileSize, audioBitrate: audioBitrate))
 
-                    // Run extraction (synchronous ffmpeg call — must not block main actor)
+                    // Run extraction with progress tracking
                     do {
-                        let outputURL = try AudioExtractor.extract(url: url)
+                        let outputURL = try AudioExtractor.extract(url: url) { secondsProcessed, totalSeconds in
+                            let fraction = min(secondsProcessed / totalSeconds, 1.0)
+                            Task { await send(.progressUpdated(fraction: fraction, secondsProcessed: secondsProcessed)) }
+                        }
                         await send(.extractionCompleted(outputURL))
                     } catch {
                         await send(.extractionFailed(error.localizedDescription))
@@ -62,6 +68,11 @@ struct AudioExtractionFeature {
                 state.durationSeconds = duration
                 state.fileSizeBytes = fileSize
                 state.audioBitrateKbps = audioBitrate
+                return .none
+
+            case let .progressUpdated(fraction, secondsProcessed):
+                state.progressFraction = fraction
+                state.secondsProcessed = secondsProcessed
                 return .none
 
             case let .extractionCompleted(url):

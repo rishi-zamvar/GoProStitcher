@@ -12,7 +12,11 @@ public enum AudioExtractor {
     /// - Parameter url: URL of the input video file.
     /// - Returns: URL of the newly created MP3 file.
     /// - Throws: `AudioExtractorError` on validation or ffmpeg failure.
-    public static func extract(url: URL) throws -> URL {
+    /// Progress callback receives `(secondsProcessed, totalDurationSeconds)`.
+    /// Called periodically during extraction. Both values are in seconds.
+    public typealias ProgressCallback = (_ secondsProcessed: Double, _ totalSeconds: Double) -> Void
+
+    public static func extract(url: URL, progress: ProgressCallback? = nil) throws -> URL {
         // 1. Find ffmpeg
         let ffmpegPath = ["/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg", "/usr/bin/ffmpeg"]
             .first { FileManager.default.fileExists(atPath: $0) }
@@ -30,7 +34,10 @@ public enum AudioExtractor {
         let stem = url.deletingPathExtension().lastPathComponent
         let outputURL = try collisionFreeURL(in: sourceDir, stem: stem, ext: "mp3")
 
-        // 4. Run ffmpeg: strip video (-vn), encode to MP3 at 320 kbps
+        // 4. Get total duration for progress calculation
+        let totalDuration = probeDuration(ffmpegPath: ffmpeg, url: url)
+
+        // 5. Run ffmpeg with progress output to stdout
         let process = Process()
         process.executableURL = URL(fileURLWithPath: ffmpeg)
         process.arguments = [
@@ -39,20 +46,75 @@ public enum AudioExtractor {
             "-vn",
             "-acodec", "libmp3lame",
             "-b:a", "320k",
+            "-progress", "pipe:1",
             outputURL.path
         ]
-        process.standardOutput = FileHandle.nullDevice
+
+        let pipe = Pipe()
+        process.standardOutput = pipe
         process.standardError = FileHandle.nullDevice
+
+        // Parse progress from stdout in a background thread
+        if let progress = progress, let total = totalDuration, total > 0 {
+            pipe.fileHandleForReading.readabilityHandler = { handle in
+                let data = handle.availableData
+                guard !data.isEmpty, let text = String(data: data, encoding: .utf8) else { return }
+                // ffmpeg progress output contains lines like "out_time_us=12345678"
+                for line in text.components(separatedBy: "\n") {
+                    if line.hasPrefix("out_time_us=") {
+                        let value = line.dropFirst("out_time_us=".count)
+                        if let microseconds = Double(value) {
+                            let seconds = microseconds / 1_000_000
+                            progress(seconds, total)
+                        }
+                    }
+                }
+            }
+        } else {
+            process.standardOutput = FileHandle.nullDevice
+        }
 
         try process.run()
         process.waitUntilExit()
 
-        // 5. Check exit code
+        // Clean up handler
+        pipe.fileHandleForReading.readabilityHandler = nil
+
+        // 6. Check exit code
         guard process.terminationStatus == 0 else {
             throw AudioExtractorError.extractionFailed("exit code \(process.terminationStatus)")
         }
 
         return outputURL
+    }
+
+    /// Uses ffprobe to get the duration of the input file in seconds.
+    private static func probeDuration(ffmpegPath: String, url: URL) -> Double? {
+        let ffprobePath = ffmpegPath.replacingOccurrences(of: "ffmpeg", with: "ffprobe")
+        guard FileManager.default.fileExists(atPath: ffprobePath) else { return nil }
+
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: ffprobePath)
+        process.arguments = [
+            "-v", "error",
+            "-show_entries", "format=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1",
+            url.path
+        ]
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        process.standardError = FileHandle.nullDevice
+
+        do {
+            try process.run()
+            process.waitUntilExit()
+            let data = pipe.fileHandleForReading.readDataToEndOfFile()
+            if let text = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
+               let duration = Double(text) {
+                return duration
+            }
+        } catch {}
+        return nil
     }
 
     // MARK: - Private helpers

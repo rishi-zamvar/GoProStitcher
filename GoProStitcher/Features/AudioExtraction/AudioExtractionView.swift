@@ -81,13 +81,33 @@ struct AudioExtractionView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
-                } else {
-                    ProgressView()
-                        .progressViewStyle(.linear)
-                        .frame(maxWidth: 400)
-                    Text("Extracting audio\u{2026}")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                } else if store.isExtracting {
+                    VStack(spacing: 12) {
+                        if store.progressFraction > 0 {
+                            ProgressView(value: store.progressFraction)
+                                .progressViewStyle(.linear)
+                                .frame(maxWidth: 400)
+                            HStack {
+                                Text("\(Int(store.progressFraction * 100))%")
+                                    .monospacedDigit()
+                                Spacer()
+                                if let total = store.durationSeconds {
+                                    Text("\(formatDuration(store.secondsProcessed)) / \(formatDuration(total))")
+                                        .monospacedDigit()
+                                }
+                            }
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: 400)
+                        } else {
+                            ProgressView()
+                                .progressViewStyle(.linear)
+                                .frame(maxWidth: 400)
+                            Text("Starting extraction\u{2026}")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
