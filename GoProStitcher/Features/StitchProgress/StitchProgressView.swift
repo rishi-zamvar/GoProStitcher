@@ -9,7 +9,7 @@ struct StitchProgressView: View {
     var body: some View {
         WithPerceptionTracking {
             VStack(spacing: 24) {
-                Text("GoProStitcher")
+                Text("GoPro Toolkit")
                     .font(.title2).bold()
 
                 if store.isComplete {
