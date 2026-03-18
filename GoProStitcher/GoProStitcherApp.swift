@@ -10,6 +10,7 @@ struct GoProStitcherApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(store: store)
+                .background(RetroColor.beigeBackground.ignoresSafeArea())
         }
     }
 }

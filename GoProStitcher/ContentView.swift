@@ -20,15 +20,20 @@ struct ContentView: View {
                         store: store.scope(state: \.chunkReview!, action: \.chunkReview)
                     )
                 } else {
-                    VStack {
-                        Button("< Back") { store.send(.backToHome) }
-                            .padding(.top, 8)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack(spacing: 0) {
+                        // Back button row
+                        HStack {
+                            RetroButton(title: "< BACK") { store.send(.backToHome) }
+                            Spacer()
+                        }
+                        .padding(RetroSpacing.md)
+                        .background(RetroColor.beigeBackground)
+
                         FolderPickerView(
                             store: store.scope(state: \.folderPicker, action: \.folderPicker)
                         )
                     }
-                    .padding(.horizontal, 16)
+                    .background(RetroColor.beigeBackground)
                 }
 
             case .audio:
@@ -44,6 +49,7 @@ struct ContentView: View {
                 }
             }
         }
+        .background(RetroColor.beigeBackground.ignoresSafeArea())
     }
 }
 

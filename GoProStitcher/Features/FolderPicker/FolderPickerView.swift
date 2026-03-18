@@ -6,32 +6,31 @@ struct FolderPickerView: View {
     let store: StoreOf<FolderPickerFeature>
 
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: RetroSpacing.lg) {
             // Header
-            VStack(spacing: 8) {
+            VStack(spacing: RetroSpacing.sm) {
                 Text("GoPro Toolkit")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(RetroFont.bold(24))
+                    .foregroundColor(RetroColor.black)
                 Text("Select a folder containing GoPro video files")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(RetroFont.regular(13))
+                    .foregroundColor(RetroColor.muted)
+                    .multilineTextAlignment(.center)
             }
 
             // Select Folder Button
-            Button(action: {
-                store.send(.selectFolderButtonTapped)
-            }) {
-                HStack {
-                    if store.isLoading {
-                        ProgressView()
-                            .controlSize(.small)
-                    }
-                    Text(store.isLoading ? "Scanning…" : "Select Folder")
-                }
-                .frame(minWidth: 140)
+            RetroButton(
+                title: store.isLoading ? "SCANNING..." : "SELECT FOLDER",
+                action: { store.send(.selectFolderButtonTapped) },
+                isDisabled: store.isLoading
+            )
+
+            // Loading indicator
+            if store.isLoading {
+                Text("[ LOADING... ]")
+                    .font(RetroFont.regular(12))
+                    .foregroundColor(RetroColor.muted)
             }
-            .buttonStyle(.borderedProminent)
-            .disabled(store.isLoading)
 
             // Result display
             if let result = store.scanResult {
@@ -41,10 +40,11 @@ struct FolderPickerView: View {
 
             Spacer()
         }
-        .padding(32)
+        .padding(RetroSpacing.xl)
         .frame(minWidth: 420, minHeight: 280)
-        .animation(.easeInOut(duration: 0.2), value: store.scanResult)
-        .animation(.easeInOut(duration: 0.2), value: store.isLoading)
+        .background(RetroColor.beigeBackground)
+        .animation(.linear(duration: 0.1), value: store.scanResult == nil)
+        .animation(.linear(duration: 0.1), value: store.isLoading)
     }
 
     @ViewBuilder
@@ -52,42 +52,51 @@ struct FolderPickerView: View {
         switch result {
         case let .success(chunks):
             let totalSize = chunks.reduce(0) { $0 + $1.sizeBytes }
-            HStack(spacing: 12) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-                    .font(.title2)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("\(chunks.count) GoPro file\(chunks.count == 1 ? "" : "s") found")
-                        .fontWeight(.medium)
-                    Text(formattedSize(totalSize))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+            RetroCard {
+                HStack(spacing: RetroSpacing.sm) {
+                    Text("✓")
+                        .font(RetroFont.bold(18))
+                        .foregroundColor(RetroColor.black)
+                    VStack(alignment: .leading, spacing: RetroSpacing.xs) {
+                        Text("\(chunks.count) GoPro file\(chunks.count == 1 ? "" : "s") found")
+                            .font(RetroFont.bold(13))
+                            .foregroundColor(RetroColor.black)
+                        Text(formattedSize(totalSize))
+                            .font(RetroFont.regular(11))
+                            .foregroundColor(RetroColor.muted)
+                    }
+                    Spacer()
                 }
+                .padding(RetroSpacing.sm)
             }
-            .padding(12)
-            .background(.green.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
 
         case .empty:
-            HStack(spacing: 12) {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.red)
-                    .font(.title2)
-                Text("No files found in selected folder")
-                    .fontWeight(.medium)
+            RetroCard {
+                HStack(spacing: RetroSpacing.sm) {
+                    Text("✗")
+                        .font(RetroFont.bold(18))
+                        .foregroundColor(RetroColor.accentRed)
+                    Text("No files found in selected folder")
+                        .font(RetroFont.bold(13))
+                        .foregroundColor(RetroColor.accentRed)
+                    Spacer()
+                }
+                .padding(RetroSpacing.sm)
             }
-            .padding(12)
-            .background(.red.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
 
         case .noGoProFiles:
-            HStack(spacing: 12) {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.red)
-                    .font(.title2)
-                Text("No GoPro files found in selected folder")
-                    .fontWeight(.medium)
+            RetroCard {
+                HStack(spacing: RetroSpacing.sm) {
+                    Text("✗")
+                        .font(RetroFont.bold(18))
+                        .foregroundColor(RetroColor.accentRed)
+                    Text("No GoPro files found in selected folder")
+                        .font(RetroFont.bold(13))
+                        .foregroundColor(RetroColor.accentRed)
+                    Spacer()
+                }
+                .padding(RetroSpacing.sm)
             }
-            .padding(12)
-            .background(.red.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
         }
     }
 
