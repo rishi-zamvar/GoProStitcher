@@ -135,10 +135,10 @@ Plans:
 4. All extraction error paths (missing input, bad codec, interrupted) return typed errors with distinct messages — verified by unit tests
 5. Test suite passes with `swift test` or `xcodebuild test` — no flaky file-system side effects in CI
 
-**Plans:** TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 05-01: AudioExtractor engine TDD (ffmpeg process, collision resolution, availability check, error types)
+- [ ] 05-01-PLAN.md — AudioExtractorError + AudioExtractor engine + AudioExtractorTests (collision, error paths, extraction)
 
 ---
 
@@ -263,4 +263,4 @@ Plans:
 *Roadmap revised (test-first): 2026-03-17*
 *Roadmap updated (v1.1 milestone): 2026-03-18*
 *Depth: quick (3-5 phases per milestone)*
-*Next: `/gsd:plan-phase 5`*
+*Next: `/gsd:execute-phase 5`*
