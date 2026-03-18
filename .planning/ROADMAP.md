@@ -194,9 +194,31 @@ Plans:
 
 ---
 
+#### Phase 8: UX Redesign — 8-Bit Design System
+
+**Goal:** Apply the GoProToolkit-8bit-system design language across all screens — beige background, black borders, monospace typography, pixel-aligned components, retro color palette, no gradients/shadows/blur. Progressive screenshot evaluation during implementation.
+
+**Depends on:** Phase 7
+
+**Requirements:**
+- Design tokens file (colors, typography, spacing, component styles)
+- All screens restyled: HomeView, FolderPickerView, ChunkReviewView, StitchProgressView, AudioFilePickerView, AudioExtractionView
+- 8-bit button styles (black fill, 0 radius, 2px border, hover invert)
+- Monospace typography throughout (JetBrains Mono)
+- 4pt grid spacing system
+- No gradients, shadows, blur, rounded corners
+- Screenshot-driven evaluation at each screen
+
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 8 to break down)
+
+---
+
 ## Progress
 
-**Execution Order:** 1 → 2 → 3 → 4 → 5 → 6 → 7
+**Execution Order:** 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -207,6 +229,7 @@ Plans:
 | 5. AudioExtractor Engine | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 6. Audio Extraction UI | v1.1 | 1/1 | Complete | 2026-03-18 |
 | 7. Home Screen & App Rename | v1.1 | 1/1 | Complete | 2026-03-18 |
+| 8. UX Redesign — 8-Bit Design System | v1.1 | 0/0 | Not started | - |
 
 ---
 

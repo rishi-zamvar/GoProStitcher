@@ -61,6 +61,10 @@ Progress: ██████████████░ 93% (7 phases underway, 
 - ActiveTool enum (not Bool flags) cleanly expresses mutually exclusive tool activation
 - backToHome resets audioPicker and folderPicker to fresh State() to avoid stale sub-state on re-entry
 
+### Roadmap Evolution
+
+- Phase 8 added: UX Redesign — 8-Bit Design System (GoProToolkit-8bit-system)
+
 ### Pending Todos
 
 None.
